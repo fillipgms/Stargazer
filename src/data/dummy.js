@@ -1,0 +1,136 @@
+import { AiFillHome } from "react-icons/ai";
+import { FaBitcoin } from "react-icons/fa";
+import { BsPersonCircle, BsStarFill } from "react-icons/bs";
+import { BiBook } from "react-icons/bi";
+import { IoMdPlanet } from "react-icons/io";
+import galaxy from "./galaxy.svg";
+import rocket from "./rocket.svg";
+import telescope from "./telescope.svg";
+
+export const icons = [
+    {
+        galaxy: galaxy,
+    },
+    {
+        rocket: rocket,
+    },
+    {
+        telescope: telescope,
+    },
+];
+
+export const links = [
+    {
+        title: "início",
+        links: [
+            {
+                name: "Home",
+                icon: <AiFillHome />,
+                url: "",
+            },
+        ],
+    },
+    {
+        title: "Crypto",
+        links: [
+            {
+                name: "notícias",
+                icon: <IoMdPlanet />,
+                url: "news",
+            },
+            {
+                name: "criptomoedas",
+                icon: <FaBitcoin />,
+                url: "coins",
+            },
+            {
+                name: "moedas favoritas",
+                icon: <BsStarFill />,
+                url: "favorite-coins",
+            },
+        ],
+    },
+    {
+        title: "Guia",
+        links: [
+            {
+                name: "Como começar",
+                icon: <BiBook />,
+                url: "guide",
+            },
+        ],
+    },
+    {
+        title: "perfil",
+        links: [
+            {
+                name: "meu perfil",
+                icon: <BsPersonCircle />,
+                url: "profile",
+            },
+        ],
+    },
+];
+
+export const container = {
+    show: {
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.5,
+        },
+    },
+};
+
+export const itemA = {
+    hidden: { scale: 0, top: 100 },
+    show: { scale: 1, top: 30 },
+};
+
+export const navContainer = {
+    visible: {
+        x: 0,
+        transition: {
+            duration: 0.2,
+        },
+    },
+    hidden: {
+        x: -700,
+        transition: {
+            duration: 0.2,
+        },
+    },
+};
+
+export const navList = {
+    visible: {
+        opacity: 1,
+        transition: {
+            delayChildren: 0.2,
+            staggerChildren: 0.07,
+        },
+    },
+    hidden: {
+        opacity: 0,
+        transition: {
+            staggerChildren: 0.05,
+            staggerDirection: -1,
+        },
+    },
+};
+
+export const navItems = {
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            y: { stiffness: 1000, velocity: -100 },
+        },
+    },
+    hidden: {
+        y: 50,
+        opacity: 0,
+        transition: {
+            y: { stiffness: 1000, velocity: -100 },
+        },
+    },
+};
