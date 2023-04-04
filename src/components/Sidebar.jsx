@@ -13,9 +13,20 @@ import { links } from "../data/dummy";
 const Sidebar = () => {
     const { menuActive, setMenuActive } = useStateContext();
 
+    const activeLink =
+        "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-md text-md m-2 bg-pink text-white";
+    const normalLink =
+        "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-md text-md text-gray-700 dark:text-gray-200 hover:bg-light-gray m-2 dark:hover:bg-main-dark-bg/50";
+
+    const handleCloseSideBar = () => {
+        if (menuActive <= 900) {
+            setMenuActive(false);
+        }
+    };
+
     return (
         <>
-            <div className="fixed left-0 md:h-full md:bg-gray-400/5 bg-clip-padding backdrop-filter md:backdrop-blur-xl bg-opacity-10 md:border-r border-r-gray-100 z-10">
+            <div className="fixed left-0 md:h-full md:bg-gray-400/5 bg-clip-padding backdrop-filter md:backdrop-blur-xl bg-opacity-10 md:border-r border-r-gray-100 z-20">
                 <button
                     className="bg-main-bg py-5 px-5 text-2xl"
                     onClick={() => setMenuActive(!menuActive)}
@@ -35,7 +46,11 @@ const Sidebar = () => {
                     className="flex items-center justify-between gap-3 mx-3 my-4 font-extrabold tracking-tight text-white text-3xl"
                     onClick={() => setMenuActive(!menuActive)}
                 >
-                    <img src={logo} alt="stargazer logo" className="w-9/12" />
+                    <img
+                        src={logo}
+                        alt="stargazer logo"
+                        className="w-9/12 cursor-pointer"
+                    />
                     <AiFillCloseCircle className="cursor-pointer" />
                 </div>
                 <nav className="mt-10">
@@ -54,8 +69,11 @@ const Sidebar = () => {
                                 <NavLink
                                     to={`/${link.url}`}
                                     key={link.name}
+                                    onClick={handleCloseSideBar}
                                     variants={navItems}
-                                    className="flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-md text-md hover:bg-light-gray m-2 text-white"
+                                    className={({ isActive }) =>
+                                        isActive ? activeLink : normalLink
+                                    }
                                 >
                                     {link.icon}
                                     <span className="capitalize">

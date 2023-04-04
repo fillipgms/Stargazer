@@ -4,7 +4,7 @@ const Header = () => {
     const signed = false;
 
     return (
-        <header className="absolute right-0 z-10 text-white">
+        <header className="md:absolute flex justify-end fixed md:bg-transparent bg-main-dark-bg w-full right-0 z-10 text-white">
             {signed ? (
                 <div>Bem vindo</div>
             ) : (

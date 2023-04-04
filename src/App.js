@@ -10,7 +10,7 @@ const App = () => {
         <div className="relative bg-main-dark-bg">
             <Sidebar />
             <Header />
-            <div className="pl-[2.5rem]">
+            <div className="md:pl-[2.5rem]">
                 <AppRoutes />
             </div>
         </div>

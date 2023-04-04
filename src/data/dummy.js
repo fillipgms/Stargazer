@@ -3,21 +3,9 @@ import { FaBitcoin } from "react-icons/fa";
 import { BsPersonCircle, BsStarFill } from "react-icons/bs";
 import { BiBook } from "react-icons/bi";
 import { IoMdPlanet } from "react-icons/io";
-import galaxy from "./galaxy.svg";
-import rocket from "./rocket.svg";
-import telescope from "./telescope.svg";
-
-export const icons = [
-    {
-        galaxy: galaxy,
-    },
-    {
-        rocket: rocket,
-    },
-    {
-        telescope: telescope,
-    },
-];
+import Galaxy from "./galaxy.png";
+import Rocket from "./rocket.svg";
+import Telescope from "./telescope.svg";
 
 export const links = [
     {
@@ -72,11 +60,67 @@ export const links = [
     },
 ];
 
+function GalaxyIcon() {
+    return <img src={Galaxy} alt="Galaxy" />;
+}
+
+function RocketIcon() {
+    return <img src={Rocket} alt="Rocket" />;
+}
+
+function TelescopeIcon() {
+    return <img src={Telescope} alt="Telescope" />;
+}
+
+export const icons = [
+    {
+        name: "Galaxy",
+        icon: <GalaxyIcon />,
+        text: "Mantenha-se atualizado sobre as últimas notícias e tendências do mundo das criptomoedas.",
+        link: "news",
+    },
+    {
+        name: "Rocket",
+        icon: <RocketIcon />,
+        text: "Descubra novas criptomoedas, acompanhe tendências e preços.",
+        link: "coins",
+    },
+    {
+        name: "Telescope",
+        icon: <TelescopeIcon />,
+        text: "Descubra como começar a investir em criptomoedas mesmo que você seja um iniciante.",
+        link: "guide",
+    },
+];
+
 export const container = {
     show: {
         transition: {
             staggerChildren: 0.1,
             delayChildren: 0.5,
+        },
+    },
+};
+
+export const cardsContainer = {
+    show: {
+        transition: {
+            staggerChildren: 0.1,
+        },
+    },
+};
+
+export const card = {
+    hidden: {
+        scale: 0,
+        opacity: 0,
+    },
+    show: {
+        scale: 1,
+        opacity: 1,
+        transition: {
+            type: "tween",
+            ease: "easeOut",
         },
     },
 };

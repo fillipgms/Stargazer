@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
-import { Cards } from "../components";
+import { Advertisement, Cards, Timeline } from "../components";
 import { container, itemA } from "../data/dummy";
 
 import logo from "../data/logo.png";
@@ -15,7 +15,7 @@ import { AiFillStar } from "react-icons/ai";
 const Home = () => {
     return (
         <>
-            <section className="h-screen bg-main-dark-bg w-full flex flex-col md:flex-row">
+            <section className="h-screen bg-main-dark-bg w-full flex flex-col md:flex-row ">
                 <div className="md:w-9/12 w-full flex gap-3 flex-col items-center justify-center h-full px-10 md:px-48">
                     <h1 className="md:w-full text-3xl md:text-4xl text-white w-full">
                         <span className="text-pink">
@@ -87,6 +87,8 @@ const Home = () => {
                 </div>
             </section>
             <Cards />
+            <Advertisement />
+            <Timeline />
         </>
     );
 };
