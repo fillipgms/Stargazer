@@ -1,11 +1,11 @@
 import React from "react";
 
+import logo from "../data/logo_preto.png";
+
 const Footer = () => {
     return (
-        <footer>
-            <div></div>
-            <div></div>
-            <div>&copy; Stargazer 2023</div>
+        <footer className=" bg-pink text-center pt-10 pb-5 rounded-t-xl">
+            Copyright &copy; 2023 Stargazer. Todos os direitos reservados
         </footer>
     );
 };

@@ -20,7 +20,7 @@ const Advertisement = () => {
 
     return (
         <Link to="/guide">
-            <section className="md:ml-6 text-white text-center relative bg-pink-sky md:py-32 py-10 bg-cover">
+            <section className=" text-white text-center relative bg-pink-sky md:py-32 py-10 bg-cover bg-right">
                 <div className="w-9/12 mx-auto">
                     <h3 className="text-2xl font-bold mb-3 bg-cover">
                         Viajando para o Desconhecido

@@ -15,6 +15,14 @@ module.exports = {
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
             },
+
+            colors: {
+                pink: "#f788b6",
+                violet: "#6a4199",
+                white: "#f1f1f1",
+                blue: "#7fa2e0",
+            },
+
             backgroundImage: {
                 "banner-bg": "url(./data/banner-bg.png)",
                 wallpaper: "url(./data/wallpaper.jpg)",

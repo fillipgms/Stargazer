@@ -5,3 +5,5 @@ export { default as Cards } from "./Cards";
 export { default as Advertisement } from "./Advertisement";
 export { default as Timeline } from "./Timeline";
 export { default as Footer } from "./Footer";
+export { default as Login } from "./Login";
+export { default as SignUp } from "./SignUp";
