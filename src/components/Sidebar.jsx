@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <>
             <motion.div
-                className="fixed left-0 h-full md:pb-10 md:w-72 w-full bg-main-dark-bg z-30 drop-shadow-xl sidebar"
+                className="fixed left-0 h-full md:pb-10 md:w-72 w-full bg-main-dark-bg z-30 drop-shadow-xl sidebar md:rounded-r-md"
                 initial="hidden"
                 animate={menuActive ? "visible" : "hidden"}
                 exit="hidden"

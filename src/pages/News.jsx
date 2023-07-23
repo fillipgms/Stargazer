@@ -1,126 +1,153 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 import { Loading } from "../components";
 import { Advertisement } from "../components";
-import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
+import { useGetCryptoNewsQuery } from "../services/cryptoCompareApi";
 
 const demoImage =
-    "https://m.economictimes.com/thumb/msid-90582586,width-1200,height-900,resizemode-4,imgsize-186060/top-cryptocurrency-prices-today-bitcoin-dogecoin-ethereum-shiba-inu-fall-up-to-10.jpg";
+    "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
 
 const News = () => {
-    const { data: cryptoNews } = useGetCryptoNewsQuery({
+    const {
+        data: cryptoNews,
+        isLoading,
+        error,
+    } = useGetCryptoNewsQuery({
         newsCategory: "Cryptocurrency",
         count: 10,
     });
 
-    if (!cryptoNews?.value) return <Loading />;
+    const [isDataReady, setIsDataReady] = useState(false);
 
-    console.log(cryptoNews);
+    useEffect(() => {
+        // Verifica se os dados estão carregados
+        if (cryptoNews) {
+            setIsDataReady(true);
+        }
+    }, [cryptoNews]);
+
+    // Caso ainda esteja carregando os dados
+    if (isLoading || !isDataReady) {
+        return <Loading />;
+    }
+
+    // Caso ocorra um erro ao buscar os dados
+    if (error) {
+        return <p>Error: {error.message}</p>;
+    }
 
     return (
         <section>
             <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center">
                 <a
-                    href={cryptoNews.value[0].url}
+                    href={cryptoNews[0].url}
                     target="_blank"
                     className="relative overflow-hidden box-border inline-block rounded-lg w-full"
                 >
                     <img
-                        src={
-                            cryptoNews.value[0]?.image?.thumbnail?.contentUrl ||
-                            demoImage
-                        }
-                        className=" aspect-video w-full object-cover"
+                        src={cryptoNews[0]?.imageurl || demoImage}
+                        className="aspect-video w-full object-cover"
                     />
                     <h1 className="absolute bottom-0 bg-pink py-3 px-2 rounded-tr-xl shadow-pink-blue-glow">
-                        {cryptoNews.value[0].name > 10
-                            ? `${cryptoNews.value[0].name.substring(0, 10)}...`
-                            : cryptoNews.value[0].name}
+                        {cryptoNews[0].title.length > 100
+                            ? `${cryptoNews.value[0].title.substring(
+                                  0,
+                                  100
+                              )}...`
+                            : cryptoNews[0].title}
                     </h1>
                 </a>
 
                 <div className="grid md:grid-cols-2 grid-cols-1 md:[&>*:nth-child(1)]:row-span-2 my-10 gap-5">
                     <a
-                        href={cryptoNews.value[1].url}
+                        href={cryptoNews[1].url}
                         target="_blank"
-                        className="bg-dark-bg rounded-sm overflow-hidden"
+                        className="bg-dark-bg rounded-md overflow-hidden"
                     >
-                        <div className="flex justify-center items-center py-5">
+                        <div className="flex justify-center items-center">
                             <img
-                                src={
-                                    cryptoNews.value[1]?.image?.thumbnail
-                                        ?.contentUrl || demoImage
-                                }
+                                src={cryptoNews[1]?.imageurl || demoImage}
                                 className="w-full aspect-video object-cover"
                             />
                         </div>
                         <aside>
                             <h1 className="bg-pink px-10 py-2">
-                                {cryptoNews.value[1].name}
+                                {cryptoNews[1].title}
                             </h1>
                             <p className="text-white px-10 my-5">
-                                {cryptoNews.value[1].description > 50
-                                    ? `${cryptoNews.value[1].description.substring(
+                                {cryptoNews[1].body.length > 100
+                                    ? `${cryptoNews[1].body.substring(
                                           0,
-                                          50
+                                          100
                                       )}...`
-                                    : cryptoNews.value[1].description}
+                                    : cryptoNews[1].body}
                             </p>
                         </aside>
                     </a>
 
-                    {cryptoNews.value.map((news, index) => {
+                    {cryptoNews.map((news, index) => {
                         if (index <= 1 || index > 3) {
                             return null;
                         }
                         return (
                             <a
+                                key={index}
                                 href={news.url}
                                 target="_blank"
-                                className="bg-dark-bg rounded-sm overflow-hidden"
+                                className="bg-dark-bg rounded-md overflow-hidden flex flex-col"
                             >
-                                <img
-                                    src={
-                                        news?.image?.thumbnail?.contentUrl ||
-                                        demoImage
-                                    }
-                                    className="aspect-square"
-                                />
-                                <aside>
-                                    <h1 className="bg-pink">{news.name}</h1>
+                                <header className="bg-pink py-2 px-4">
+                                    <h1>{news.title}</h1>
+                                </header>
+                                <div className="py-2 px-4  gap-3 flex text-white items-center align-center flex-1">
+                                    <img
+                                        src={news?.imageurl || demoImage}
+                                        className="aspect-square h-[100px]"
+                                    />
                                     <p>
-                                        {news.description > 50
-                                            ? `${news.description.substring(
+                                        {news.body.length > 100
+                                            ? `${news.body.substring(
                                                   0,
-                                                  50
+                                                  100
                                               )}...`
-                                            : news.description}
+                                            : news.body}
                                     </p>
-                                </aside>
+                                </div>
                             </a>
                         );
                     })}
                 </div>
             </div>
-            <div className="mt-10">
+            <div className="my-10">
                 <Advertisement />
             </div>
-            <div className="flex md:px-48 px-10 flex-col items-center justify-center">
-                {cryptoNews.value.map((news, index) => {
+            <div className="flex md:px-48 px-10 flex-col items-center justify-center w-full gap-10">
+                {cryptoNews.map((news, index) => {
                     if (index <= 3) {
                         return null;
                     }
                     return (
-                        <>
-                            <div>
+                        <a
+                            href={news.url}
+                            target="_blank"
+                            className="bg-dark-bg relative rounded-md overflow-hidden"
+                        >
+                            <header className="bg-pink py-2 px-4">
+                                <h1>{news.title}</h1>
+                            </header>
+                            <div className="flex py-2 px-4 gap-3 text-white items-center align-center ">
                                 <img
-                                    src={
-                                        news?.image?.thumbnail?.contentUrl ||
-                                        demoImage
-                                    }
+                                    src={news?.imageurl || demoImage}
+                                    className="aspect-square h-full"
                                 />
+                                <p>
+                                    {news.body.length > 100
+                                        ? `${news.body.substring(0, 100)}...`
+                                        : news.description}
+                                </p>
                             </div>
-                        </>
+                        </a>
                     );
                 })}
             </div>
