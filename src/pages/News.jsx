@@ -70,6 +70,8 @@ const News = () => {
         return <p>Error: {error}</p>;
     }
 
+    console.log(cryptoNews);
+
     return (
         <>
             <section>

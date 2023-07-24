@@ -3,14 +3,25 @@ import { FcGoogle } from "react-icons/fc";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const Login = () => {
-    const { signInUser, email, setEmail, password, setPassword, loginError } =
-        useStateContext();
+    const {
+        signInUser,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        loginError,
+        signInGoogle,
+    } = useStateContext();
 
     const [inputType, setInputType] = useState(false);
 
     const handleChange = () => {
         setInputType(!inputType);
     };
+
+    async function loginGoogle() {
+        await signInGoogle();
+    }
 
     return (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 px-10 rounded-lg shadow-pink-blue-glow flex flex-col gap-4">
@@ -54,7 +65,14 @@ const Login = () => {
                     </label>
                 </div>
 
-                <button className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full">
+                <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5">
+                    ou
+                </span>
+
+                <button
+                    className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full"
+                    onClick={loginGoogle}
+                >
                     <FcGoogle />
                     Entre com sua conta Google
                 </button>
