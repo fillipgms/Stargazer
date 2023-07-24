@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const Login = () => {
+    const { signInUser, email, setEmail, password, setPassword, loginError } =
+        useStateContext();
+
+    const [inputType, setInputType] = useState(false);
+
+    const handleChange = () => {
+        setInputType(!inputType);
+    };
+
     return (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 px-10 rounded-lg shadow-pink-blue-glow flex flex-col gap-4">
             <h1 className="text-base font-semibold">Entre com sua conta</h1>
-            <form action="get" className="flex flex-col gap-6">
+            <form
+                action="#"
+                className="flex flex-col gap-6"
+                onSubmit={signInUser}
+            >
                 <div class="relative">
                     <input
                         type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         id="outlined_success"
                         aria-describedby="outlined_success_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
@@ -23,11 +39,12 @@ const Login = () => {
                 </div>
                 <div class="relative">
                     <input
-                        type="password"
                         id="outlined_success"
                         aria-describedby="outlined_success_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                         placeholder=" "
+                        onChange={(e) => setPassword(e.target.value)}
+                        type={inputType ? "text" : "password"}
                     />
                     <label
                         for="outlined_success"

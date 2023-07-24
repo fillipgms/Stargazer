@@ -20,6 +20,7 @@ export const ContextProvider = ({ children }) => {
     const auth = getAuth(app);
 
     const [scroll, setScroll] = useState(undefined);
+    const [profileMenu, setProfileMenu] = useState(false);
     const [menuActive, setMenuActive] = useState(false);
     const [screenSize, setScreenSize] = useState(undefined);
     const [loginError, setLoginError] = useState("");
@@ -130,6 +131,8 @@ export const ContextProvider = ({ children }) => {
                 signInUser,
                 loginError,
                 setLoginError,
+                profileMenu,
+                setProfileMenu,
             }}
         >
             {children}

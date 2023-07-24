@@ -10,7 +10,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { links } from "../data/dummy";
 
 const Sidebar = () => {
-    const signed = false;
+    const { signed } = useStateContext();
 
     const { menuActive, setMenuActive } = useStateContext();
 

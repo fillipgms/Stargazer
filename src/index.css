@@ -8,6 +8,30 @@ body {
     scroll-behavior: smooth;
 }
 
+@layer utilities {
+    .clip {
+        border-top-right-radius: 0;
+    }
+
+    .clip::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        right: 1px;
+        background: #25252a;
+        width: 20px;
+        height: 15px;
+        transform: rotate(180deg);
+        -tw-shadow: 19px -8px 48px -15px #f788b6, -7px 15px 48px -15px #7fa2e0;
+        --tw-shadow-colored: 19px -8px 48px -15px #f788b6,
+            -7px 15px 48px -15px #7fa2e0;
+        box-shadow: 19px -8px 48px -15px #f788b6, -7px 15px 48px -15px #7fa2e0;
+
+        /* The points are: (left top: x y, right top: x y, center bottom: x y) */
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -2,11 +2,13 @@ import React from "react";
 
 import { useStateContext } from "../contexts/ContextProvider";
 import { Link } from "react-router-dom";
+import { ProfileLogOff } from ".";
 
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { RiMenu4Fill } from "react-icons/ri";
 
 const Header = () => {
-    const { signed, user } = useStateContext();
+    const { signed, user, profileMenu, setProfileMenu } = useStateContext();
 
     const { scroll, setScroll, menuActive, setMenuActive } = useStateContext();
 
@@ -31,11 +33,26 @@ const Header = () => {
                 </button>
             </div>
             {signed ? (
-                <div className="flex justify-center items-center">
-                    <span className="text-gray-400 text-14">Bem-vindo,</span>{" "}
-                    <span className="text-gray-400 font-bold ml-1 text-14">
-                        {signed && user.displayName}
-                    </span>
+                <div
+                    className="flex justify-center items-center cursor-pointer"
+                    onClick={() => setProfileMenu(!profileMenu)}
+                >
+                    <div>
+                        <span className="text-white text-14">
+                            Bem-vindo(a),
+                        </span>{" "}
+                        <span className="text-white font-bold ml-1 text-14">
+                            {signed && user.displayName}
+                        </span>
+                    </div>
+                    <MdKeyboardArrowDown
+                        className="text-gray-400 text-14 transition-transform"
+                        style={
+                            profileMenu
+                                ? { transform: "rotate(180deg)" }
+                                : { transform: "rotate(0)" }
+                        }
+                    />
                 </div>
             ) : (
                 <div className="flex gap-3 justify-center items-center">
@@ -53,6 +70,7 @@ const Header = () => {
                     </Link>
                 </div>
             )}
+            {profileMenu ? <ProfileLogOff /> : ""}
         </header>
     );
 };
