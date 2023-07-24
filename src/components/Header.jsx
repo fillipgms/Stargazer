@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { RiMenu4Fill } from "react-icons/ri";
 
 const Header = () => {
-    const signed = false;
+    const { signed, user } = useStateContext();
 
     const { scroll, setScroll, menuActive, setMenuActive } = useStateContext();
 
@@ -31,7 +31,12 @@ const Header = () => {
                 </button>
             </div>
             {signed ? (
-                <div>Bem vindo</div>
+                <div className="flex justify-center items-center">
+                    <span className="text-gray-400 text-14">Bem-vindo,</span>{" "}
+                    <span className="text-gray-400 font-bold ml-1 text-14">
+                        {signed && user.displayName}
+                    </span>
+                </div>
             ) : (
                 <div className="flex gap-3 justify-center items-center">
                     <Link
@@ -40,9 +45,12 @@ const Header = () => {
                     >
                         Iniciar Seção
                     </Link>
-                    <button className="border px-4 h-fit py-2 rounded-full bg-main-bg text-black font-bold">
+                    <Link
+                        className="border px-4 h-fit py-2 rounded-full bg-main-bg text-black font-bold"
+                        to={"/signup"}
+                    >
                         Criar conta
-                    </button>
+                    </Link>
                 </div>
             )}
         </header>

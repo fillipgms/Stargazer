@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -13,6 +13,10 @@ import cardano from "../data/cardano.png";
 import { AiFillStar } from "react-icons/ai";
 
 const Home = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <>
             <section className="h-screen bg-main-dark-bg w-full flex flex-col md:flex-row ">

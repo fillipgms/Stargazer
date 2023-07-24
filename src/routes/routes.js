@@ -1,4 +1,5 @@
-import { Home, LoginPage, News } from "../pages";
+import { Home, LoginPage, News, RegisterPage } from "../pages";
+import PrivateRoutes from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 const AppRoutes = () => {
@@ -11,8 +12,12 @@ const AppRoutes = () => {
             <Route path="/coins" element="Coins" />
             <Route path="/favorite-coins" element="favorite Coins" />
             <Route path="/profile" exact element="Profile" />
-            <Route path="/signup" exact element="Create Acount" />
-            <Route path="/signin" exact element={<LoginPage />} />
+            <Route path="/signup" element={<PrivateRoutes />}>
+                <Route path="/signup" exact element={<RegisterPage />} />
+            </Route>
+            <Route path="/signin" element={<PrivateRoutes />}>
+                <Route path="/signin" exact element={<LoginPage />} />
+            </Route>
             <Route path="/guide" exact element="Guia" />
 
             <Route path="ErrorPage" element="erro" />
