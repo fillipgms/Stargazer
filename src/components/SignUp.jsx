@@ -31,7 +31,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 px-14 rounded-lg shadow-pink-blue-glow flex flex-col gap-4">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 md:px-14 w-4/5 rounded-lg shadow-pink-blue-glow flex flex-col gap-4 px-4 md:w-fit">
             <h1 className="text-base font-semibold">Vamos criar sua conta</h1>
             <form
                 action="#"

@@ -29,6 +29,13 @@ export const ContextProvider = ({ children }) => {
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
     const [user, setUser] = useState("");
+    const [currency, setCurrency] = useState("BRL");
+    const [symbol, setSymbol] = useState("₹");
+
+    useEffect(() => {
+        if (currency === "BRL") setSymbol("R$");
+        else if (currency === "USD") setSymbol("$");
+    }, [currency]);
 
     useEffect(() => {
         const loadStoreAuth = () => {
@@ -133,6 +140,9 @@ export const ContextProvider = ({ children }) => {
                 setLoginError,
                 profileMenu,
                 setProfileMenu,
+                currency,
+                setCurrency,
+                symbol,
             }}
         >
             {children}
