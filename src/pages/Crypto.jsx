@@ -81,7 +81,7 @@ const Crypto = () => {
     return (
         <>
             <section className="mb-5">
-                <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-5">
+                <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
                     {coins
                         .slice((page - 1) * 10, (page - 1) * 10 + 10)
                         .map((coin) => {
@@ -90,7 +90,7 @@ const Crypto = () => {
                             return (
                                 <div
                                     key={coin.id}
-                                    className="bg-dark-bg rounded-md overflow-hidden flex flex-col"
+                                    className="bg-dark-bg rounded-md overflow-hidden flex flex-col w-full"
                                 >
                                     <div className="bg-pink py-2 px-4 flex items-center gap-3">
                                         <button
@@ -115,16 +115,21 @@ const Crypto = () => {
                                         }
                                         className="cursor-pointer flex"
                                     >
-                                        <div className="w-1/2">
+                                        <div className="w-1/3">
                                             <img
+                                                className="w-1/2"
                                                 src={coin.image}
                                                 alt={coin.name}
                                             />
                                         </div>
                                         <div>
-                                            <div className="border-2 py-1 px-5 rounded-md border-pink text-white">
-                                                R${" "}
-                                                {coin.current_price.toFixed(2)}{" "}
+                                            <div className="border-2 rounded-md border-pink text-white">
+                                                <span className="py-1 px-4">
+                                                    R${" "}
+                                                    {coin.current_price.toFixed(
+                                                        2
+                                                    )}{" "}
+                                                </span>
                                                 <span
                                                     style={{
                                                         color:
@@ -133,6 +138,7 @@ const Crypto = () => {
                                                                 : "red",
                                                         fontWeight: 500,
                                                     }}
+                                                    className="border-l-2 border-pink py-1 px-2"
                                                 >
                                                     {profit && "+"}
                                                     {coin.price_change_percentage_24h.toFixed(

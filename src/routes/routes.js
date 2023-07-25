@@ -6,6 +6,7 @@ import {
     Crypto,
     CoinPage,
     FavoriteCoins,
+    LoggedHome,
 } from "../pages";
 import { PrivateRoutes, LoggedRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -16,7 +17,11 @@ const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path="/" exact element={signed ? "home" : <Home />} />
+            <Route
+                path="/"
+                exact
+                element={signed ? <LoggedHome /> : <Home />}
+            />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/news" element={<News />} />

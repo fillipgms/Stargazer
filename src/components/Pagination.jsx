@@ -13,8 +13,8 @@ const Pagination = ({
     );
 
     return (
-        <nav className="md:w-full bg-dark-bg px-3 py-2 text-white rounded-md">
-            <ul className="flex justify-between items-center">
+        <nav className=" w-full bg-dark-bg px-3 py-2 text-white rounded-md overflow-auto">
+            <ul className="flex justify-between items-center gap-2">
                 <li>
                     <button
                         className="disabled:opacity-20"
@@ -25,14 +25,9 @@ const Pagination = ({
                     </button>
                 </li>
                 {pageNumbers.map((pageNumber) => (
-                    <li
-                        key={pageNumber}
-                        className={` ${
-                            pageNumber === currentPage ? "active" : ""
-                        }`}
-                    >
+                    <li key={pageNumber}>
                         <button
-                            className={`py-3 px-5 rounded-full ${
+                            className={`px-5 py-1 rounded-full ${
                                 pageNumber === currentPage
                                     ? "bg-pink text-white"
                                     : ""
