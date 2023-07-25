@@ -16,7 +16,7 @@ const ProfileLogoff = () => {
     };
 
     return (
-        <div className="absolute right-4 md:m-0 mx-3 top-20 bg-dark-bg shadow-pink-blue-glow dark:bg-dark p-8 rounded-md w-64 z-50 clip">
+        <div className="absolute right-4 md:m-0 mx-3 top-20 bg-dark-bg shadow-2xl dark:bg-dark p-8 rounded-md w-64 z-50 clip">
             <div className="flex justify-between items-center">
                 <span className="font-semibold text-lg text-white">
                     Ajustes Rápidos

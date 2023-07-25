@@ -27,7 +27,7 @@ const Pagination = ({
                 {pageNumbers.map((pageNumber) => (
                     <li key={pageNumber}>
                         <button
-                            className={`px-5 py-1 rounded-full ${
+                            className={`px-5 py-1 rounded-md ${
                                 pageNumber === currentPage
                                     ? "bg-pink text-white"
                                     : ""

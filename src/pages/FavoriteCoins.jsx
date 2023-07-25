@@ -102,11 +102,14 @@ const FavoriteCoins = () => {
                         coins
                             .slice((page - 1) * 10, (page - 1) * 10 + 10)
                             .map((coin) => {
+                                const profit =
+                                    coin.price_change_percentage_24h > 0;
+
                                 if (favorites.includes(coin.id))
                                     return (
                                         <div
                                             key={coin.id}
-                                            className="bg-dark-bg rounded-md overflow-hidden flex flex-col"
+                                            className="bg-dark-bg rounded-md overflow-hidden flex flex-col w-full"
                                         >
                                             <div className="bg-pink py-2 px-4 flex items-center gap-3">
                                                 <button
@@ -121,7 +124,10 @@ const FavoriteCoins = () => {
                                                         <AiOutlineStar />
                                                     )}
                                                 </button>
-                                                <h1>{coin.name}</h1>
+                                                <h1>
+                                                    #{coin.market_cap_rank}{" "}
+                                                    {coin.name}
+                                                </h1>
                                             </div>
                                             <div
                                                 onClick={() =>
@@ -129,13 +135,41 @@ const FavoriteCoins = () => {
                                                         `/coins/${coin.id}`
                                                     )
                                                 }
-                                                className="cursor-pointer"
+                                                className="cursor-pointer flex"
                                             >
-                                                <img
-                                                    src={coin.image}
-                                                    alt={coin.name}
-                                                    className="w-1/2"
-                                                />
+                                                <div className="w-1/3">
+                                                    <img
+                                                        className="w-1/2"
+                                                        src={coin.image}
+                                                        alt={coin.name}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <div className="border-2 rounded-md border-pink text-white">
+                                                        <span className="py-1 px-4">
+                                                            R${" "}
+                                                            {coin.current_price.toFixed(
+                                                                2
+                                                            )}{" "}
+                                                        </span>
+                                                        <span
+                                                            style={{
+                                                                color:
+                                                                    profit > 0
+                                                                        ? "rgb(14, 203, 129)"
+                                                                        : "red",
+                                                                fontWeight: 500,
+                                                            }}
+                                                            className="border-l-2 border-pink py-1 px-2"
+                                                        >
+                                                            {profit && "+"}
+                                                            {coin.price_change_percentage_24h.toFixed(
+                                                                2
+                                                            )}
+                                                            %
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     );

@@ -86,6 +86,12 @@ const Crypto = () => {
                         .slice((page - 1) * 10, (page - 1) * 10 + 10)
                         .map((coin) => {
                             const profit = coin.price_change_percentage_24h > 0;
+                            const price = coin.current_price
+                                .toFixed(2)
+                                .replace(/\D/g, "")
+                                .replace(/(\d)(\d{8})$/, "$1.$2")
+                                .replace(/(\d)(\d{5})$/, "$1.$2")
+                                .replace(/(\d)(\d{2})$/, "$1,$2");
 
                             return (
                                 <div
@@ -125,10 +131,7 @@ const Crypto = () => {
                                         <div>
                                             <div className="border-2 rounded-md border-pink text-white">
                                                 <span className="py-1 px-4">
-                                                    R${" "}
-                                                    {coin.current_price.toFixed(
-                                                        2
-                                                    )}{" "}
+                                                    R$ {price}{" "}
                                                 </span>
                                                 <span
                                                     style={{
