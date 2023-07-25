@@ -1,17 +1,29 @@
-import { Home, LoginPage, News, RegisterPage, Crypto } from "../pages";
+import {
+    Home,
+    LoginPage,
+    News,
+    RegisterPage,
+    Crypto,
+    CoinPage,
+    FavoriteCoins,
+} from "../pages";
 import { PrivateRoutes, LoggedRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const AppRoutes = () => {
+    const { signed } = useStateContext();
+
     return (
         <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/index" element={<Home />} />
+            <Route path="/" exact element={signed ? "home" : <Home />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/news" element={<News />} />
             <Route path="/coins" element={<Crypto />} />
+            <Route path="/coins/:id" element={<CoinPage />} />
             <Route path="/favorite-coins" element={<LoggedRoutes />}>
-                <Route path="/favorite-coins" element="favorite Coins" />
+                <Route path="/favorite-coins" element={<FavoriteCoins />} />
             </Route>
             <Route path="/profile" element={<LoggedRoutes />}>
                 <Route path="/profile" exact element="Profile" />

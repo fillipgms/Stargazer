@@ -8,8 +8,11 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, onSnapshot } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
+import { doc } from "firebase/firestore";
+import axios from "axios";
+import { CoinList } from "../services/coinGeckoApi";
 
 export const db = getFirestore(app);
 
@@ -18,6 +21,7 @@ const provider = new GoogleAuthProvider();
 
 export const ContextProvider = ({ children }) => {
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
     const [scroll, setScroll] = useState(undefined);
     const [profileMenu, setProfileMenu] = useState(false);
@@ -30,7 +34,27 @@ export const ContextProvider = ({ children }) => {
     const [passwordRepeat, setPasswordRepeat] = useState("");
     const [user, setUser] = useState("");
     const [currency, setCurrency] = useState("BRL");
-    const [symbol, setSymbol] = useState("₹");
+    const [symbol, setSymbol] = useState("R$");
+    const [favorites, setFavorites] = useState([]);
+    const [coins, setCoins] = useState();
+
+    useEffect(() => {
+        if (user) {
+            const coinRef = doc(db, "favorites", user.uid);
+
+            var desisncrever = onSnapshot(coinRef, (coin) => {
+                if (coin.exists()) {
+                    console.log(coin.data().coins);
+                    setFavorites(coin.data().coins);
+                } else {
+                    console.log("Sem favoritos");
+                }
+            });
+            return () => {
+                desisncrever();
+            };
+        }
+    }, [user]);
 
     useEffect(() => {
         if (currency === "BRL") setSymbol("R$");
@@ -116,6 +140,7 @@ export const ContextProvider = ({ children }) => {
     return (
         <StateContext.Provider
             value={{
+                db,
                 menuActive,
                 setMenuActive,
                 screenSize,
@@ -143,6 +168,8 @@ export const ContextProvider = ({ children }) => {
                 currency,
                 setCurrency,
                 symbol,
+                favorites,
+                coins,
             }}
         >
             {children}
