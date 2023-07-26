@@ -14,6 +14,7 @@ module.exports = {
                 violet: "#6a4199",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
+                purple: "#1D1332",
             },
 
             colors: {
@@ -21,6 +22,7 @@ module.exports = {
                 violet: "#6a4199",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
+                purple: "#1D1332",
             },
 
             backgroundImage: {
@@ -45,6 +47,7 @@ module.exports = {
                 violet: "#6a4199",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
+                purple: "#1D1332",
             },
         },
     },

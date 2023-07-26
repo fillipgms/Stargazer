@@ -100,7 +100,7 @@ const Crypto = () => {
                                 >
                                     <div className="bg-pink py-2 px-4 flex items-center gap-3">
                                         <button
-                                            className="cursor-pointer text-lg"
+                                            className="cursor-pointer text-lg text-purple"
                                             onClick={() =>
                                                 favoriteCoin(coin.id)
                                             } // Passa o ID da moeda para a função de favoritar
@@ -129,7 +129,7 @@ const Crypto = () => {
                                             />
                                         </div>
                                         <div>
-                                            <div className="border-2 rounded-md border-pink text-white">
+                                            <div className="border-2 rounded-md border-blue text-white">
                                                 <span className="py-1 px-4">
                                                     R$ {price}{" "}
                                                 </span>
@@ -141,7 +141,7 @@ const Crypto = () => {
                                                                 : "red",
                                                         fontWeight: 500,
                                                     }}
-                                                    className="border-l-2 border-pink py-1 px-2"
+                                                    className="border-l-2 border-blue py-1 px-2"
                                                 >
                                                     {profit && "+"}
                                                     {coin.price_change_percentage_24h.toFixed(

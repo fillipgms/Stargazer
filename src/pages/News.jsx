@@ -65,42 +65,56 @@ const News = () => {
         return <p>Error: {error}</p>;
     }
 
+    console.log(cryptoNews);
+
     return (
         <>
             <section>
                 <TopNews />
                 <Advertisement />
-                <div className="flex md:px-48 px-10 flex-col items-center justify-center w-full gap-10 py-10">
+                <div className="grid md:px-48 px-10 grid-cols-3 items-center justify-center w-full gap-10 py-10">
                     {cryptoNews.map((news, index) => {
                         if (index <= 3) {
                             return null;
                         }
-                        return (
-                            <a
-                                key={index}
-                                href={news.url}
-                                target="_blank"
-                                className="bg-dark-bg rounded-md overflow-hidden flex flex-col"
-                            >
-                                <header className="bg-pink py-2 px-4">
-                                    <h1>{news.title}</h1>
-                                </header>
-                                <div className="py-2 px-4  gap-4 flex text-white items-center align-center flex-1">
-                                    <img
-                                        src={news?.urlToImage || demoImage}
-                                        className="aspect-square h-[100px]"
-                                    />
-                                    <p>
-                                        {news.description.length > 150
-                                            ? `${news.description.substring(
-                                                  0,
-                                                  150
-                                              )}...`
-                                            : news.description}
-                                    </p>
+
+                        const isLargeNews = index === 0 || index % 4 === 0;
+
+                        if (isLargeNews) {
+                            return (
+                                <div className="col-span-3 ">
+                                    <div>{news.title}</div>
                                 </div>
-                            </a>
-                        );
+                            );
+                        } else {
+                            return (
+                                <a
+                                    href={news.url}
+                                    target="_blank"
+                                    className="bg-dark-bg rounded-md overflow-hidden h-full"
+                                >
+                                    <div className="flex justify-center items-cent">
+                                        <img
+                                            src={news.urlToImage || demoImage}
+                                            className="w-full aspect-video object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h1 className="bg-pink px-10 py-2">
+                                            {news.title}
+                                        </h1>
+                                        <p className="text-white px-10 my-5">
+                                            {news.description.length > 100
+                                                ? `${news.description.substring(
+                                                      0,
+                                                      100
+                                                  )}...`
+                                                : news.description}
+                                        </p>
+                                    </div>
+                                </a>
+                            );
+                        }
                     })}
                 </div>
             </section>
