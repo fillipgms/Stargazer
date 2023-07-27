@@ -82,35 +82,84 @@ const Crypto = () => {
         <>
             <section className="mb-5">
                 <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
-                    <table className="w-full">
-                        {coins
-                            .slice((page - 1) * 10, (page - 1) * 10 + 10)
-                            .map((coin) => {
-                                const profit =
-                                    coin.price_change_percentage_24h > 0;
-                                const price = coin.current_price
-                                    .toFixed(2)
-                                    .replace(/\D/g, "")
-                                    .replace(/(\d)(\d{8})$/, "$1.$2")
-                                    .replace(/(\d)(\d{5})$/, "$1.$2")
-                                    .replace(/(\d)(\d{2})$/, "$1,$2");
+                    {coins
+                        .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                        .map((coin) => {
+                            const profit = coin.price_change_percentage_24h > 0;
+                            const price = coin.current_price
+                                .toFixed(2)
+                                .replace(/\D/g, "")
+                                .replace(/(\d)(\d{8})$/, "$1.$2")
+                                .replace(/(\d)(\d{5})$/, "$1.$2")
+                                .replace(/(\d)(\d{2})$/, "$1,$2");
 
-                                return (
-                                    <div>
-                                        <header></header>
-                                        <section>
-                                            {" "}
-                                            <div className="w-20">
-                                                <img
-                                                    src={coin.image}
-                                                    alt={coin.name}
-                                                />
-                                            </div>
-                                        </section>
-                                    </div>
-                                );
-                            })}
-                    </table>
+                            return (
+                                <div className="w-full rounded-md overflow-hidden">
+                                    <header className="bg-pink font-bold text-black flex w-full px-4 items-center justify-between py-2">
+                                        <div className="flex items-center justify-center gap-3">
+                                            <span
+                                                className="cursor-pointer text-lg text-purple"
+                                                onClick={() =>
+                                                    favoriteCoin(coin.id)
+                                                }
+                                            >
+                                                {isInFavorites(coin.id) ? (
+                                                    <AiFillStar />
+                                                ) : (
+                                                    <AiOutlineStar />
+                                                )}
+                                            </span>
+                                            <span className="flex items-center justify-center gap-1">
+                                                <h1>
+                                                    #{coin.market_cap_rank}{" "}
+                                                    <span>{coin.name}</span>
+                                                </h1>
+                                                <span className="opacity-75 align-super text-sm">
+                                                    {coin.symbol}
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-2">
+                                            <span>R$ {price}</span>
+                                            <span
+                                                style={{
+                                                    color:
+                                                        profit > 0
+                                                            ? "#A8F16F"
+                                                            : "#D32F2F",
+                                                    fontWeight: 500,
+                                                    borderColor:
+                                                        profit > 0
+                                                            ? "#A8F16F"
+                                                            : "#D32F2F",
+                                                }}
+                                                className="border-2 py-1 px-2 rounded-md"
+                                            >
+                                                {profit && "+"}
+                                                {coin.price_change_percentage_24h.toFixed(
+                                                    2
+                                                )}
+                                                %
+                                            </span>
+                                        </div>
+                                    </header>
+                                    <section
+                                        onClick={() =>
+                                            navigate(`/coins/${coin.id}`)
+                                        }
+                                        className="cursor-pointer flex bg-dark-bg px-4 py-2"
+                                    >
+                                        {" "}
+                                        <div className="w-20">
+                                            <img
+                                                src={coin.image}
+                                                alt={coin.name}
+                                            />
+                                        </div>
+                                    </section>
+                                </div>
+                            );
+                        })}
                     <Pagination
                         totalItems={coins.length}
                         itemsPerPage={itemsPerPage}
