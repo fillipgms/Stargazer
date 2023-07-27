@@ -72,7 +72,7 @@ const News = () => {
             <section>
                 <TopNews />
                 <Advertisement />
-                <div className="grid md:px-48 px-10 grid-cols-3 items-center justify-center w-full gap-10 py-10">
+                <div className="grid md:px-48 px-10 md:grid-cols-3 grid-cols-1 items-center justify-center w-full gap-10 py-10">
                     {cryptoNews.map((news, index) => {
                         if (index <= 3) {
                             return null;
@@ -82,9 +82,31 @@ const News = () => {
 
                         if (isLargeNews) {
                             return (
-                                <div className="col-span-3 ">
-                                    <div>{news.title}</div>
-                                </div>
+                                <a
+                                    className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row"
+                                    href={news.url}
+                                    target="_blank"
+                                >
+                                    <div className="md:w-96">
+                                        <img
+                                            src={news.urlToImage || demoImage}
+                                            className="w-full h-full aspect-video object-cover"
+                                        />
+                                    </div>
+                                    <div className="w-full">
+                                        <h1 className="bg-pink px-10 py-2 font-semibold">
+                                            {news.title}
+                                        </h1>
+                                        <p className="text-white px-10 my-5">
+                                            {news.description.length > 100
+                                                ? `${news.description.substring(
+                                                      0,
+                                                      100
+                                                  )}...`
+                                                : news.description}
+                                        </p>
+                                    </div>
+                                </a>
                             );
                         } else {
                             return (
@@ -93,14 +115,14 @@ const News = () => {
                                     target="_blank"
                                     className="bg-dark-bg rounded-md overflow-hidden h-full"
                                 >
-                                    <div className="flex justify-center items-cent">
+                                    <div className="flex justify-center items-center">
                                         <img
                                             src={news.urlToImage || demoImage}
                                             className="w-full aspect-video object-cover"
                                         />
                                     </div>
                                     <div>
-                                        <h1 className="bg-pink px-10 py-2">
+                                        <h1 className="bg-pink px-10 py-2 font-semibold">
                                             {news.title}
                                         </h1>
                                         <p className="text-white px-10 my-5">

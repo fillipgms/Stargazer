@@ -82,79 +82,35 @@ const Crypto = () => {
         <>
             <section className="mb-5">
                 <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
-                    {coins
-                        .slice((page - 1) * 10, (page - 1) * 10 + 10)
-                        .map((coin) => {
-                            const profit = coin.price_change_percentage_24h > 0;
-                            const price = coin.current_price
-                                .toFixed(2)
-                                .replace(/\D/g, "")
-                                .replace(/(\d)(\d{8})$/, "$1.$2")
-                                .replace(/(\d)(\d{5})$/, "$1.$2")
-                                .replace(/(\d)(\d{2})$/, "$1,$2");
+                    <table className="w-full">
+                        {coins
+                            .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                            .map((coin) => {
+                                const profit =
+                                    coin.price_change_percentage_24h > 0;
+                                const price = coin.current_price
+                                    .toFixed(2)
+                                    .replace(/\D/g, "")
+                                    .replace(/(\d)(\d{8})$/, "$1.$2")
+                                    .replace(/(\d)(\d{5})$/, "$1.$2")
+                                    .replace(/(\d)(\d{2})$/, "$1,$2");
 
-                            return (
-                                <div
-                                    key={coin.id}
-                                    className="bg-dark-bg rounded-md overflow-hidden flex flex-col w-full"
-                                >
-                                    <div className="bg-pink py-2 px-4 flex items-center gap-3">
-                                        <button
-                                            className="cursor-pointer text-lg text-purple"
-                                            onClick={() =>
-                                                favoriteCoin(coin.id)
-                                            } // Passa o ID da moeda para a função de favoritar
-                                        >
-                                            {isInFavorites(coin.id) ? (
-                                                <AiFillStar />
-                                            ) : (
-                                                <AiOutlineStar />
-                                            )}
-                                        </button>
-                                        <h1>
-                                            #{coin.market_cap_rank} {coin.name}
-                                        </h1>
-                                    </div>
-                                    <div
-                                        onClick={() =>
-                                            navigate(`/coins/${coin.id}`)
-                                        }
-                                        className="cursor-pointer flex"
-                                    >
-                                        <div className="w-1/3">
-                                            <img
-                                                className="w-1/2"
-                                                src={coin.image}
-                                                alt={coin.name}
-                                            />
-                                        </div>
-                                        <div>
-                                            <div className="border-2 rounded-md border-blue text-white">
-                                                <span className="py-1 px-4">
-                                                    R$ {price}{" "}
-                                                </span>
-                                                <span
-                                                    style={{
-                                                        color:
-                                                            profit > 0
-                                                                ? "rgb(14, 203, 129)"
-                                                                : "red",
-                                                        fontWeight: 500,
-                                                    }}
-                                                    className="border-l-2 border-blue py-1 px-2"
-                                                >
-                                                    {profit && "+"}
-                                                    {coin.price_change_percentage_24h.toFixed(
-                                                        2
-                                                    )}
-                                                    %
-                                                </span>
+                                return (
+                                    <div>
+                                        <header></header>
+                                        <section>
+                                            {" "}
+                                            <div className="w-20">
+                                                <img
+                                                    src={coin.image}
+                                                    alt={coin.name}
+                                                />
                                             </div>
-                                        </div>
+                                        </section>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                    </table>
                     <Pagination
                         totalItems={coins.length}
                         itemsPerPage={itemsPerPage}
