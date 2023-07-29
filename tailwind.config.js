@@ -11,7 +11,7 @@ module.exports = {
                 "half-transparent": "rgba(0, 0, 0, 0.5)",
                 glassmorphism: "rgba(217, 217, 217, 0.005);",
                 pink: "#f788b6",
-                violet: "#6a4199",
+                violet: "#c7a3ff",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
                 purple: "#1D1332",
@@ -19,7 +19,7 @@ module.exports = {
 
             colors: {
                 pink: "#f788b6",
-                violet: "#6a4199",
+                violet: "#c7a3ff",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
                 purple: "#1D1332",
@@ -44,7 +44,7 @@ module.exports = {
             textColor: {
                 black: "#18181a",
                 pink: "#f788b6",
-                violet: "#6a4199",
+                violet: "#c7a3ff",
                 white: "#f1f1f1",
                 blue: "#7fa2e0",
                 purple: "#1D1332",

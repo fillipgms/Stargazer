@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
+import { MdPlayArrow } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { useNavigate, Link } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
@@ -12,10 +13,23 @@ import { Loading, Footer, Pagination } from "../components";
 const FavoriteCoins = () => {
     const navigate = useNavigate();
     const [coins, setCoins] = useState([]);
-    const { favorites, user, db, currency } = useStateContext();
+    const { favorites, user, db, currency, screenSize, setScreenSize } =
+        useStateContext();
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [canScroll, setCanScroll] = useState(false);
+
+    setScreenSize(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenSize(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const fetchCoins = async () => {
         setLoading(true);
@@ -92,7 +106,7 @@ const FavoriteCoins = () => {
     return (
         <>
             <section>
-                <div className=" flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-5">
+                <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
                     {favorites.length === 0 ? (
                         <div className="text-white absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-dark-bg px-5 py-10 flex flex-col text-center w-1/4 rounded-md">
                             <span>
@@ -121,13 +135,72 @@ const FavoriteCoins = () => {
                                     .replace(/(\d)(\d{5})$/, "$1.$2")
                                     .replace(/(\d)(\d{2})$/, "$1,$2");
 
+                                const high = coin.high_24h
+                                    .toFixed(2)
+                                    .replace(/\D/g, "")
+                                    .replace(/(\d)(\d{8})$/, "$1.$2")
+                                    .replace(/(\d)(\d{5})$/, "$1.$2")
+                                    .replace(/(\d)(\d{2})$/, "$1,$2");
+
+                                const low = coin.low_24h
+                                    .toFixed(2)
+                                    .replace(/\D/g, "")
+                                    .replace(/(\d)(\d{8})$/, "$1.$2")
+                                    .replace(/(\d)(\d{5})$/, "$1.$2")
+                                    .replace(/(\d)(\d{2})$/, "$1,$2");
+
                                 if (favorites.includes(coin.id))
                                     return (
-                                        <div className="w-full rounded-md overflow-hidden">
-                                            <header className="bg-pink font-bold text-black flex w-full px-4 items-center justify-between py-2">
+                                        <div className="w-full rounded-md overflow-hidden shadow-xl">
+                                            <header className="bg-dark-bg font-bold text-white flex w-full px-4 items-center justify-between py-2 border-b-2 border-pink">
                                                 <div className="flex items-center justify-center gap-3">
+                                                    <span className="flex items-center justify-center md:gap-1">
+                                                        <h1>
+                                                            #
+                                                            {
+                                                                coin.market_cap_rank
+                                                            }{" "}
+                                                            <span>
+                                                                {coin.name}
+                                                            </span>
+                                                        </h1>
+                                                        {screenSize > 900 ? (
+                                                            <span className="opacity-75 align-super text-sm">
+                                                                {coin.symbol}
+                                                            </span>
+                                                        ) : (
+                                                            ""
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <span>R$ {price}</span>
+                                                    {screenSize > 900 ? (
+                                                        <span
+                                                            style={{
+                                                                color:
+                                                                    profit > 0
+                                                                        ? "#7fa2e0"
+                                                                        : "#c7a3ff",
+                                                                fontWeight: 500,
+                                                                borderColor:
+                                                                    profit > 0
+                                                                        ? "#7fa2e0"
+                                                                        : "#c7a3ff",
+                                                            }}
+                                                            className="border-2 py-1 px-2 rounded-md"
+                                                        >
+                                                            {profit && "+"}
+                                                            {coin.price_change_percentage_24h.toFixed(
+                                                                2
+                                                            )}
+                                                            %
+                                                        </span>
+                                                    ) : (
+                                                        ""
+                                                    )}
                                                     <span
-                                                        className="cursor-pointer text-lg text-purple"
+                                                        className="cursor-pointer text-lg text-pink"
                                                         onClick={() =>
                                                             favoriteCoin(
                                                                 coin.id
@@ -142,43 +215,6 @@ const FavoriteCoins = () => {
                                                             <AiOutlineStar />
                                                         )}
                                                     </span>
-                                                    <span className="flex items-center justify-center gap-1">
-                                                        <h1>
-                                                            #
-                                                            {
-                                                                coin.market_cap_rank
-                                                            }{" "}
-                                                            <span>
-                                                                {coin.name}
-                                                            </span>
-                                                        </h1>
-                                                        <span className="opacity-75 align-super text-sm">
-                                                            {coin.symbol}
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center justify-center gap-2">
-                                                    <span>R$ {price}</span>
-                                                    <span
-                                                        style={{
-                                                            color:
-                                                                profit > 0
-                                                                    ? "#A8F16F"
-                                                                    : "#D32F2F",
-                                                            fontWeight: 500,
-                                                            borderColor:
-                                                                profit > 0
-                                                                    ? "#A8F16F"
-                                                                    : "#D32F2F",
-                                                        }}
-                                                        className="border-2 py-1 px-2 rounded-md"
-                                                    >
-                                                        {profit && "+"}
-                                                        {coin.price_change_percentage_24h.toFixed(
-                                                            2
-                                                        )}
-                                                        %
-                                                    </span>
                                                 </div>
                                             </header>
                                             <section
@@ -187,7 +223,7 @@ const FavoriteCoins = () => {
                                                         `/coins/${coin.id}`
                                                     )
                                                 }
-                                                className="cursor-pointer flex bg-dark-bg px-4 py-2"
+                                                className="cursor-pointer flex bg-dark-bg px-4 py-2 items-center gap-5"
                                             >
                                                 {" "}
                                                 <div className="w-20">
@@ -195,6 +231,16 @@ const FavoriteCoins = () => {
                                                         src={coin.image}
                                                         alt={coin.name}
                                                     />
+                                                </div>
+                                                <div className="text-white">
+                                                    <span className="flex gap-1 items-center">
+                                                        <MdPlayArrow className="text-blue -rotate-90 text-lg" />
+                                                        <p>R$ {high}</p>
+                                                    </span>
+                                                    <span className="flex gap-1 items-center">
+                                                        <MdPlayArrow className="text-violet rotate-90 text-lg" />{" "}
+                                                        <p>R$ {low}</p>
+                                                    </span>
                                                 </div>
                                             </section>
                                         </div>

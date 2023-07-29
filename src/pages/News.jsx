@@ -9,20 +9,15 @@ const demoImage =
     "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
 
 const News = () => {
-    const pageSize = 10; // Número de notícias por página
-    const [page, setPage] = useState(1); // Número da página atual
-    const [cryptoNews, setCryptoNews] = useState([]); // Lista de notícias exibidas
+    const pageSize = 10;
+    const [page, setPage] = useState(1);
+    const [cryptoNews, setCryptoNews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchNews();
     }, [page]);
-
-    useEffect(() => {
-        // Armazenar os dados no armazenamento local quando houver alteração na lista de notícias
-        localStorage.setItem("cryptoNews", JSON.stringify(cryptoNews));
-    }, [cryptoNews]);
 
     const fetchNews = async () => {
         try {
@@ -42,7 +37,7 @@ const News = () => {
         const scrollTop =
             document.documentElement.scrollTop || document.body.scrollTop;
         const distanceFromBottom = documentHeight - (scrollTop + windowHeight);
-        const loadMoreThreshold = 500; // Distância em pixels antes do fim da página para carregar mais notícias
+        const loadMoreThreshold = 500;
 
         if (distanceFromBottom < loadMoreThreshold && !isLoading) {
             setPage((prevPage) => prevPage + 1);
@@ -50,10 +45,8 @@ const News = () => {
     };
 
     useEffect(() => {
-        // Adicionar um ouvinte de evento de scroll para a janela
         window.addEventListener("scroll", handleScroll);
 
-        // Remover o ouvinte de evento de scroll quando o componente for desmontado
         return () => window.removeEventListener("scroll", handleScroll);
     }, [page, isLoading]);
 

@@ -1,12 +1,12 @@
 import React from "react";
-import { TopNews } from "../components";
+import { TopNews, Advertisement } from "../components";
 
 const LoggedHome = () => {
     return (
-        <div>
-            LoggedHome
+        <section>
+            <Advertisement />
             <TopNews />
-        </div>
+        </section>
     );
 };
 

@@ -3,7 +3,7 @@ import { SignUp } from "../components";
 
 const RegisterPage = () => {
     return (
-        <div className="h-screen bg-wallpaper bg-cover">
+        <div className="min-h-screen bg-wallpaper bg-cover">
             <SignUp />
         </div>
     );
