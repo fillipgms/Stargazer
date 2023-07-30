@@ -7,6 +7,7 @@ import {
     CoinPage,
     FavoriteCoins,
     LoggedHome,
+    PasswordReset,
 } from "../pages";
 import { PrivateRoutes, LoggedRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -38,6 +39,13 @@ const AppRoutes = () => {
             </Route>
             <Route path="/signin" element={<PrivateRoutes />}>
                 <Route path="/signin" exact element={<LoginPage />} />
+            </Route>
+            <Route path="/passwordreset" element={<PrivateRoutes />}>
+                <Route
+                    path="/passwordreset"
+                    exact
+                    element={<PasswordReset />}
+                />
             </Route>
             <Route path="/guide" exact element="Guia" />
 

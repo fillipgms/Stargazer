@@ -27,9 +27,11 @@ const CoinPage = () => {
     }
 
     return (
-        <div>
-            <h1>{coin.name}</h1>
-        </div>
+        <section className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
+            <header className="w-full">
+                <h1>{coin.name}</h1>
+            </header>
+        </section>
     );
 };
 

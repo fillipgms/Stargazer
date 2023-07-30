@@ -1,12 +1,15 @@
 import React from "react";
-import { TopNews, Advertisement } from "../components";
+import { TopNews, Advertisement, Footer } from "../components";
 
 const LoggedHome = () => {
     return (
-        <section>
-            <Advertisement />
-            <TopNews />
-        </section>
+        <>
+            <section>
+                <Advertisement />
+                <TopNews />
+            </section>
+            <Footer />
+        </>
     );
 };
 

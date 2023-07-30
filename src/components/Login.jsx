@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useStateContext } from "../contexts/ContextProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const {
@@ -48,21 +49,30 @@ const Login = () => {
                         E-mail
                     </label>
                 </div>
-                <div class="relative">
-                    <input
-                        id="outlined_success"
-                        aria-describedby="outlined_success_help"
-                        class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
-                        placeholder=" "
-                        onChange={(e) => setPassword(e.target.value)}
-                        type={inputType ? "text" : "password"}
-                    />
-                    <label
-                        for="outlined_success"
-                        class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1"
+                <div>
+                    <div className="relative">
+                        <input
+                            id="outlined_success"
+                            aria-describedby="outlined_success_help"
+                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
+                            placeholder=" "
+                            onChange={(e) => setPassword(e.target.value)}
+                            type={inputType ? "text" : "password"}
+                        />
+                        <label
+                            for="outlined_success"
+                            class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1"
+                        >
+                            Senha
+                        </label>
+                    </div>
+
+                    <Link
+                        className="text-pink ml-auto flex justify-end font-semibold mt-1 text-sm"
+                        to={"/passwordreset"}
                     >
-                        Senha
-                    </label>
+                        Esqueceu a senha?
+                    </Link>
                 </div>
 
                 <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5">

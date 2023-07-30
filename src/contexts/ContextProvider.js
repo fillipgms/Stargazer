@@ -7,6 +7,7 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     updateProfile,
+    sendPasswordResetEmail,
 } from "firebase/auth";
 import { getFirestore, onSnapshot } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
@@ -130,6 +131,13 @@ export const ContextProvider = ({ children }) => {
             });
     };
 
+    const passworReset = async (e) => {
+        e.preventDefault();
+        sendPasswordResetEmail(auth, email);
+
+        return <Navigate to="/login" />;
+    };
+
     function signOut() {
         localStorage.removeItem("@AuthFirebase:user");
         setUser(null);
@@ -170,6 +178,7 @@ export const ContextProvider = ({ children }) => {
                 symbol,
                 favorites,
                 coins,
+                passworReset,
             }}
         >
             {children}
