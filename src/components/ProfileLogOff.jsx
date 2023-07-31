@@ -4,9 +4,6 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsFillGearFill } from "react-icons/bs";
 
-const demoImage =
-    "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
-
 const ProfileLogoff = () => {
     const { user, setProfileMenu, signOut, signed } = useStateContext();
 
@@ -16,7 +13,7 @@ const ProfileLogoff = () => {
     };
 
     return (
-        <div className="absolute right-4 md:m-0 mx-3 top-20 bg-dark-bg shadow-2xl dark:bg-dark p-8 rounded-md w-64 z-50 clip">
+        <div className="absolute right-4 md:m-0 mx-3 top-12 bg-dark-bg shadow-2xl dark:bg-dark p-8 rounded-md w-64 z-50">
             <div className="flex justify-between items-center">
                 <span className="font-semibold text-lg text-white">
                     Ajustes Rápidos

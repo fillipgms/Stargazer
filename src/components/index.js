@@ -10,3 +10,4 @@ export { default as SignUp } from "./SignUp";
 export { default as ProfileLogOff } from "./ProfileLogOff";
 export { default as Pagination } from "./Pagination";
 export { default as TopNews } from "./TopNews";
+export { default as CoinChart } from "./CoinChart";

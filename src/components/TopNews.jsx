@@ -37,7 +37,7 @@ const TopNews = () => {
                         src={cryptoHeadlines[0]?.urlToImage || demoImage}
                         className="aspect-video w-full object-cover"
                     />
-                    <h1 className="absolute bottom-0 bg-pink py-3 px-2 rounded-tr-xl shadow-pink-blue-glow font-semibold">
+                    <h1 className="absolute text-black bottom-0 bg-pink py-3 px-2 rounded-tr-xl shadow-pink-blue-glow font-semibold">
                         {cryptoHeadlines[0]?.title.length > 100
                             ? `${cryptoHeadlines[0]?.title.substring(
                                   0,
@@ -61,7 +61,7 @@ const TopNews = () => {
                         />
                     </div>
                     <div>
-                        <h1 className="bg-pink px-10 py-2 font-semibold">
+                        <h1 className="bg-pink text-black px-10 py-2 font-semibold">
                             {cryptoHeadlines[1]?.title}
                         </h1>
                         <p className="text-white px-10 my-5">
@@ -89,7 +89,7 @@ const TopNews = () => {
                             />
                         </div>
                         <div>
-                            <h1 className="bg-pink px-10 py-2 font-semibold">
+                            <h1 className="bg-pink text-black px-10 py-2 font-semibold">
                                 {news.title}
                             </h1>
                             <p className="text-white px-10 my-5">

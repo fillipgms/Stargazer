@@ -87,7 +87,7 @@ const News = () => {
                                         />
                                     </div>
                                     <div className="w-full">
-                                        <h1 className="bg-pink px-10 py-2 font-semibold">
+                                        <h1 className="bg-pink text-black px-10 py-2 font-semibold">
                                             {news.title}
                                         </h1>
                                         <p className="text-white px-10 my-5">
@@ -115,7 +115,7 @@ const News = () => {
                                         />
                                     </div>
                                     <div>
-                                        <h1 className="bg-pink px-10 py-2 font-semibold">
+                                        <h1 className="bg-pink text-black px-10 py-2 font-semibold">
                                             {news.title}
                                         </h1>
                                         <p className="text-white px-10 my-5">

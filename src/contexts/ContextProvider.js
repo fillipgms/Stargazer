@@ -45,7 +45,6 @@ export const ContextProvider = ({ children }) => {
 
             var desisncrever = onSnapshot(coinRef, (coin) => {
                 if (coin.exists()) {
-                    console.log(coin.data().coins);
                     setFavorites(coin.data().coins);
                 } else {
                     console.log("Sem favoritos");
