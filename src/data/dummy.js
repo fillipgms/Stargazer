@@ -178,3 +178,34 @@ export const navItems = {
         },
     },
 };
+
+export const datasGrafico = [
+    {
+        nome: "24 Horas",
+        tempo: "1",
+    },
+    {
+        nome: "7 dias",
+        tempo: "7",
+    },
+    {
+        nome: "14 dias",
+        tempo: "14",
+    },
+    {
+        nome: "30 dias",
+        tempo: "30",
+    },
+    {
+        nome: "90 dias",
+        tempo: "90",
+    },
+    {
+        nome: "180 dias",
+        tempo: "180",
+    },
+    {
+        nome: "1 ano",
+        tempo: "365",
+    },
+];
