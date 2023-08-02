@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { app } from "../services/firebase";
+import { app, createUserDocument } from "../services/firebase";
 import {
     getAuth,
     signInWithPopup,
@@ -14,8 +14,6 @@ import { Navigate } from "react-router-dom";
 import { doc } from "firebase/firestore";
 import axios from "axios";
 import { CoinList } from "../services/coinGeckoApi";
-
-export const db = getFirestore(app);
 
 const StateContext = createContext();
 const provider = new GoogleAuthProvider();
@@ -38,6 +36,7 @@ export const ContextProvider = ({ children }) => {
     const [symbol, setSymbol] = useState("R$");
     const [favorites, setFavorites] = useState([]);
     const [coins, setCoins] = useState();
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -73,13 +72,19 @@ export const ContextProvider = ({ children }) => {
 
     const signInGoogle = () => {
         signInWithPopup(auth, provider)
-            .then((result) => {
+            .then(async (result) => {
                 const user = result.user;
                 setUser(user);
                 localStorage.setItem(
                     "@AuthFirebase:user",
                     JSON.stringify(user)
                 );
+
+                // Call createUserDocument to create the user document in Firestore
+                await createUserDocument(user, {
+                    displayName: user.displayName,
+                    isAdmin, // Set isAdmin as per your requirement
+                });
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -105,6 +110,10 @@ export const ContextProvider = ({ children }) => {
                         "@AuthFirebase:user",
                         JSON.stringify(user)
                     );
+                    await createUserDocument(user, {
+                        displayName: username,
+                        isAdmin, // Make sure this variable is correctly set before using it
+                    });
                 })
                 .catch((error) => {
                     setLoginError(error);
