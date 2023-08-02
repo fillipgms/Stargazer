@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { app, createUserDocument } from "../services/firebase";
+import { app } from "../services/firebase";
 import {
     getAuth,
     signInWithPopup,
@@ -8,8 +8,9 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     sendPasswordResetEmail,
+    onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, onSnapshot } from "firebase/firestore";
+import { getFirestore, onSnapshot, getDoc, setDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import { doc } from "firebase/firestore";
 import axios from "axios";
@@ -37,6 +38,47 @@ export const ContextProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);
     const [coins, setCoins] = useState();
     const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+                setIsAdmin(false);
+            }
+        });
+
+        return () => {
+            unsubscribeAuth();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (user && user.uid) {
+            const fetchIsAdminStatus = async () => {
+                try {
+                    const db = getFirestore(app);
+                    const userRef = doc(db, "usuarios", user.uid);
+                    const snapshot = await getDoc(userRef);
+                    if (snapshot.exists()) {
+                        const isAdmin = snapshot.data().isAdmin || false;
+                        setIsAdmin(isAdmin);
+                        setLoading(false);
+                    } else {
+                        console.log("Usuário não encontrado.");
+                        setLoading(false);
+                    }
+                } catch (error) {
+                    console.log("Erro:", error);
+                    setLoading(false);
+                }
+            };
+
+            fetchIsAdminStatus();
+        }
+    }, [user]);
 
     useEffect(() => {
         if (user) {
@@ -80,10 +122,9 @@ export const ContextProvider = ({ children }) => {
                     JSON.stringify(user)
                 );
 
-                // Call createUserDocument to create the user document in Firestore
                 await createUserDocument(user, {
                     displayName: user.displayName,
-                    isAdmin, // Set isAdmin as per your requirement
+                    isAdmin,
                 });
             })
             .catch((error) => {
@@ -112,7 +153,7 @@ export const ContextProvider = ({ children }) => {
                     );
                     await createUserDocument(user, {
                         displayName: username,
-                        isAdmin, // Make sure this variable is correctly set before using it
+                        isAdmin,
                     });
                 })
                 .catch((error) => {
@@ -153,6 +194,49 @@ export const ContextProvider = ({ children }) => {
         return <Navigate to="/" />;
     }
 
+    const createUserDocument = async (user, additionalData) => {
+        if (!user || !user.uid) {
+            console.log("Invalid user object or missing UID.");
+            return;
+        }
+
+        if (
+            !additionalData ||
+            !additionalData.displayName ||
+            additionalData.isAdmin === undefined
+        ) {
+            console.log(
+                "Invalid additional data or missing displayName or isAdmin."
+            );
+            return;
+        }
+
+        try {
+            const userRef = doc(db, "usuarios", user.uid);
+            console.log("userRef:", userRef);
+
+            const snapshot = await getDoc(userRef);
+            console.log("snapshot.exists:", snapshot.exists());
+
+            if (!snapshot.exists()) {
+                const { email } = user;
+                const { displayName, isAdmin } = additionalData;
+
+                await setDoc(userRef, {
+                    displayName: displayName,
+                    email: email,
+                    isAdmin: isAdmin,
+                });
+
+                console.log("User document created successfully!");
+            } else {
+                console.log("User document already exists.");
+            }
+        } catch (error) {
+            console.log("Error in creating user document:", error);
+        }
+    };
+
     return (
         <StateContext.Provider
             value={{
@@ -187,6 +271,8 @@ export const ContextProvider = ({ children }) => {
                 favorites,
                 coins,
                 passworReset,
+                isAdmin,
+                loading,
             }}
         >
             {children}

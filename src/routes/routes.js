@@ -8,8 +8,10 @@ import {
     FavoriteCoins,
     LoggedHome,
     PasswordReset,
+    Admin,
+    ErrorPage,
 } from "../pages";
-import { PrivateRoutes, LoggedRoutes } from ".";
+import { PrivateRoutes, LoggedRoutes, AdminRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 
@@ -48,8 +50,11 @@ const AppRoutes = () => {
                 />
             </Route>
             <Route path="/guide" exact element="Guia" />
+            <Route path="/admin/*" element={<AdminRoutes />}>
+                <Route path="/admin/*" exact element={<Admin />} />
+            </Route>
 
-            <Route path="ErrorPage" element="erro" />
+            <Route path="ErrorPage" element={<ErrorPage />} />
             <Route path="*" element={<Navigate to="/ErrorPage" replace />} />
         </Routes>
     );
