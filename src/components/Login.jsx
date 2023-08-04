@@ -26,7 +26,9 @@ const Login = () => {
 
     return (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 md:px-14 rounded-lg shadow-pink-blue-glow flex flex-col gap-4 w-4/5 md:w-fit px-4">
-            <h1 className="text-base font-semibold">Entre com sua conta</h1>
+            <h1 className="text-base font-semibold text-black">
+                Entre com sua conta
+            </h1>
             <form
                 action="#"
                 className="flex flex-col gap-6"
@@ -75,12 +77,12 @@ const Login = () => {
                     </Link>
                 </div>
 
-                <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5">
+                <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5 text-black">
                     ou
                 </span>
 
                 <button
-                    className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full"
+                    className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full text-black font-medium shadow-sm"
                     onClick={loginGoogle}
                 >
                     <FcGoogle />
@@ -90,7 +92,7 @@ const Login = () => {
                 <input
                     type="submit"
                     value="Entrar"
-                    className="cursor-pointer bg-pink w-full flex items-center justify-center py-2 rounded-md"
+                    className="cursor-pointer bg-pink w-full flex items-center justify-center py-2 rounded-md text-white font-medium"
                 />
             </form>
         </div>

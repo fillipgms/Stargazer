@@ -27,6 +27,8 @@ const CoinPage = () => {
         return <Loading />;
     }
 
+    console.log(coin);
+
     const price = coin?.market_data.current_price[currency.toLowerCase()]
         .toFixed(2)
         .replace(/\D/g, "")

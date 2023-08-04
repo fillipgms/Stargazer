@@ -36,7 +36,10 @@ const Cards = () => {
                             className="absolute bottom-4 w-10/12 bg-pink  rounded-md font-bold  text-center flex items-center justify-center"
                             whileTap={{ scale: 0.9 }}
                         >
-                            <Link to={`/${item.link}`} className="w-full py-2">
+                            <Link
+                                to={`/${item.link}`}
+                                className="w-full text-black py-2"
+                            >
                                 Explore
                             </Link>
                         </motion.span>

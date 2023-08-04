@@ -47,6 +47,7 @@ export const ContextProvider = ({ children }) => {
             } else {
                 setUser(null);
                 setIsAdmin(false);
+                setLoading(false); // Add this line to handle the case when there is no user
             }
         });
 
@@ -65,18 +66,19 @@ export const ContextProvider = ({ children }) => {
                     if (snapshot.exists()) {
                         const isAdmin = snapshot.data().isAdmin || false;
                         setIsAdmin(isAdmin);
-                        setLoading(false);
                     } else {
                         console.log("Usuário não encontrado.");
-                        setLoading(false);
                     }
                 } catch (error) {
                     console.log("Erro:", error);
-                    setLoading(false);
+                } finally {
+                    setLoading(false); // Move setLoading(false) inside the finally block
                 }
             };
 
             fetchIsAdminStatus();
+        } else {
+            setLoading(false); // Add this line to handle the case when there is no user UID
         }
     }, [user]);
 

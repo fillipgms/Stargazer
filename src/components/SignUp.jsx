@@ -32,7 +32,9 @@ const SignUp = () => {
 
     return (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-center py-5 md:px-14 w-4/5 rounded-lg shadow-pink-blue-glow flex flex-col gap-4 px-4 md:w-fit">
-            <h1 className="text-base font-semibold">Vamos criar sua conta</h1>
+            <h1 className="text-base font-semibold text-black">
+                Vamos criar sua conta
+            </h1>
             <form
                 action="#"
                 className="flex flex-col gap-6"
@@ -109,12 +111,12 @@ const SignUp = () => {
                     </label>
                 </div>
 
-                <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5">
+                <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5 text-black">
                     ou
                 </span>
 
                 <button
-                    className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full text-sm w-full"
+                    className="flex items-center justify-center gap-3 bg-[#fff] py-3 px-5 rounded-full text-black font-medium shadow-sm"
                     onClick={loginGoogle}
                 >
                     <FcGoogle />
@@ -123,7 +125,7 @@ const SignUp = () => {
 
                 <button
                     type="submit"
-                    className="cursor-pointer bg-pink w-full flex items-center justify-center py-2 rounded-md"
+                    className="cursor-pointer bg-pink w-full flex items-center justify-center py-2 rounded-md text-white font-medium"
                 >
                     Criar conta
                 </button>
