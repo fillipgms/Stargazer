@@ -56,7 +56,7 @@ const CoinPage = () => {
                 <div className="text-white flex items-center gap-2">
                     <img src={coin?.image.small} alt={coin?.name} />
                     <span
-                        className="tooltip tooltip-bottom cursor-help text-left before:bg-dark-bg before:shadow-md before:text-white before:py-2 before:px-4"
+                        className="tooltip tooltip-bottom cursor-help text-left"
                         data-tip={"preço atual de " + coin?.name}
                     >
                         <h1>

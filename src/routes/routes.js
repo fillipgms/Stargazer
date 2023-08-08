@@ -33,9 +33,6 @@ const AppRoutes = () => {
             <Route path="/favorite-coins" element={<LoggedRoutes />}>
                 <Route path="/favorite-coins" element={<FavoriteCoins />} />
             </Route>
-            <Route path="/profile" element={<LoggedRoutes />}>
-                <Route path="/profile" exact element="Profile" />
-            </Route>
             <Route path="/signup" element={<PrivateRoutes />}>
                 <Route path="/signup" exact element={<RegisterPage />} />
             </Route>

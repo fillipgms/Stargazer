@@ -48,16 +48,6 @@ export const links = [
             },
         ],
     },
-    {
-        title: "perfil",
-        links: [
-            {
-                name: "meu perfil",
-                icon: <BsPersonCircle />,
-                url: "profile",
-            },
-        ],
-    },
 ];
 
 function GalaxyIcon() {
@@ -89,6 +79,27 @@ export const icons = [
         name: "Telescope",
         icon: <TelescopeIcon />,
         text: "Descubra como começar a investir em criptomoedas mesmo que você seja um iniciante.",
+        link: "guide",
+    },
+];
+
+export const adminPages = [
+    {
+        name: "Galaxy",
+        icon: <GalaxyIcon />,
+        text: "Atualizar os guias do nosso site.",
+        link: "news",
+    },
+    {
+        name: "Rocket",
+        icon: <RocketIcon />,
+        text: "Analisar o uso das APIs.",
+        link: "coins",
+    },
+    {
+        name: "Telescope",
+        icon: <TelescopeIcon />,
+        text: "Visualizar Feedbacks.",
         link: "guide",
     },
 ];
@@ -209,3 +220,15 @@ export const datasGrafico = [
         tempo: "365",
     },
 ];
+
+export const basicInfo = {
+    altasEbaixas: {
+        nome: "24 horas",
+        content: "maior alta e baixa das últimas 24 horas.",
+    },
+    capitalizacao: {
+        nome: "capitalização de mercado",
+        content:
+            "é a quantidade de dinheiro que custaria se você fosse comprar todas as ações emitidas de uma empresa ao preço atual de mercado.",
+    },
+};

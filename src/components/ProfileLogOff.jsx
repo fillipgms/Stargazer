@@ -23,7 +23,7 @@ const ProfileLogoff = () => {
         <div className="absolute right-4 md:m-0 mx-3 top-12 bg-dark-bg shadow-2xl dark:bg-dark p-8 rounded-md w-64 z-50">
             <div className="flex justify-between items-center">
                 <span className="font-semibold text-lg text-white">
-                    Ajustes Rápidos
+                    Meu perfil
                 </span>
                 <span
                     onClick={() => setProfileMenu(false)}
@@ -60,14 +60,6 @@ const ProfileLogoff = () => {
                 ) : (
                     ""
                 )}
-                <Link
-                    to="/profile"
-                    onClick={handleCloseProfile}
-                    className="flex items-center py-3 px-5 dark:text-white gap-3  "
-                >
-                    <BsFillGearFill />
-                    Configurações
-                </Link>
             </div>
 
             <div className="mt-5">

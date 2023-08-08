@@ -47,7 +47,7 @@ export const ContextProvider = ({ children }) => {
             } else {
                 setUser(null);
                 setIsAdmin(false);
-                setLoading(false); // Add this line to handle the case when there is no user
+                setLoading(false);
             }
         });
 
@@ -72,13 +72,13 @@ export const ContextProvider = ({ children }) => {
                 } catch (error) {
                     console.log("Erro:", error);
                 } finally {
-                    setLoading(false); // Move setLoading(false) inside the finally block
+                    setLoading(false);
                 }
             };
 
             fetchIsAdminStatus();
         } else {
-            setLoading(false); // Add this line to handle the case when there is no user UID
+            setLoading(false);
         }
     }, [user]);
 

@@ -3,8 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CoinList } from "../services/coinGeckoApi";
 import { useStateContext } from "../contexts/ContextProvider";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar, AiOutlineInfoCircle } from "react-icons/ai";
 import { MdPlayArrow } from "react-icons/md";
+import { basicInfo } from "../data/dummy";
 import { doc, setDoc } from "firebase/firestore";
 
 import { Footer, Loading, Pagination } from "../components";
@@ -122,8 +123,8 @@ const Crypto = () => {
                                 .replace(/(\d)(\d{2})$/, "$1,$2");
 
                             return (
-                                <div className="w-full rounded-md overflow-hidden shadow-xl">
-                                    <header className="bg-dark-bg font-bold text-white flex w-full px-4 items-center justify-between py-2 border-b-2 border-pink">
+                                <div className="w-full rounded-md shadow-xl">
+                                    <header className="bg-dark-bg font-bold text-white flex w-full px-4 items-center justify-between py-2 border-b-2 border-pink rounded-t-md">
                                         <div className="flex items-center justify-center gap-3">
                                             <span className="flex items-center justify-center md:gap-1">
                                                 <h1>
@@ -192,15 +193,78 @@ const Crypto = () => {
                                                 alt={coin.name}
                                             />
                                         </div>
-                                        <div className="text-white flex flex-col gap-1">
-                                            <span className="flex gap-1 items-center">
-                                                <MdPlayArrow className="text-blue -rotate-90 text-lg" />
-                                                <p>R$ {high}</p>
-                                            </span>
-                                            <span className="flex gap-1 items-center">
-                                                <MdPlayArrow className="text-violet rotate-90 text-lg" />{" "}
-                                                <p>R$ {low}</p>
-                                            </span>
+                                        <div className="flex w-full justify-between items-center">
+                                            <div
+                                                className="items-center text-white flex flex-col gap-1 tooltip tooltip-bottom"
+                                                data-tip={
+                                                    basicInfo.altasEbaixas
+                                                        .content
+                                                }
+                                            >
+                                                <h1 className="font-semibold flex items-center gap-1">
+                                                    {
+                                                        basicInfo.altasEbaixas
+                                                            .nome
+                                                    }
+                                                    <AiOutlineInfoCircle />
+                                                </h1>
+                                                <div>
+                                                    <span className="flex gap-1 items-center">
+                                                        <MdPlayArrow className="text-blue -rotate-90 text-lg" />
+                                                        <p>R$ {high}</p>
+                                                    </span>
+                                                    <span className="flex gap-1 items-center">
+                                                        <MdPlayArrow className="text-violet rotate-90 text-lg" />{" "}
+                                                        <p>R$ {low}</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {screenSize >= 900 ? (
+                                                <div
+                                                    className="tooltip tooltip-bottom"
+                                                    data-tip={
+                                                        basicInfo.capitalizacao
+                                                            .content
+                                                    }
+                                                >
+                                                    <h1 className="text-white font-semibold flex items-center gap-1">
+                                                        {
+                                                            basicInfo
+                                                                .capitalizacao
+                                                                .nome
+                                                        }
+                                                        <AiOutlineInfoCircle />
+                                                    </h1>
+                                                    <p className="text-white">
+                                                        R${" "}
+                                                        {coin.market_cap
+                                                            .toFixed(2)
+                                                            .replace(/\D/g, "")
+                                                            .replace(
+                                                                /(\d)(\d{14})$/,
+                                                                "$1.$2"
+                                                            )
+                                                            .replace(
+                                                                /(\d)(\d{11})$/,
+                                                                "$1.$2"
+                                                            )
+                                                            .replace(
+                                                                /(\d)(\d{8})$/,
+                                                                "$1.$2"
+                                                            )
+                                                            .replace(
+                                                                /(\d)(\d{5})$/,
+                                                                "$1.$2"
+                                                            )
+                                                            .replace(
+                                                                /(\d)(\d{2})$/,
+                                                                "$1,$2"
+                                                            )}
+                                                    </p>
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
                                         </div>
                                     </section>
                                 </div>

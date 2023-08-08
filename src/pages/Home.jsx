@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
 import { Advertisement, Cards, Timeline, Footer } from "../components";
-import { container, itemA } from "../data/dummy";
+import { container, itemA, icons } from "../data/dummy";
 
 import logo from "../data/logo.png";
 import bitcoin from "../data/bitcoin.png";
@@ -90,7 +90,18 @@ const Home = () => {
                     </motion.div>
                 </div>
             </section>
-            <Cards />
+            <div>
+                <div className="text-center">
+                    <h3 className="text-pink md:text-4xl text-2xl">
+                        Descura Cripto
+                    </h3>
+                    <h5 className="text-white md:text-2xl text-lg">
+                        Desvendando o universo das criptomoedas
+                    </h5>
+                </div>
+                <Cards items={icons} />
+            </div>
+
             <Advertisement />
             <Timeline />
             <Footer />
