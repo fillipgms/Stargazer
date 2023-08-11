@@ -88,7 +88,7 @@ export const adminPages = [
         name: "Galaxy",
         icon: <GalaxyIcon />,
         text: "Atualizar os guias do nosso site.",
-        link: "news",
+        link: "admin/guide",
     },
     {
         name: "Rocket",
@@ -101,6 +101,17 @@ export const adminPages = [
         icon: <TelescopeIcon />,
         text: "Visualizar Feedbacks.",
         link: "guide",
+    },
+];
+
+export const categories = [
+    {
+        label: "Geral",
+        value: "geral",
+    },
+    {
+        label: "Moeda",
+        value: "moeda especifica",
     },
 ];
 

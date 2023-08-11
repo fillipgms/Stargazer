@@ -9,3 +9,4 @@ export { default as LoggedHome } from "./LoggedHome";
 export { default as PasswordReset } from "./PasswordReset";
 export { default as Admin } from "./Admin";
 export { default as ErrorPage } from "./ErrorPage";
+export { default as AdminGuide } from "./AdminGuide";

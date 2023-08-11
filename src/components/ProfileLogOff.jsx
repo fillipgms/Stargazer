@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsFillGearFill } from "react-icons/bs";
-import { GoVerified } from "react-icons/go";
+import { VscVerifiedFilled } from "react-icons/vsc";
 import { RiAdminFill } from "react-icons/ri";
 
 const ProfileLogoff = () => {
@@ -37,7 +37,7 @@ const ProfileLogoff = () => {
                     <p className="font-semibold items-center flex gap-2 text-xl text-white">
                         {signed && user.displayName}
                         {isAdmin ? (
-                            <GoVerified className="text-pink flex text-lg" />
+                            <VscVerifiedFilled className="text-pink" />
                         ) : (
                             ""
                         )}

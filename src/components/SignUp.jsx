@@ -43,15 +43,15 @@ const SignUp = () => {
                 <div class="relative">
                     <input
                         type="text"
-                        id="outlined_success"
-                        aria-describedby="outlined_success_help"
+                        id="outlined_nome"
+                        aria-describedby="outlined_nome_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                         placeholder=" "
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <label
-                        for="outlined_success"
+                        for="outlined_nome"
                         class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
                     >
                         Nome
@@ -61,15 +61,15 @@ const SignUp = () => {
                 <div class="relative">
                     <input
                         type="email"
-                        id="outlined_success"
-                        aria-describedby="outlined_success_help"
+                        id="outlined_email"
+                        aria-describedby="outlined_email_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                         placeholder=" "
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <label
-                        for="outlined_success"
+                        for="outlined_email"
                         class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
                     >
                         E-mail
@@ -78,8 +78,8 @@ const SignUp = () => {
 
                 <div class="relative">
                     <input
-                        id="outlined_success"
-                        aria-describedby="outlined_success_help"
+                        id="outlined_senha"
+                        aria-describedby="outlined_senha_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                         placeholder=" "
                         value={password}
@@ -87,7 +87,7 @@ const SignUp = () => {
                         type={inputType ? "text" : "password"}
                     />
                     <label
-                        for="outlined_success"
+                        for="outlined_senha"
                         class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
                     >
                         Senha
@@ -95,8 +95,8 @@ const SignUp = () => {
                 </div>
                 <div class="relative">
                     <input
-                        id="outlined_success"
-                        aria-describedby="outlined_success_help"
+                        id="outlined_repetir_senha"
+                        aria-describedby="outlined_repetir_senha_help"
                         class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                         placeholder=" "
                         value={passwordRepeat}
@@ -104,7 +104,7 @@ const SignUp = () => {
                         type={inputTypeRepeat ? "text" : "password"}
                     />
                     <label
-                        for="outlined_success"
+                        for="outlined_repetir_senha"
                         class="absolute text-sm text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
                     >
                         Repita a senha

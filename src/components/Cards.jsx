@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { cardsContainer, card } from "../data/dummy";
-import { Scale } from "chart.js";
 
-const Cards = ({ items, home }) => {
+const Cards = ({ items }) => {
     return (
         <section className=" mb-32 md:pt-0 pt-10 bg-main-dark-bg flex items-center justify-center flex-col">
             <motion.div
