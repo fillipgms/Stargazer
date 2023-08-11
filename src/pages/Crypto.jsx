@@ -44,6 +44,10 @@ const Crypto = () => {
         fetchCoins();
     }, [currency]);
 
+    useEffect(() => {
+        document.title = "Criptomoedas";
+    });
+
     if (loading) {
         return <Loading />;
     }

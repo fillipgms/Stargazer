@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
 
 const ErrorPage = () => {
+    useEffect(() => {
+        document.title = "Erro";
+    });
+
     return (
         <section>
             <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">

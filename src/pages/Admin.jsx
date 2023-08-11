@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Cards, Footer } from "../components";
 import { adminPages } from "../data/dummy";
@@ -6,6 +6,10 @@ const Admin = () => {
     const { isAdmin } = useStateContext();
 
     console.log(isAdmin);
+
+    useEffect(() => {
+        document.title = "admin/ Home";
+    });
 
     return (
         <>

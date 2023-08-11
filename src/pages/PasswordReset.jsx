@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const PasswordReset = () => {
     const { passworReset, email, setEmail } = useStateContext();
+
+    useEffect(() => {
+        document.title = "Redefinir senha";
+    });
 
     return (
         <section className="bg-wallpaper bg-cover min-h-screen">

@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { categories } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
+import { GuiasPublicados } from "../components";
 
 const AdminGuide = () => {
-    const { screenSize, setScreenSize } = useStateContext();
+    const {
+        screenSize,
+        setScreenSize,
+        category,
+        setCategory,
+        guideName,
+        setGuideName,
+        guideDescription,
+        setGuideDescription,
+        createGuide,
+    } = useStateContext();
 
     setScreenSize(window.innerWidth);
 
@@ -17,6 +28,10 @@ const AdminGuide = () => {
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        document.title = "admin/ Guias";
+    });
 
     return (
         <>
@@ -38,6 +53,7 @@ const AdminGuide = () => {
                                 <form
                                     action="#"
                                     className="flex flex-col gap-6 w-full"
+                                    onSubmit={createGuide}
                                 >
                                     <div className="flex w-full gap-4 items-center">
                                         <label
@@ -48,7 +64,12 @@ const AdminGuide = () => {
                                         </label>
                                         <select
                                             id="categoria"
+                                            name="categoria"
                                             className="py-1 flex-1 bg-transparent border-0 border-b-2 border-pink appearance-none text-white"
+                                            value={category}
+                                            onChange={(e) =>
+                                                setCategory(e.target.value)
+                                            }
                                         >
                                             {categories.map((category) => (
                                                 <option
@@ -66,22 +87,47 @@ const AdminGuide = () => {
                                             aria-describedby="outlined_guide_name_help"
                                             class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                                             placeholder=" "
+                                            autoComplete="off"
+                                            name="guide_name"
+                                            value={guideName}
+                                            onChange={(e) =>
+                                                setGuideName(e.target.value)
+                                            }
                                         />
                                         <label
                                             for="guide_name"
                                             class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-main-dark-bg  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
                                         >
-                                            Guia para:
+                                            {category == "geral"
+                                                ? "Título do guia:"
+                                                : "Guia para:"}
                                         </label>
                                     </div>
+                                    <div class="relative">
+                                        <textarea
+                                            id="guide_description"
+                                            name="guide_description"
+                                            aria-describedby="border-box outlined_guide_name_help"
+                                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
+                                            placeholder=" "
+                                            autoComplete="off"
+                                            value={guideDescription}
+                                            onChange={(e) =>
+                                                setGuideDescription(
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="cursor-pointer bg-pink w-full flex items-center justify-center py-2 rounded-md text-black font-semibold"
+                                    >
+                                        Enviar Guia
+                                    </button>
                                 </form>
                             </div>
-                            <div className="bg-dark-bg rounded-md h-fit">
-                                <header className="border-b-pink text-white border-b-2 py-2 px-4">
-                                    Nossos guias já publicados
-                                </header>
-                                <main className="px-4"></main>
-                            </div>
+                            <GuiasPublicados />
                         </div>
                     )}
                 </div>

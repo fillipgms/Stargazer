@@ -19,6 +19,10 @@ const News = () => {
         fetchNews();
     }, [page]);
 
+    useEffect(() => {
+        document.title = "Notícias";
+    });
+
     const fetchNews = async () => {
         try {
             const news = await getCryptoNews(page, pageSize);

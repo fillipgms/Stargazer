@@ -39,6 +39,9 @@ export const ContextProvider = ({ children }) => {
     const [coins, setCoins] = useState();
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [category, setCategory] = useState("geral");
+    const [guideName, setGuideName] = useState("");
+    const [guideDescription, setGuideDescription] = useState("");
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -215,7 +218,6 @@ export const ContextProvider = ({ children }) => {
 
         try {
             const userRef = doc(db, "usuarios", user.uid);
-            console.log("userRef:", userRef);
 
             const snapshot = await getDoc(userRef);
             console.log("snapshot.exists:", snapshot.exists());
@@ -237,6 +239,32 @@ export const ContextProvider = ({ children }) => {
         } catch (error) {
             console.log("Error in creating user document:", error);
         }
+    };
+
+    const createGuide = async (e) => {
+        e.preventDefault();
+
+        const guideName = e.target.guide_name.value;
+        const guideCategory = e.target.categoria.value;
+        const guideDescription = e.target.guide_description.value;
+
+        const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
+
+        try {
+            const docRef = doc(db, "guias", collectionName);
+
+            await setDoc(docRef, {
+                gategoria: guideCategory,
+                nome: guideName,
+                descricao: guideDescription,
+            });
+        } catch (error) {
+            console.error("Erro ao criar o documento:", error);
+        }
+
+        createGuide("Geral");
+        setGuideName("");
+        setGuideDescription("");
     };
 
     return (
@@ -275,6 +303,13 @@ export const ContextProvider = ({ children }) => {
                 passworReset,
                 isAdmin,
                 loading,
+                category,
+                setCategory,
+                createGuide,
+                guideName,
+                setGuideName,
+                guideDescription,
+                setGuideDescription,
             }}
         >
             {children}

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TopNews, Advertisement, Footer } from "../components";
 
 const LoggedHome = () => {
+    useEffect(() => {
+        document.title = "Home";
+    });
+
     return (
         <>
             <section>

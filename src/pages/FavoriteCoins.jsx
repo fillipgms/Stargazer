@@ -40,6 +40,10 @@ const FavoriteCoins = () => {
     };
 
     useEffect(() => {
+        document.title = "Moedas favoritas";
+    });
+
+    useEffect(() => {
         fetchCoins();
 
         const handleScroll = () => {

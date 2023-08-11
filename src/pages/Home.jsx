@@ -14,8 +14,8 @@ import { AiFillStar } from "react-icons/ai";
 
 const Home = () => {
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+        document.title = "Home";
+    });
 
     return (
         <>
