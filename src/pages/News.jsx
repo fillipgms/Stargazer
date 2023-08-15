@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { Loading } from "../components";
+import { Footer, Loading } from "../components";
 import { Advertisement, TopNews } from "../components";
 import { getCryptoNews } from "../services/newsApi";
 
@@ -137,6 +137,7 @@ const News = () => {
                     })}
                 </div>
             </section>
+            <Footer />
         </>
     );
 };

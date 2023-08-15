@@ -50,6 +50,8 @@ export const ContextProvider = ({ children }) => {
     const [category, setCategory] = useState("geral");
     const [guideName, setGuideName] = useState("");
     const [guideDescription, setGuideDescription] = useState("");
+    const [guiasGerais, setGuiasGerais] = useState([]);
+    const [guiasEspecificos, setGuiasEspecificos] = useState([]);
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -274,6 +276,41 @@ export const ContextProvider = ({ children }) => {
         setGuideDescription("");
     };
 
+    useEffect(() => {
+        const guiasRef = collection(db, "guias");
+
+        const guiasGeraisQuery = query(
+            guiasRef,
+            where("categoria", "==", "geral")
+        );
+        const guiasEspecificosQuery = query(
+            guiasRef,
+            where("categoria", "==", "moeda especifica")
+        );
+
+        const unsubscribeGerais = onSnapshot(guiasGeraisQuery, (snapshot) => {
+            const guiasGeraisData = snapshot.docs.map((doc) => doc.data());
+            setGuiasGerais(guiasGeraisData);
+        });
+
+        const unsubscribeEspecificos = onSnapshot(
+            guiasEspecificosQuery,
+            (snapshot) => {
+                const guiasEspecificosData = snapshot.docs.map((doc) =>
+                    doc.data()
+                );
+                setGuiasEspecificos(guiasEspecificosData);
+            }
+        );
+
+        setLoading(false);
+
+        return () => {
+            unsubscribeGerais();
+            unsubscribeEspecificos();
+        };
+    }, []);
+
     return (
         <StateContext.Provider
             value={{
@@ -319,6 +356,8 @@ export const ContextProvider = ({ children }) => {
                 setGuideDescription,
                 guides,
                 setGuides,
+                guiasGerais,
+                guiasEspecificos,
             }}
         >
             {children}

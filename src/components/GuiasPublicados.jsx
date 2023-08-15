@@ -7,49 +7,17 @@ import { TbEdit } from "react-icons/tb";
 import { BsFillTrash3Fill } from "react-icons/bs";
 
 const GuiasPublicados = () => {
-    const { db, setGuideDescription, setGuideName, setCategory } =
-        useStateContext();
+    const {
+        loading,
+        setGuideDescription,
+        setGuideName,
+        setCategory,
+        guiasEspecificos,
+        guiasGerais,
+    } = useStateContext();
 
-    const [loading, setLoading] = useState(true);
     const [geralVisivel, setGeralVisivel] = useState(false);
     const [especificoVisivel, setEspecificoVisivel] = useState(false);
-    const [guiasGerais, setGuiasGerais] = useState([]);
-    const [guiasEspecificos, setGuiasEspecificos] = useState([]);
-
-    useEffect(() => {
-        const guiasRef = collection(db, "guias");
-
-        const guiasGeraisQuery = query(
-            guiasRef,
-            where("categoria", "==", "geral")
-        );
-        const guiasEspecificosQuery = query(
-            guiasRef,
-            where("categoria", "==", "moeda especifica")
-        );
-
-        const unsubscribeGerais = onSnapshot(guiasGeraisQuery, (snapshot) => {
-            const guiasGeraisData = snapshot.docs.map((doc) => doc.data());
-            setGuiasGerais(guiasGeraisData);
-        });
-
-        const unsubscribeEspecificos = onSnapshot(
-            guiasEspecificosQuery,
-            (snapshot) => {
-                const guiasEspecificosData = snapshot.docs.map((doc) =>
-                    doc.data()
-                );
-                setGuiasEspecificos(guiasEspecificosData);
-            }
-        );
-
-        setLoading(false);
-
-        return () => {
-            unsubscribeGerais();
-            unsubscribeEspecificos();
-        };
-    }, []);
 
     if (loading) {
         return <Loading />;
@@ -63,7 +31,7 @@ const GuiasPublicados = () => {
 
     return (
         <div className="bg-dark-bg rounded-md h-fit">
-            <header className="border-b-pink text-white border-b-2 py-2 px-4 uppercase font-semibold">
+            <header className="border-b-pink text-white border-b-2 py-2 px-4  font-semibold capitalize">
                 Nossos guias já publicados
             </header>
             <main className="px-4">
@@ -83,20 +51,22 @@ const GuiasPublicados = () => {
                         />
                     </span>
 
-                    {geralVisivel
-                        ? guiasGerais.map((guia) => (
-                              <div
-                                  key={guia.nome}
-                                  className="flex items-center justify-between cursor-pointer pl-4"
-                                  onClick={() => handleEditClick(guia)}
-                              >
-                                  {guia.nome}
-                                  <span>
-                                      <TbEdit />
-                                  </span>
-                              </div>
-                          ))
-                        : ""}
+                    <div className="flex flex-col gap-2">
+                        {geralVisivel
+                            ? guiasGerais.map((guia) => (
+                                  <div
+                                      key={guia.nome}
+                                      className="flex items-center justify-between cursor-pointer pl-4"
+                                      onClick={() => handleEditClick(guia)}
+                                  >
+                                      {guia.nome}
+                                      <span>
+                                          <TbEdit />
+                                      </span>
+                                  </div>
+                              ))
+                            : ""}
+                    </div>
                 </div>
 
                 <div className="py-2">
@@ -115,20 +85,22 @@ const GuiasPublicados = () => {
                         />
                     </span>
 
-                    {especificoVisivel
-                        ? guiasEspecificos.map((guia) => (
-                              <div
-                                  key={guia.nome}
-                                  className="flex items-center justify-between cursor-pointer pl-4"
-                                  onClick={() => handleEditClick(guia)}
-                              >
-                                  {guia.nome}
-                                  <span>
-                                      <TbEdit />
-                                  </span>
-                              </div>
-                          ))
-                        : ""}
+                    <div className="flex flex-col gap-2">
+                        {especificoVisivel
+                            ? guiasEspecificos.map((guia) => (
+                                  <div
+                                      key={guia.nome}
+                                      className="flex items-center justify-between cursor-pointer pl-4"
+                                      onClick={() => handleEditClick(guia)}
+                                  >
+                                      {guia.nome}
+                                      <span>
+                                          <TbEdit />
+                                      </span>
+                                  </div>
+                              ))
+                            : ""}
+                    </div>
                 </div>
             </main>
         </div>
