@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import React, { useState } from "react";
 import { Loading } from ".";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { TbEdit } from "react-icons/tb";
-import { BsFillTrash3Fill } from "react-icons/bs";
 
 const GuiasPublicados = () => {
     const {
@@ -23,7 +21,7 @@ const GuiasPublicados = () => {
         return <Loading />;
     }
 
-    const handleEditClick = (guia) => {
+    const handleEdit = (guia) => {
         setGuideName(guia.nome);
         setGuideDescription(guia.descricao);
         setCategory(guia.categoria);
@@ -57,7 +55,7 @@ const GuiasPublicados = () => {
                                   <div
                                       key={guia.nome}
                                       className="flex items-center justify-between cursor-pointer pl-4"
-                                      onClick={() => handleEditClick(guia)}
+                                      onClick={() => handleEdit(guia)}
                                   >
                                       {guia.nome}
                                       <TbEdit />
@@ -89,7 +87,7 @@ const GuiasPublicados = () => {
                                   <div
                                       key={guia.nome}
                                       className="flex items-center justify-between cursor-pointer pl-4"
-                                      onClick={() => handleEditClick(guia)}
+                                      onClick={() => handleEdit(guia)}
                                   >
                                       {guia.nome}
                                       <TbEdit />
