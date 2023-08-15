@@ -10,9 +10,16 @@ import {
     sendPasswordResetEmail,
     onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, onSnapshot, getDoc, setDoc } from "firebase/firestore";
+import {
+    getFirestore,
+    onSnapshot,
+    getDoc,
+    setDoc,
+    query,
+    where,
+} from "firebase/firestore";
 import { Navigate } from "react-router-dom";
-import { doc } from "firebase/firestore";
+import { doc, collection } from "firebase/firestore";
 import axios from "axios";
 import { CoinList } from "../services/coinGeckoApi";
 
@@ -36,12 +43,15 @@ export const ContextProvider = ({ children }) => {
     const [currency, setCurrency] = useState("BRL");
     const [symbol, setSymbol] = useState("R$");
     const [favorites, setFavorites] = useState([]);
+    const [guides, setGuides] = useState([]);
     const [coins, setCoins] = useState();
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("geral");
     const [guideName, setGuideName] = useState("");
     const [guideDescription, setGuideDescription] = useState("");
+    const [guiasGerais, setGuiasGerais] = useState([]);
+    const [guiasEspecificos, setGuiasEspecificos] = useState([]);
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -254,7 +264,7 @@ export const ContextProvider = ({ children }) => {
             const docRef = doc(db, "guias", collectionName);
 
             await setDoc(docRef, {
-                gategoria: guideCategory,
+                categoria: guideCategory,
                 nome: guideName,
                 descricao: guideDescription,
             });
@@ -262,7 +272,6 @@ export const ContextProvider = ({ children }) => {
             console.error("Erro ao criar o documento:", error);
         }
 
-        createGuide("Geral");
         setGuideName("");
         setGuideDescription("");
     };
@@ -310,6 +319,8 @@ export const ContextProvider = ({ children }) => {
                 setGuideName,
                 guideDescription,
                 setGuideDescription,
+                guides,
+                setGuides,
             }}
         >
             {children}
