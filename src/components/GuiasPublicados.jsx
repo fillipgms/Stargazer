@@ -42,7 +42,7 @@ const GuiasPublicados = () => {
                     >
                         <h3 className="text-white">Guias gerais</h3>
                         <MdKeyboardArrowDown
-                            className="text-gray-400 text-14 transition-transform"
+                            className="text-white text-14 transition-transform"
                             style={
                                 geralVisivel
                                     ? { transform: "rotate(180deg)" }
@@ -60,9 +60,7 @@ const GuiasPublicados = () => {
                                       onClick={() => handleEditClick(guia)}
                                   >
                                       {guia.nome}
-                                      <span>
-                                          <TbEdit />
-                                      </span>
+                                      <TbEdit />
                                   </div>
                               ))
                             : ""}
@@ -76,7 +74,7 @@ const GuiasPublicados = () => {
                     >
                         <h3 className="text-white">Guias Especificos</h3>
                         <MdKeyboardArrowDown
-                            className="text-gray-400 text-14 transition-transform"
+                            className="text-white text-14 transition-transform"
                             style={
                                 especificoVisivel
                                     ? { transform: "rotate(180deg)" }
@@ -94,9 +92,7 @@ const GuiasPublicados = () => {
                                       onClick={() => handleEditClick(guia)}
                                   >
                                       {guia.nome}
-                                      <span>
-                                          <TbEdit />
-                                      </span>
+                                      <TbEdit />
                                   </div>
                               ))
                             : ""}

@@ -10,3 +10,4 @@ export { default as PasswordReset } from "./PasswordReset";
 export { default as Admin } from "./Admin";
 export { default as ErrorPage } from "./ErrorPage";
 export { default as AdminGuide } from "./AdminGuide";
+export { default as Guide } from "./Guide";

@@ -11,6 +11,7 @@ import {
     Admin,
     ErrorPage,
     AdminGuide,
+    Guide,
 } from "../pages";
 import { PrivateRoutes, LoggedRoutes, AdminRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -47,7 +48,7 @@ const AppRoutes = () => {
                     element={<PasswordReset />}
                 />
             </Route>
-            <Route path="/guide" exact element="Guia" />
+            <Route path="/guide" exact element={<Guide />} />
             <Route path="/admin/*" element={<AdminRoutes />}>
                 <Route path="/admin/*" element={<Admin />} />
             </Route>
