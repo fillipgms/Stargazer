@@ -50,8 +50,6 @@ export const ContextProvider = ({ children }) => {
     const [category, setCategory] = useState("geral");
     const [guideName, setGuideName] = useState("");
     const [guideDescription, setGuideDescription] = useState("");
-    const [guiasGerais, setGuiasGerais] = useState([]);
-    const [guiasEspecificos, setGuiasEspecificos] = useState([]);
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
