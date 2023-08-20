@@ -258,6 +258,8 @@ export const ContextProvider = ({ children }) => {
         const guideCategory = e.target.categoria.value;
         const guideDescription = e.target.guide_description.value;
 
+        const descricao = guideDescription.replace(/\n/g, "\\n");
+
         const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
 
         try {
@@ -266,7 +268,7 @@ export const ContextProvider = ({ children }) => {
             await setDoc(docRef, {
                 categoria: guideCategory,
                 nome: guideName,
-                descricao: guideDescription,
+                descricao: descricao,
             });
         } catch (error) {
             console.error("Erro ao criar o documento:", error);

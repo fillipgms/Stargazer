@@ -8,9 +8,16 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { RiMenu4Fill } from "react-icons/ri";
 
 const Header = () => {
-    const { signed, user, profileMenu, setProfileMenu } = useStateContext();
-
-    const { scroll, setScroll, menuActive, setMenuActive } = useStateContext();
+    const {
+        signed,
+        user,
+        profileMenu,
+        setProfileMenu,
+        scroll,
+        setScroll,
+        menuActive,
+        setMenuActive,
+    } = useStateContext();
 
     const notScrolled =
         "transition-colors flex py-2 px-3 justify-between fixed md:bg-transparent bg-main-dark-bg w-full right-0 z-10 text-white text-sm";
