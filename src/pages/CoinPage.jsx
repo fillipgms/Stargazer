@@ -81,11 +81,11 @@ const CoinPage = () => {
                     <p>{coin?.market_cap_change_24h}</p>
                 </div>
                 <div>
-                    <div
-                        className="cursor-pointer py-2 text-white sticky"
-                        onClick={() => setGuideOpen(!guideOpen)}
-                    >
-                        <div className="flex justify-between font-medium">
+                    <div className="bg-dark-bg px-3 rounded-b-md py-2 text-white sticky">
+                        <div
+                            className="flex justify-between font-medium cursor-pointer "
+                            onClick={() => setGuideOpen(!guideOpen)}
+                        >
                             Nosso Guia{" "}
                             <MdKeyboardArrowDown
                                 className="text-white text-14 transition-transform"
