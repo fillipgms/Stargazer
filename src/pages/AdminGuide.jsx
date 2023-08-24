@@ -15,6 +15,8 @@ const AdminGuide = () => {
         guideDescription,
         setGuideDescription,
         createGuide,
+        editingGuideUid,
+        updateGuide,
     } = useStateContext();
 
     setScreenSize(window.innerWidth);
@@ -53,7 +55,11 @@ const AdminGuide = () => {
                                 <form
                                     action="#"
                                     className="flex flex-col gap-6 w-full"
-                                    onSubmit={createGuide}
+                                    onSubmit={
+                                        editingGuideUid
+                                            ? updateGuide
+                                            : createGuide
+                                    }
                                 >
                                     <div className="flex w-full gap-4 items-center">
                                         <label

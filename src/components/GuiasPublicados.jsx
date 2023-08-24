@@ -16,16 +16,19 @@ const GuiasPublicados = () => {
         guiasGerais,
         setGuiasGerais,
         db,
+        editingGuideUid,
+        setEditingGuideUid,
     } = useStateContext();
 
     const [loading, setLoading] = useState(false);
     const [geralVisivel, setGeralVisivel] = useState(false);
     const [especificoVisivel, setEspecificoVisivel] = useState(false);
 
-    const handleEdit = (guia) => {
+    const handleEdit = async (guia) => {
         setGuideName(guia.nome);
         setGuideDescription(guia.descricao);
         setCategory(guia.categoria);
+        setEditingGuideUid(guia.uid);
     };
 
     const handleDragEnd = async (result) => {
@@ -119,12 +122,8 @@ const GuiasPublicados = () => {
                                         >
                                             {guiasGerais.map((guia, index) => (
                                                 <Draggable
-                                                    key={guia.nome
-                                                        .replace(/\s+/g, "_")
-                                                        .toLowerCase()}
-                                                    draggableId={guia.nome
-                                                        .replace(/\s+/g, "_")
-                                                        .toLowerCase()}
+                                                    key={guia.uid}
+                                                    draggableId={guia.uid}
                                                     index={index}
                                                 >
                                                     {(provided) => (

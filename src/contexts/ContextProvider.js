@@ -18,11 +18,13 @@ import {
     query,
     where,
     getDocs,
+    updateDoc,
 } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import { doc, collection } from "firebase/firestore";
 import axios from "axios";
 import { CoinList } from "../services/coinGeckoApi";
+import { v4 as uuidv4 } from "uuid";
 
 const StateContext = createContext();
 const provider = new GoogleAuthProvider();
@@ -53,6 +55,7 @@ export const ContextProvider = ({ children }) => {
     const [guideDescription, setGuideDescription] = useState("");
     const [guiasGerais, setGuiasGerais] = useState([]);
     const [guiasEspecificos, setGuiasEspecificos] = useState([]);
+    const [editingGuideUid, setEditingGuideUid] = useState(null);
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -258,10 +261,9 @@ export const ContextProvider = ({ children }) => {
         const guideName = e.target.guide_name.value;
         const guideCategory = e.target.categoria.value;
         const guideDescription = e.target.guide_description.value;
+        const uid = uuidv4();
 
         if (guideCategory === "geral") {
-            const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
-
             try {
                 // Obtenha o número total de guias
                 const guiasRef = collection(db, "guias");
@@ -269,29 +271,29 @@ export const ContextProvider = ({ children }) => {
                 const newIndex = guiasSnapshot.size + 1;
 
                 // Crie o novo guia com o campo index definido
-                const docRef = doc(db, "guias", collectionName);
+                const docRef = doc(db, "guias", uid);
                 await setDoc(docRef, {
                     categoria: guideCategory,
                     nome: guideName,
                     descricao: guideDescription,
-                    index: newIndex, // Defina o campo index aqui
+                    index: newIndex,
+                    uid: uid,
                 });
             } catch (error) {
                 console.error("Erro ao criar o documento:", error);
             }
         } else {
-            const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
-
             try {
                 // Obtenha o número total de guias
                 const guiasRef = collection(db, "guias");
 
                 // Crie o novo guia com o campo index definido
-                const docRef = doc(db, "guias", collectionName);
+                const docRef = doc(db, "guias", uid);
                 await setDoc(docRef, {
                     categoria: guideCategory,
                     nome: guideName,
                     descricao: guideDescription,
+                    uid: uid,
                 });
             } catch (error) {
                 console.error("Erro ao criar o documento:", error);
@@ -300,6 +302,26 @@ export const ContextProvider = ({ children }) => {
 
         setGuideName("");
         setGuideDescription("");
+    };
+
+    const updateGuide = async (e) => {
+        e.preventDefault();
+
+        try {
+            const docRef = doc(db, "guias", editingGuideUid);
+            await updateDoc(docRef, {
+                nome: guideName,
+                descricao: guideDescription,
+                categoria: category,
+            });
+        } catch (error) {
+            console.error("Erro ao atualizar o guia:", error);
+        }
+
+        setEditingGuideUid(null); // Limpe o estado do UID de edição
+        setGuideName("");
+        setGuideDescription("");
+        setCategory("");
     };
 
     useEffect(() => {
@@ -385,6 +407,9 @@ export const ContextProvider = ({ children }) => {
                 guiasGerais,
                 setGuiasGerais,
                 guiasEspecificos,
+                editingGuideUid,
+                setEditingGuideUid,
+                updateGuide,
             }}
         >
             {children}

@@ -49,6 +49,7 @@ const AppRoutes = () => {
                 />
             </Route>
             <Route path="/guide" exact element={<Guide />} />
+            <Route path="/guide/:id" element={"Teste"} />
             <Route path="/admin/*" element={<AdminRoutes />}>
                 <Route path="/admin/*" element={<Admin />} />
             </Route>
