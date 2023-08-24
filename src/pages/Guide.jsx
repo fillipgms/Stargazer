@@ -18,7 +18,7 @@ const Guide = () => {
     const guiasOrdenados = [...guiasGerais].sort((a, b) => a.index - b.index);
 
     const guiaEspecifico = (nome, guiaUid) => {
-        navigate(`/guide/${nome}`);
+        navigate(`/guias/${nome}`);
         setGuideUid(guiaUid);
     };
 

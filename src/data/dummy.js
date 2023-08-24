@@ -44,7 +44,7 @@ export const links = [
             {
                 name: "Como começar",
                 icon: <BiBook />,
-                url: "guide",
+                url: "guias",
             },
         ],
     },
@@ -79,7 +79,7 @@ export const icons = [
         name: "Telescope",
         icon: <TelescopeIcon />,
         text: "Descubra como começar a investir em criptomoedas mesmo que você seja um iniciante.",
-        link: "guide",
+        link: "guias",
     },
 ];
 
@@ -100,7 +100,7 @@ export const adminPages = [
         name: "Telescope",
         icon: <TelescopeIcon />,
         text: "Visualizar Feedbacks.",
-        link: "guide",
+        link: "guias",
     },
 ];
 

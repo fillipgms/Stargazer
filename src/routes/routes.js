@@ -49,8 +49,8 @@ const AppRoutes = () => {
                     element={<PasswordReset />}
                 />
             </Route>
-            <Route path="/guide" exact element={<Guide />} />
-            <Route path="/guide/:id" element={<GuiasEspecificos />} />
+            <Route path="/guias" exact element={<Guide />} />
+            <Route path="/guias/:id" element={<GuiasEspecificos />} />
             <Route path="/admin/*" element={<AdminRoutes />}>
                 <Route path="/admin/*" element={<Admin />} />
             </Route>
