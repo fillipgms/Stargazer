@@ -96,6 +96,7 @@ const CoinPage = () => {
                                 }
                             />
                         </div>
+
                         {guideOpen ? (
                             <div className="font-normal py-1">
                                 {guiaEncontrado

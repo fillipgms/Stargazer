@@ -3,6 +3,8 @@ import { Loading } from ".";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { TbEdit } from "react-icons/tb";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
 
 const GuiasPublicados = () => {
     const {
@@ -12,6 +14,8 @@ const GuiasPublicados = () => {
         setCategory,
         guiasEspecificos,
         guiasGerais,
+        setGuiasGerais,
+        db,
     } = useStateContext();
 
     const [geralVisivel, setGeralVisivel] = useState(false);
@@ -25,6 +29,24 @@ const GuiasPublicados = () => {
         setGuideName(guia.nome);
         setGuideDescription(guia.descricao);
         setCategory(guia.categoria);
+    };
+
+    const handleDragEnd = async (result) => {
+        if (!result.destination) {
+            return;
+        }
+
+        const updatedGuias = Array.from(guiasGerais);
+        const [reorderedGuia] = updatedGuias.splice(result.source.index, 1);
+        updatedGuias.splice(result.destination.index, 0, reorderedGuia);
+
+        // Atualize a ordem no Firebase
+        updatedGuias.forEach(async (guia, index) => {
+            const guideName = guia.nome.replace(/\s+/g, "_").toLowerCase();
+
+            const guiaRef = doc(db, "guias", guideName);
+            updateDoc(guiaRef, { index: index });
+        });
     };
 
     return (
@@ -48,21 +70,39 @@ const GuiasPublicados = () => {
                             }
                         />
                     </span>
-
-                    <div className="flex flex-col gap-2">
-                        {geralVisivel
-                            ? guiasGerais.map((guia) => (
-                                  <div
-                                      key={guia.nome}
-                                      className="flex items-center justify-between cursor-pointer pl-4"
-                                      onClick={() => handleEdit(guia)}
-                                  >
-                                      {guia.nome}
-                                      <TbEdit />
-                                  </div>
-                              ))
-                            : ""}
-                    </div>
+                    {geralVisivel ? (
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                            <Droppable droppableId="guias">
+                                {(provided) => (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {guiasGerais.map((guia, index) => (
+                                            <Draggable
+                                                key={guia.nome}
+                                                draggableId={guia.nome}
+                                                index={index}
+                                            >
+                                                {(provided) => (
+                                                    <div
+                                                        ref={provided.innerRef}
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                    >
+                                                        {guia.nome}
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
+                    ) : (
+                        ""
+                    )}
                 </div>
 
                 <div className="py-2">

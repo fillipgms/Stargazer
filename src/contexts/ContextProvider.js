@@ -17,6 +17,7 @@ import {
     setDoc,
     query,
     where,
+    getDocs,
 } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import { doc, collection } from "firebase/firestore";
@@ -258,20 +259,43 @@ export const ContextProvider = ({ children }) => {
         const guideCategory = e.target.categoria.value;
         const guideDescription = e.target.guide_description.value;
 
-        const descricao = guideDescription.replace(/\n/g, "\\n");
+        if (guideCategory === "geral") {
+            const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
 
-        const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
+            try {
+                // Obtenha o número total de guias
+                const guiasRef = collection(db, "guias");
+                const guiasSnapshot = await getDocs(guiasRef);
+                const newIndex = guiasSnapshot.size + 1;
 
-        try {
-            const docRef = doc(db, "guias", collectionName);
+                // Crie o novo guia com o campo index definido
+                const docRef = doc(db, "guias", collectionName);
+                await setDoc(docRef, {
+                    categoria: guideCategory,
+                    nome: guideName,
+                    descricao: guideDescription,
+                    index: newIndex, // Defina o campo index aqui
+                });
+            } catch (error) {
+                console.error("Erro ao criar o documento:", error);
+            }
+        } else {
+            const collectionName = guideName.replace(/\s+/g, "_").toLowerCase();
 
-            await setDoc(docRef, {
-                categoria: guideCategory,
-                nome: guideName,
-                descricao: descricao,
-            });
-        } catch (error) {
-            console.error("Erro ao criar o documento:", error);
+            try {
+                // Obtenha o número total de guias
+                const guiasRef = collection(db, "guias");
+
+                // Crie o novo guia com o campo index definido
+                const docRef = doc(db, "guias", collectionName);
+                await setDoc(docRef, {
+                    categoria: guideCategory,
+                    nome: guideName,
+                    descricao: guideDescription,
+                });
+            } catch (error) {
+                console.error("Erro ao criar o documento:", error);
+            }
         }
 
         setGuideName("");
@@ -359,6 +383,7 @@ export const ContextProvider = ({ children }) => {
                 guides,
                 setGuides,
                 guiasGerais,
+                setGuiasGerais,
                 guiasEspecificos,
             }}
         >
