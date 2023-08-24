@@ -55,7 +55,7 @@ export const ContextProvider = ({ children }) => {
     const [guideDescription, setGuideDescription] = useState("");
     const [guiasGerais, setGuiasGerais] = useState([]);
     const [guiasEspecificos, setGuiasEspecificos] = useState([]);
-    const [editingGuideUid, setEditingGuideUid] = useState(null);
+    const [guideUid, setGuideUid] = useState(null);
 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -308,7 +308,7 @@ export const ContextProvider = ({ children }) => {
         e.preventDefault();
 
         try {
-            const docRef = doc(db, "guias", editingGuideUid);
+            const docRef = doc(db, "guias", guideUid);
             await updateDoc(docRef, {
                 nome: guideName,
                 descricao: guideDescription,
@@ -318,7 +318,7 @@ export const ContextProvider = ({ children }) => {
             console.error("Erro ao atualizar o guia:", error);
         }
 
-        setEditingGuideUid(null); // Limpe o estado do UID de edição
+        setGuideUid(null); // Limpe o estado do UID de edição
         setGuideName("");
         setGuideDescription("");
         setCategory("");
@@ -407,8 +407,8 @@ export const ContextProvider = ({ children }) => {
                 guiasGerais,
                 setGuiasGerais,
                 guiasEspecificos,
-                editingGuideUid,
-                setEditingGuideUid,
+                guideUid,
+                setGuideUid,
                 updateGuide,
             }}
         >

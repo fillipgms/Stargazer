@@ -12,6 +12,7 @@ import {
     ErrorPage,
     AdminGuide,
     Guide,
+    GuiasEspecificos,
 } from "../pages";
 import { PrivateRoutes, LoggedRoutes, AdminRoutes } from ".";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -49,7 +50,7 @@ const AppRoutes = () => {
                 />
             </Route>
             <Route path="/guide" exact element={<Guide />} />
-            <Route path="/guide/:id" element={"Teste"} />
+            <Route path="/guide/:id" element={<GuiasEspecificos />} />
             <Route path="/admin/*" element={<AdminRoutes />}>
                 <Route path="/admin/*" element={<Admin />} />
             </Route>

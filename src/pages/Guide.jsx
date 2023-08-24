@@ -7,7 +7,7 @@ import telescope from "../data/telescope.svg";
 import galaxy from "../data/galaxy.png";
 
 const Guide = () => {
-    const { guiasGerais } = useStateContext();
+    const { guiasGerais, setGuideUid } = useStateContext();
 
     const navigate = useNavigate();
 
@@ -16,6 +16,11 @@ const Guide = () => {
     });
 
     const guiasOrdenados = [...guiasGerais].sort((a, b) => a.index - b.index);
+
+    const guiaEspecifico = (nome, guiaUid) => {
+        navigate(`/guide/${nome}`);
+        setGuideUid(guiaUid);
+    };
 
     return (
         <section className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
@@ -33,8 +38,8 @@ const Guide = () => {
                     return (
                         <div
                             className="bg-dark-bg rounded-sm py-2 px-4 cursor-pointer"
-                            key={guia.nome}
-                            onClick={() => navigate(`/guide/${guideName}`)}
+                            key={guia.uid}
+                            onClick={() => guiaEspecifico(guideName, guia.uid)}
                         >
                             <div className="flex gap-4 text-white items-center">
                                 <img src={icon} className="w-1/6" alt="Icon" />

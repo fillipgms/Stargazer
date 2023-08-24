@@ -15,7 +15,7 @@ const AdminGuide = () => {
         guideDescription,
         setGuideDescription,
         createGuide,
-        editingGuideUid,
+        guideUid,
         updateGuide,
     } = useStateContext();
 
@@ -56,9 +56,7 @@ const AdminGuide = () => {
                                     action="#"
                                     className="flex flex-col gap-6 w-full"
                                     onSubmit={
-                                        editingGuideUid
-                                            ? updateGuide
-                                            : createGuide
+                                        guideUid ? updateGuide : createGuide
                                     }
                                 >
                                     <div className="flex w-full gap-4 items-center">
