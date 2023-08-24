@@ -12,7 +12,6 @@ const Guide = () => {
         document.title = "Guias";
     });
 
-    // Ordene os guias gerais com base no campo 'index'
     const guiasOrdenados = [...guiasGerais].sort((a, b) => a.index - b.index);
 
     return (
