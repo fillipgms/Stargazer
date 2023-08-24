@@ -16,8 +16,7 @@ const GuiasPublicados = () => {
         guiasGerais,
         setGuiasGerais,
         db,
-        editingGuideUid,
-        setEditingGuideUid,
+        setGuideUid,
     } = useStateContext();
 
     const [loading, setLoading] = useState(false);
@@ -28,7 +27,7 @@ const GuiasPublicados = () => {
         setGuideName(guia.nome);
         setGuideDescription(guia.descricao);
         setCategory(guia.categoria);
-        setEditingGuideUid(guia.uid);
+        setGuideUid(guia.uid);
     };
 
     const handleDragEnd = async (result) => {
