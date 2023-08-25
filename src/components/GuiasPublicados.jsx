@@ -3,7 +3,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { TbEdit } from "react-icons/tb";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { BiTrashAlt } from "react-icons/bi";
 
 const GuiasPublicados = () => {
     const {
@@ -26,6 +27,21 @@ const GuiasPublicados = () => {
         setGuideDescription(guia.descricao);
         setCategory(guia.categoria);
         setGuideUid(guia.uid);
+    };
+
+    const handleDelete = async (guia) => {
+        const shouldDelete = window.confirm(
+            `Tem certeza que deseja deletar ${guia.nome}?`
+        );
+
+        if (shouldDelete) {
+            try {
+                const guiaRef = doc(db, "guias", guia.uid);
+                await deleteDoc(guiaRef);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     };
 
     const handleDragEnd = async (result) => {
@@ -130,7 +146,7 @@ const GuiasPublicados = () => {
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
                                                         >
-                                                            <span className="flex justify-between items-center">
+                                                            <span className="flex justify-between pl-4 items-center">
                                                                 {guia.nome
                                                                     .length > 15
                                                                     ? `${guia.nome.substring(
@@ -138,13 +154,24 @@ const GuiasPublicados = () => {
                                                                           15
                                                                       )}...`
                                                                     : guia.nome}
-                                                                <TbEdit
-                                                                    onClick={() =>
-                                                                        handleEdit(
-                                                                            guia
-                                                                        )
-                                                                    }
-                                                                />
+                                                                <span className="flex items-center gap-1">
+                                                                    <TbEdit
+                                                                        onClick={() =>
+                                                                            handleEdit(
+                                                                                guia
+                                                                            )
+                                                                        }
+                                                                        className="cursor-pointer"
+                                                                    />
+                                                                    <BiTrashAlt
+                                                                        onClick={() =>
+                                                                            handleDelete(
+                                                                                guia
+                                                                            )
+                                                                        }
+                                                                        className="cursor-pointer"
+                                                                    />
+                                                                </span>
                                                             </span>
                                                         </div>
                                                     )}
@@ -186,7 +213,16 @@ const GuiasPublicados = () => {
                                       onClick={() => handleEdit(guia)}
                                   >
                                       {guia.nome}
-                                      <TbEdit />
+                                      <span className="flex items-center gap-1">
+                                          <TbEdit
+                                              onClick={() => handleEdit(guia)}
+                                              className="cursor-pointer"
+                                          />
+                                          <BiTrashAlt
+                                              onClick={() => handleDelete(guia)}
+                                              className="cursor-pointer"
+                                          />
+                                      </span>
                                   </div>
                               ))
                             : ""}
