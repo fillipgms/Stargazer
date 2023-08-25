@@ -47,8 +47,7 @@ const GuiasPublicados = () => {
         // Atualizar no Firebase primeiro
         await Promise.all(
             updatedGuias.map(async (guia, index) => {
-                const guideName = guia.nome.replace(/\s+/g, "_").toLowerCase();
-                const guiaRef = doc(db, "guias", guideName);
+                const guiaRef = doc(db, "guias", guia.uid);
                 await updateDoc(guiaRef, { index: index });
             })
         );
