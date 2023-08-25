@@ -8,7 +8,7 @@ import telescope from "../data/telescope.svg";
 import galaxy from "../data/galaxy.png";
 
 const Guide = () => {
-    const { guiasGerais, setGuideUid } = useStateContext();
+    const { guiasGerais } = useStateContext();
 
     const navigate = useNavigate();
 

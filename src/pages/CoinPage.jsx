@@ -12,7 +12,7 @@ const CoinPage = () => {
     const [coin, setCoin] = useState();
     const [guideOpen, setGuideOpen] = useState(false);
 
-    const { currency, symbol, guiasEspecificos } = useStateContext();
+    const { currency, guiasEspecificos } = useStateContext();
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(id));
