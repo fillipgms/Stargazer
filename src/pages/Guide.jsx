@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import rocket from "../data/rocket.svg";
 import telescope from "../data/telescope.svg";
@@ -17,9 +18,9 @@ const Guide = () => {
 
     const guiasOrdenados = [...guiasGerais].sort((a, b) => a.index - b.index);
 
-    const guiaEspecifico = (nome, guiaUid) => {
-        navigate(`/guias/${nome}`);
-        setGuideUid(guiaUid);
+    const guiaEspecifico = (nome, guideUid) => {
+        navigate(`/guias/${encodeURIComponent(nome)}`);
+        Cookies.set("uid", guideUid);
     };
 
     return (

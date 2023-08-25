@@ -14,6 +14,7 @@
         "firebase": "^9.17.2",
         "framer-motion": "^10.2.4",
         "html-react-parser": "^3.0.11",
+        "js-cookie": "^3.0.5",
         "luxon": "^3.3.0",
         "millify": "^5.0.1",
         "moment": "^2.29.4",
