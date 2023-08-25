@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Loading } from ".";
+import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { TbEdit } from "react-icons/tb";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
-import { FaDove } from "react-icons/fa";
+import { doc, updateDoc } from "firebase/firestore";
 
 const GuiasPublicados = () => {
     const {
