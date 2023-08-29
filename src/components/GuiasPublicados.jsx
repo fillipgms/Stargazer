@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useStateContext } from "../contexts/ContextProvider";
 import { TbEdit } from "react-icons/tb";
@@ -21,6 +21,10 @@ const GuiasPublicados = () => {
     const [loading, setLoading] = useState(false);
     const [geralVisivel, setGeralVisivel] = useState(false);
     const [especificoVisivel, setEspecificoVisivel] = useState(false);
+
+    useEffect(() => {
+        setGuiasGerais([...guiasGerais].sort((a, b) => a.index - b.index));
+    }, []);
 
     const handleEdit = async (guia) => {
         setGuideName(guia.nome);

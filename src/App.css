@@ -13,6 +13,26 @@
     }
 }
 
+.ql-container {
+    color: #f1f1f1;
+    border-color: transparent !important;
+}
+
+.ql-toolbar {
+    color: #f1f1f1 !important;
+    border-color: transparent !important;
+    border-bottom-color: #f788b6 !important;
+}
+
+.ql-picker-label {
+    color: #f1f1f1;
+}
+
+.ql-toolbar svg {
+    filter: invert(100%) sepia(5%) saturate(72%) hue-rotate(344deg)
+        brightness(113%) contrast(89%);
+}
+
 .e-dlg-center-center,
 .e-quick-popup-wrapper.e-device {
     z-index: 1000000 !important;

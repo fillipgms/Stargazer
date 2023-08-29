@@ -3,6 +3,8 @@ import { categories } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import { GuiasPublicados } from "../components";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AdminGuide = () => {
     const {
@@ -108,19 +110,18 @@ const AdminGuide = () => {
                                         </select>
                                     </div>
 
-                                    <div class="relative">
-                                        <textarea
+                                    <div class="rounded-md border-pink border-2 border-solid">
+                                        <ReactQuill
                                             id="guide_description"
+                                            theme="snow"
                                             name="guide_description"
                                             aria-describedby="border-box outlined_guide_name_help"
-                                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
+                                            className="border-pink text-white"
                                             placeholder=" "
                                             autoComplete="off"
                                             value={guideDescription}
-                                            onChange={(e) =>
-                                                setGuideDescription(
-                                                    e.target.value
-                                                )
+                                            onChange={(content) =>
+                                                setGuideDescription(content)
                                             }
                                         />
                                     </div>
