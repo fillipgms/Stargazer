@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { SingleCoin } from "../services/coinGeckoApi";
 import { useStateContext } from "../contexts/ContextProvider";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 import { CoinChart, Loading } from "../components";
 
@@ -105,7 +106,10 @@ const CoinPage = () => {
                                         }}
                                     />
                                 ) : (
-                                    "nao temos guia"
+                                    <span className="flex items-center gap-2">
+                                        <AiOutlineInfoCircle />
+                                        ainda nao temos guia para essa moeda.
+                                    </span>
                                 )}
                             </div>
                         ) : (
