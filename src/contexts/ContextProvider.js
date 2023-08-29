@@ -22,8 +22,6 @@ import {
 } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import { doc, collection } from "firebase/firestore";
-import axios from "axios";
-import { CoinList } from "../services/coinGeckoApi";
 import { v4 as uuidv4 } from "uuid";
 
 const StateContext = createContext();

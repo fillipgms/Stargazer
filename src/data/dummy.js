@@ -1,6 +1,6 @@
 import { AiFillHome } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
-import { BsPersonCircle, BsStarFill } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 import { BiBook } from "react-icons/bi";
 import { IoMdPlanet } from "react-icons/io";
 import Galaxy from "./galaxy.png";

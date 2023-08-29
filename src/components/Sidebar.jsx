@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import { motion } from "framer-motion";
 
@@ -10,8 +10,6 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { links } from "../data/dummy";
 
 const Sidebar = () => {
-    const { signed } = useStateContext();
-
     const { menuActive, setMenuActive } = useStateContext();
 
     const activeLink =

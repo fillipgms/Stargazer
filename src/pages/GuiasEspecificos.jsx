@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import icon from "../data/icon.png";
 
 import { Footer, Loading } from "../components";
-import { RiH1 } from "react-icons/ri";
 
 const GuiasEspecificos = () => {
     const { db } = useStateContext();
@@ -66,6 +65,7 @@ const GuiasEspecificos = () => {
                             <img
                                 src={icon}
                                 className="md:w-32 w-20 rounded-full absolute bottom-0 left-10 border-4 border-main-dark transform translate-y-1/2"
+                                alt="icon"
                             />
                         </div>
                     </header>

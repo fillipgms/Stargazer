@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
-import { BsFillRocketTakeoffFill } from "react-icons/bs";
 import {
     BiSolidBook,
     BiSolidBookReader,
     BiSolidBookmarkHeart,
 } from "react-icons/bi";
 
-import rocket from "../data/rocket.svg";
-import telescope from "../data/telescope.svg";
-import galaxy from "../data/galaxy.png";
 import { Loading } from "../components";
 
 const Guide = () => {
@@ -34,14 +29,14 @@ const Guide = () => {
     return (
         <section className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
             <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                {guiasOrdenados.length == 0 ? (
+                {guiasOrdenados.length === 0 ? (
                     <Loading />
                 ) : (
                     guiasOrdenados.map((guia) => {
                         let icon = Math.floor(Math.random() * 3) + 1;
                         const guideName = guia.nome.replace(/\s+/g, "_");
 
-                        icon == 1
+                        icon === 1
                             ? (icon = <BiSolidBook />)
                             : icon === 2
                             ? (icon = <BiSolidBookReader />)

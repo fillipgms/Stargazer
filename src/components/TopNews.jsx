@@ -6,7 +6,7 @@ const demoImage =
 
 const TopNews = () => {
     const [cryptoHeadlines, setCryptoHeadlines] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -17,11 +17,9 @@ const TopNews = () => {
         try {
             const headlines = await getCryptoNews(1, 4);
             setCryptoHeadlines(headlines);
-            setIsLoading(false);
         } catch (error) {
             console.error("Error fetching crypto news:", error);
             setError(error.message);
-            setIsLoading(false);
         }
     };
 
@@ -31,6 +29,7 @@ const TopNews = () => {
                 <a
                     href={cryptoHeadlines[0]?.url}
                     target="_blank"
+                    rel="noreferrer"
                     className="relative overflow-hidden box-border inline-block rounded-lg w-full hover:shadow-glow transition-all"
                 >
                     <img
@@ -52,6 +51,7 @@ const TopNews = () => {
                 <a
                     href={cryptoHeadlines[1]?.url}
                     target="_blank"
+                    rel="noreferrer"
                     className="bg-dark-bg rounded-md overflow-hidden hover:shadow-glow transition-all"
                 >
                     <div className="flex justify-center items-center">
@@ -81,6 +81,7 @@ const TopNews = () => {
                         href={news.url}
                         key={index}
                         target="_blank"
+                        rel="noreferrer"
                     >
                         <div className="w-full">
                             <img

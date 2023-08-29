@@ -83,10 +83,12 @@ const News = () => {
                                     className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"
                                     href={news.url}
                                     target="_blank"
+                                    rel="noreferrer"
                                 >
                                     <div className="md:w-96">
                                         <img
                                             src={news.urlToImage || demoImage}
+                                            alt="foto da noticia"
                                             className="w-full h-full aspect-video object-cover"
                                         />
                                     </div>
@@ -110,11 +112,13 @@ const News = () => {
                                 <a
                                     href={news.url}
                                     target="_blank"
+                                    rel="noreferrer"
                                     className="bg-dark-bg rounded-md overflow-hidden h-full hover:shadow-glow transition-all"
                                 >
                                     <div className="flex justify-center items-center">
                                         <img
                                             src={news.urlToImage || demoImage}
+                                            alt="foto da noticia"
                                             className="w-full aspect-video object-cover"
                                         />
                                     </div>
