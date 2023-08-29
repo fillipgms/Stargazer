@@ -14,8 +14,8 @@ const AdminGuide = () => {
         setCategory,
         guideName,
         setGuideName,
-        guideDescription,
-        setGuideDescription,
+        descricacaoDoGuia,
+        setDescricacaoDoGuia,
         createGuide,
         guideUid,
         updateGuide,
@@ -119,9 +119,9 @@ const AdminGuide = () => {
                                             className="border-pink text-white"
                                             placeholder=" "
                                             autoComplete="off"
-                                            value={guideDescription}
+                                            value={descricacaoDoGuia}
                                             onChange={(content) =>
-                                                setGuideDescription(content)
+                                                setDescricacaoDoGuia(content)
                                             }
                                         />
                                     </div>

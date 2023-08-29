@@ -52,7 +52,7 @@ export const ContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("geral");
     const [guideName, setGuideName] = useState("");
-    const [guideDescription, setGuideDescription] = useState("");
+    const [descricacaoDoGuia, setDescricacaoDoGuia] = useState("");
     const [guiasGerais, setGuiasGerais] = useState([]);
     const [guiasEspecificos, setGuiasEspecificos] = useState([]);
     const [guideUid, setGuideUid] = useState(null);
@@ -260,7 +260,7 @@ export const ContextProvider = ({ children }) => {
 
         const guideName = e.target.guide_name.value;
         const guideCategory = e.target.categoria.value;
-        const guideDescription = e.target.guide_description.value;
+        const guideDescription = descricacaoDoGuia;
         const uid = uuidv4();
 
         if (guideCategory === "geral") {
@@ -295,7 +295,7 @@ export const ContextProvider = ({ children }) => {
         }
 
         setGuideName("");
-        setGuideDescription("");
+        setDescricacaoDoGuia("");
     };
 
     const updateGuide = async (e) => {
@@ -305,7 +305,7 @@ export const ContextProvider = ({ children }) => {
             const docRef = doc(db, "guias", guideUid);
             await updateDoc(docRef, {
                 nome: guideName,
-                descricao: guideDescription,
+                descricao: descricacaoDoGuia,
                 categoria: category,
             });
         } catch (error) {
@@ -314,7 +314,7 @@ export const ContextProvider = ({ children }) => {
 
         setGuideUid(null); // Limpe o estado do UID de edição
         setGuideName("");
-        setGuideDescription("");
+        setDescricacaoDoGuia("");
         setCategory("");
     };
 
@@ -394,8 +394,8 @@ export const ContextProvider = ({ children }) => {
                 createGuide,
                 guideName,
                 setGuideName,
-                guideDescription,
-                setGuideDescription,
+                descricacaoDoGuia,
+                setDescricacaoDoGuia,
                 guides,
                 setGuides,
                 guiasGerais,

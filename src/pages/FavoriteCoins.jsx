@@ -52,7 +52,7 @@ const FavoriteCoins = () => {
             setCanScroll(totalHeight > visibleHeight);
         };
 
-        handleScroll(); // Verificar inicialmente
+        handleScroll();
         window.addEventListener("scroll", handleScroll);
 
         return () => {

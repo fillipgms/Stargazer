@@ -14,6 +14,8 @@ const GuiasEspecificos = () => {
     const [guiaInfo, setGuiaInfo] = useState(null);
     const guideUid = Cookies.get("uid");
 
+    const [canScroll, setCanScroll] = useState(false);
+
     useEffect(() => {
         document.title = `Guia/ ${nome}`;
     });
@@ -39,6 +41,22 @@ const GuiasEspecificos = () => {
         }
     }, [db, guideUid]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalHeight = document.body.scrollHeight;
+            const visibleHeight = window.innerHeight;
+            setCanScroll(totalHeight > visibleHeight);
+        };
+
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
         <>
             {guiaInfo ? (
@@ -58,7 +76,19 @@ const GuiasEspecificos = () => {
                         className="py-10 md:px-48 px-10 text-white"
                         dangerouslySetInnerHTML={{ __html: guiaInfo.descricao }}
                     ></main>
-                    <Footer />
+                    <span
+                        style={
+                            canScroll
+                                ? { position: "unset" }
+                                : {
+                                      position: "absolute",
+                                      bottom: 0,
+                                      width: "100%",
+                                  }
+                        }
+                    >
+                        <Footer />
+                    </span>
                 </>
             ) : (
                 <Loading />

@@ -8,7 +8,7 @@ import { BiTrashAlt } from "react-icons/bi";
 
 const GuiasPublicados = () => {
     const {
-        setGuideDescription,
+        setDescricacaoDoGuia,
         setGuideName,
         setCategory,
         guiasEspecificos,
@@ -28,7 +28,7 @@ const GuiasPublicados = () => {
 
     const handleEdit = async (guia) => {
         setGuideName(guia.nome);
-        setGuideDescription(guia.descricao);
+        setDescricacaoDoGuia(guia.descricao);
         setCategory(guia.categoria);
         setGuideUid(guia.uid);
     };
