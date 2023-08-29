@@ -79,19 +79,7 @@ const GuiasEspecificos = () => {
                             }}
                         />
                     </main>
-                    <span
-                        style={
-                            canScroll
-                                ? { position: "unset" }
-                                : {
-                                      position: "absolute",
-                                      bottom: 0,
-                                      width: "100%",
-                                  }
-                        }
-                    >
-                        <Footer />
-                    </span>
+                    {canScroll ? <Footer /> : ""}
                 </>
             ) : (
                 <Loading />

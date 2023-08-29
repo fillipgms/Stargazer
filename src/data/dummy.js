@@ -42,7 +42,7 @@ export const links = [
         title: "Guia",
         links: [
             {
-                name: "Como começar",
+                name: "Nossos guias",
                 icon: <BiBook />,
                 url: "guias",
             },
