@@ -47,6 +47,58 @@
     background: #f788b6;
 }
 
+.tooltip::before {
+    background-color: #18181a !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+    color: #f1f1f1 !important;
+    padding: 1rem 0.5rem !important;
+}
+
+.tooltip::after {
+    border-color: #18181a !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+}
+
+.descricao-do-guia a {
+    color: #f788b6;
+    text-decoration: underline;
+}
+
+.descricao-do-guia h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.descricao-do-guia h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.descricao-do-guia h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+.descricao-do-guia ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.descricao-do-guia ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
 /* color-picker style  */
 
 #preview {

@@ -77,6 +77,7 @@ const GuiasEspecificos = () => {
                             dangerouslySetInnerHTML={{
                                 __html: guiaInfo.descricao,
                             }}
+                            className="descricao-do-guia"
                         />
                     </main>
                     {canScroll ? <Footer /> : ""}
