@@ -38,6 +38,15 @@
     z-index: 1000000 !important;
 }
 
+.moedas::-webkit-scrollbar {
+    height: 10px;
+}
+
+.moedas::-webkit-scrollbar-thumb {
+    border-radius: 0.125rem;
+    background: #f788b6;
+}
+
 /* color-picker style  */
 
 #preview {

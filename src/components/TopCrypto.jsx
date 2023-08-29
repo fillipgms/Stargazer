@@ -27,7 +27,7 @@ const TopCrypto = () => {
                     <div className="text-white text-center font-semibold text-lg py-2 px-4 border-b-2 border-pink">
                         Bombando agora
                     </div>
-                    <div className="flex justify-between py-2 px-4 overflow-auto">
+                    <div className="flex justify-between py-2 px-4 overflow-auto gap-3 moedas">
                         {trendindCoins.map((coin) => (
                             <img
                                 src={coin.image}
