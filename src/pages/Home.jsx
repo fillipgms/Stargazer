@@ -70,14 +70,14 @@ const Home = () => {
                     >
                         {threeCoins.map((coin) => (
                             <motion.div
-                                className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 flex items-center justify-center backdrop-blur-glassmorphism"
+                                className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 backdrop-blur-glassmorphism"
                                 variants={itemA}
                             >
                                 <img
                                     src={coin.image}
                                     alt={coin.name}
                                     draggable="false"
-                                    className="w-10/12"
+                                    className="rounded-full"
                                 />
                             </motion.div>
                         ))}
