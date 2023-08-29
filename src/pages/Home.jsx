@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import axios from "axios";
 
 import { Advertisement, Cards, Timeline, Footer } from "../components";
 import { container, itemA, icons } from "../data/dummy";
+import { TopThreeCoins } from "../services/coinGeckoApi";
 
 import logo from "../data/logo.png";
-import bitcoin from "../data/bitcoin.png";
-import ethereum from "../data/ethereum.png";
-import cardano from "../data/cardano.png";
 
 import { AiFillStar } from "react-icons/ai";
 
@@ -16,6 +15,18 @@ const Home = () => {
     useEffect(() => {
         document.title = "Home";
     });
+
+    const [threeCoins, setThreeCoins] = useState([]);
+
+    const fetchTrending = async () => {
+        const { data } = await axios.get(TopThreeCoins());
+
+        setThreeCoins(data);
+    };
+
+    useEffect(() => {
+        fetchTrending();
+    }, []);
 
     return (
         <>
@@ -57,36 +68,19 @@ const Home = () => {
                         initial="hidden"
                         animate="show"
                     >
-                        <motion.div
-                            className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-5 p-3 backdrop-blur-glassmorphism"
-                            variants={itemA}
-                        >
-                            <img
-                                src={bitcoin}
-                                alt="bitcoin logo"
-                                draggable="false"
-                            />
-                        </motion.div>
-                        <motion.div
-                            className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-5 p-3 backdrop-blur-glassmorphism"
-                            variants={itemA}
-                        >
-                            <img
-                                src={ethereum}
-                                alt="ethereum logo"
-                                draggable="false"
-                            />
-                        </motion.div>
-                        <motion.div
-                            className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-5 p-3 backdrop-blur-glassmorphism"
-                            variants={itemA}
-                        >
-                            <img
-                                src={cardano}
-                                alt="cardano logo"
-                                draggable="false"
-                            />
-                        </motion.div>
+                        {threeCoins.map((coin) => (
+                            <motion.div
+                                className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 flex items-center justify-center backdrop-blur-glassmorphism"
+                                variants={itemA}
+                            >
+                                <img
+                                    src={coin.image}
+                                    alt={coin.name}
+                                    draggable="false"
+                                    className="w-10/12"
+                                />
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
             </section>

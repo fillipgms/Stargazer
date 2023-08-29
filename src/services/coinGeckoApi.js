@@ -9,3 +9,6 @@ export const HistoricalChart = (id, days, currency) =>
 
 export const TrendingCoins = (currency) =>
     `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`;
+
+export const TopThreeCoins = () =>
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=BRL&order=gecko_desc&per_page=3&page=1&sparkline=false&price_change_percentage=24h`;
