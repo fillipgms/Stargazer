@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TopNews, Advertisement, Footer } from "../components";
+import { TopNews, Advertisement, Footer, TopCrypto } from "../components";
 
 const LoggedHome = () => {
     useEffect(() => {
@@ -9,6 +9,7 @@ const LoggedHome = () => {
     return (
         <>
             <section>
+                <TopCrypto />
                 <Advertisement />
                 <TopNews />
             </section>
