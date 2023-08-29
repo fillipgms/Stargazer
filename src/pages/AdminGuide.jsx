@@ -59,6 +59,28 @@ const AdminGuide = () => {
                                         guideUid ? updateGuide : createGuide
                                     }
                                 >
+                                    <div class="relative">
+                                        <input
+                                            id="guide_name"
+                                            aria-describedby="outlined_guide_name_help"
+                                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
+                                            placeholder=" "
+                                            autoComplete="off"
+                                            name="guide_name"
+                                            value={guideName}
+                                            onChange={(e) =>
+                                                setGuideName(e.target.value)
+                                            }
+                                        />
+                                        <label
+                                            for="guide_name"
+                                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-main-dark-bg  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
+                                        >
+                                            {category == "geral"
+                                                ? "Título do guia:"
+                                                : "Guia para:"}
+                                        </label>
+                                    </div>
                                     <div className="flex w-full gap-4 items-center">
                                         <label
                                             htmlFor="categoria"
@@ -85,28 +107,7 @@ const AdminGuide = () => {
                                             ))}
                                         </select>
                                     </div>
-                                    <div class="relative">
-                                        <input
-                                            id="guide_name"
-                                            aria-describedby="outlined_guide_name_help"
-                                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
-                                            placeholder=" "
-                                            autoComplete="off"
-                                            name="guide_name"
-                                            value={guideName}
-                                            onChange={(e) =>
-                                                setGuideName(e.target.value)
-                                            }
-                                        />
-                                        <label
-                                            for="guide_name"
-                                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-main-dark-bg  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-90 peer-focus:-translate-y-4 left-1 select-none"
-                                        >
-                                            {category == "geral"
-                                                ? "Título do guia:"
-                                                : "Guia para:"}
-                                        </label>
-                                    </div>
+
                                     <div class="relative">
                                         <textarea
                                             id="guide_description"

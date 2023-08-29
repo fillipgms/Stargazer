@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider";
 import { doc, getDoc } from "firebase/firestore";
 import Cookies from "js-cookie";
+import icon from "../data/icon.png";
 
-import { Loading } from "../components";
+import { Footer, Loading } from "../components";
+import { RiH1 } from "react-icons/ri";
 
 const GuiasEspecificos = () => {
     const { db } = useStateContext();
@@ -38,16 +40,39 @@ const GuiasEspecificos = () => {
     }, [db, guideUid]);
 
     return (
-        <section className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10 text-white">
+        <>
             {guiaInfo ? (
                 <>
-                    <h2>{guiaInfo.nome}</h2>
-                    <p>{guiaInfo.descricao}</p>
+                    <header className="w-full h-fit">
+                        <div className="bg-pink-sky bg-cover h-52 relative">
+                            <img
+                                src={icon}
+                                className="md:w-32 w-20 rounded-full absolute bottom-0 left-10 border-4 border-main-dark transform translate-y-1/2"
+                            />
+                        </div>
+                        <h1 className="mt-4 ml-52 text-white font-semibold uppercase">
+                            {guiaInfo.nome}
+                        </h1>
+                    </header>
+                    <main className="py-10 md:px-48 px-10">
+                        <p className="text-white">
+                            {guiaInfo.descricao
+                                .replace(/\\n/g, "\n")
+                                .split("\n")
+                                .map((line, index) => (
+                                    <React.Fragment key={index}>
+                                        {line}
+                                        <br />
+                                    </React.Fragment>
+                                ))}
+                        </p>
+                    </main>
+                    <Footer />
                 </>
             ) : (
                 <Loading />
             )}
-        </section>
+        </>
     );
 };
 

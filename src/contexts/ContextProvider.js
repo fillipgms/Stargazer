@@ -265,12 +265,10 @@ export const ContextProvider = ({ children }) => {
 
         if (guideCategory === "geral") {
             try {
-                // Obtenha o número total de guias
                 const guiasRef = collection(db, "guias");
                 const guiasSnapshot = await getDocs(guiasRef);
                 const newIndex = guiasSnapshot.size + 1;
 
-                // Crie o novo guia com o campo index definido
                 const docRef = doc(db, "guias", uid);
                 await setDoc(docRef, {
                     categoria: guideCategory,
@@ -284,10 +282,6 @@ export const ContextProvider = ({ children }) => {
             }
         } else {
             try {
-                // Obtenha o número total de guias
-                const guiasRef = collection(db, "guias");
-
-                // Crie o novo guia com o campo index definido
                 const docRef = doc(db, "guias", uid);
                 await setDoc(docRef, {
                     categoria: guideCategory,
