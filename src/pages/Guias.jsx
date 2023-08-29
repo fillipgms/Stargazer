@@ -49,7 +49,7 @@ const Guide = () => {
 
                         return (
                             <div
-                                className="flex items-center bg-dark-bg rounded-sm py-2 px-4 cursor-pointer"
+                                className="flex items-center bg-dark-bg rounded-sm py-2 px-4 cursor-pointer hover:shadow-glow transition-all"
                                 key={guia.uid}
                                 onClick={() =>
                                     guiaEspecifico(guideName, guia.uid)

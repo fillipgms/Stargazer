@@ -155,7 +155,7 @@ const FavoriteCoins = () => {
 
                                 if (favorites.includes(coin.id))
                                     return (
-                                        <div className="w-full rounded-md overflow-hidden shadow-xl">
+                                        <div className="w-full rounded-md overflow-hidden shadow-xl hover:shadow-glow transition-all">
                                             <header className="bg-dark-bg font-bold text-white flex w-full px-4 items-center justify-between py-2 border-b-2 border-pink">
                                                 <div className="flex items-center justify-center gap-3">
                                                     <span className="flex items-center justify-center md:gap-1">

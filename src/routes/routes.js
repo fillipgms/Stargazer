@@ -11,7 +11,7 @@ import {
     Admin,
     ErrorPage,
     AdminGuide,
-    Guide,
+    Guias,
     GuiasEspecificos,
 } from "../pages";
 import { PrivateRoutes, LoggedRoutes, AdminRoutes } from ".";
@@ -49,7 +49,7 @@ const AppRoutes = () => {
                     element={<PasswordReset />}
                 />
             </Route>
-            <Route path="/guias" exact element={<Guide />} />
+            <Route path="/guias" exact element={<Guias />} />
             <Route path="/guias/:nome" element={<GuiasEspecificos />} />
             <Route path="/admin/*" element={<AdminRoutes />}>
                 <Route path="/admin/*" element={<Admin />} />

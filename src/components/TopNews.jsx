@@ -31,7 +31,7 @@ const TopNews = () => {
                 <a
                     href={cryptoHeadlines[0]?.url}
                     target="_blank"
-                    className="relative overflow-hidden box-border inline-block rounded-lg w-full"
+                    className="relative overflow-hidden box-border inline-block rounded-lg w-full hover:shadow-glow transition-all"
                 >
                     <img
                         src={cryptoHeadlines[0]?.urlToImage || demoImage}
@@ -52,7 +52,7 @@ const TopNews = () => {
                 <a
                     href={cryptoHeadlines[1]?.url}
                     target="_blank"
-                    className="bg-dark-bg rounded-md overflow-hidden"
+                    className="bg-dark-bg rounded-md overflow-hidden hover:shadow-glow transition-all"
                 >
                     <div className="flex justify-center items-center">
                         <img
@@ -77,7 +77,7 @@ const TopNews = () => {
 
                 {cryptoHeadlines.slice(2, 4).map((news, index) => (
                     <a
-                        className=" flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row"
+                        className=" flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"
                         href={news.url}
                         key={index}
                         target="_blank"

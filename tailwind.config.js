@@ -36,6 +36,9 @@ module.exports = {
                 "pink-blue-glow": [
                     "19px -8px 48px -15px #F788B6, -7px 15px 48px -15px #7FA2E0",
                 ],
+                glow: [
+                    "10px -4px 20px -7.5px rgba(247, 136, 182, 0.6), -5px 10px 20px -7.5px rgba(127, 162, 224, 0.6)",
+                ],
                 "black-gray-shadow": [
                     "-18px -18px 20px #1A1C1E, 18px 18px 20px #2A2D32",
                 ],

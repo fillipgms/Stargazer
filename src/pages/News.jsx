@@ -80,7 +80,7 @@ const News = () => {
                         if (isLargeNews) {
                             return (
                                 <a
-                                    className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row"
+                                    className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"
                                     href={news.url}
                                     target="_blank"
                                 >
@@ -110,7 +110,7 @@ const News = () => {
                                 <a
                                     href={news.url}
                                     target="_blank"
-                                    className="bg-dark-bg rounded-md overflow-hidden h-full"
+                                    className="bg-dark-bg rounded-md overflow-hidden h-full hover:shadow-glow transition-all"
                                 >
                                     <div className="flex justify-center items-center">
                                         <img

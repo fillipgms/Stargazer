@@ -127,7 +127,7 @@ const Crypto = () => {
                                 .replace(/(\d)(\d{2})$/, "$1,$2");
 
                             return (
-                                <div className="w-full rounded-md shadow-xl">
+                                <div className="w-full rounded-md shadow-xl hover:shadow-glow transition-all">
                                     <header className="bg-dark-bg font-bold text-white flex w-full px-4 items-center justify-between py-2 border-b-2 border-pink rounded-t-md">
                                         <div className="flex items-center justify-center gap-3">
                                             <span className="flex items-center justify-center md:gap-1">
