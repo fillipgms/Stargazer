@@ -98,17 +98,15 @@ const CoinPage = () => {
 
                         {guideOpen ? (
                             <div className="font-normal py-1">
-                                {guiaEncontrado
-                                    ? guiaEncontrado.descricao
-                                          .replace(/\\n/g, "\n")
-                                          .split("\n")
-                                          .map((line, index) => (
-                                              <React.Fragment key={index}>
-                                                  {line}
-                                                  <br />
-                                              </React.Fragment>
-                                          ))
-                                    : "nao temos guia"}
+                                {guiaEncontrado ? (
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: guiaEncontrado.descricao,
+                                        }}
+                                    />
+                                ) : (
+                                    "nao temos guia"
+                                )}
                             </div>
                         ) : (
                             ""

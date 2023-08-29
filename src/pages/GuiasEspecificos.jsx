@@ -68,14 +68,17 @@ const GuiasEspecificos = () => {
                                 className="md:w-32 w-20 rounded-full absolute bottom-0 left-10 border-4 border-main-dark transform translate-y-1/2"
                             />
                         </div>
-                        <h1 className="mt-4 md:ml-48 ml-32 text-white font-semibold uppercase">
+                    </header>
+                    <main className="md:py-5 py-10 md:px-48 px-10 text-white">
+                        <h1 className="font-semibold text-xl mb-2">
                             {guiaInfo.nome}
                         </h1>
-                    </header>
-                    <main
-                        className="py-10 md:px-48 px-10 text-white"
-                        dangerouslySetInnerHTML={{ __html: guiaInfo.descricao }}
-                    ></main>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: guiaInfo.descricao,
+                            }}
+                        />
+                    </main>
                     <span
                         style={
                             canScroll
