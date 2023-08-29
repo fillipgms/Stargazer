@@ -51,8 +51,11 @@ const AppRoutes = () => {
             </Route>
             <Route path="/guias" exact element={<Guias />} />
             <Route path="/guias/:nome" element={<GuiasEspecificos />} />
-            <Route path="/admin/*" element={<AdminRoutes />}>
-                <Route path="/admin/*" element={<Admin />} />
+            <Route path="/admin" element={<AdminRoutes />}>
+                <Route
+                    path="/admin"
+                    element={<Navigate to="/admin/guide" replace />}
+                />
             </Route>
             <Route path="/admin/guide" element={<AdminRoutes />}>
                 <Route path="/admin/guide" element={<AdminGuide />} />
