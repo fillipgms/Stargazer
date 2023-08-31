@@ -62,8 +62,6 @@ const News = () => {
         return <p>Error: {error}</p>;
     }
 
-    console.log(cryptoNews);
-
     return (
         <>
             <section>
@@ -81,28 +79,28 @@ const News = () => {
                             return (
                                 <a
                                     className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"
-                                    href={news.url}
+                                    href={news?.url}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
                                     <div className="md:w-96">
                                         <img
-                                            src={news.urlToImage || demoImage}
+                                            src={news?.urlToImage || demoImage}
                                             alt="foto da noticia"
                                             className="w-full h-full aspect-video object-cover"
                                         />
                                     </div>
                                     <div className="w-full">
                                         <h1 className="bg-pink text-black px-10 py-2 font-semibold">
-                                            {news.title}
+                                            {news?.title}
                                         </h1>
                                         <p className="text-white px-10 my-5">
-                                            {news.description.length > 100
-                                                ? `${news.description.substring(
+                                            {news?.description?.length > 100
+                                                ? `${news?.description.substring(
                                                       0,
                                                       100
                                                   )}...`
-                                                : news.description}
+                                                : news?.description}
                                         </p>
                                     </div>
                                 </a>
@@ -110,29 +108,29 @@ const News = () => {
                         } else {
                             return (
                                 <a
-                                    href={news.url}
+                                    href={news?.url}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="bg-dark-bg rounded-md overflow-hidden h-full hover:shadow-glow transition-all"
                                 >
                                     <div className="flex justify-center items-center">
                                         <img
-                                            src={news.urlToImage || demoImage}
+                                            src={news?.urlToImage || demoImage}
                                             alt="foto da noticia"
                                             className="w-full aspect-video object-cover"
                                         />
                                     </div>
                                     <div>
                                         <h1 className="bg-pink text-black px-10 py-2 font-semibold">
-                                            {news.title}
+                                            {news?.title}
                                         </h1>
                                         <p className="text-white px-10 my-5">
-                                            {news.description.length > 100
-                                                ? `${news.description.substring(
+                                            {news?.description?.length > 100
+                                                ? `${news?.description.substring(
                                                       0,
                                                       100
                                                   )}...`
-                                                : news.description}
+                                                : news?.description}
                                         </p>
                                     </div>
                                 </a>

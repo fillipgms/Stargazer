@@ -64,7 +64,6 @@ const GuiasPublicados = () => {
         const [reorderedGuia] = updatedGuias.splice(source.index, 1);
         updatedGuias.splice(destination.index, 0, reorderedGuia);
 
-        // Atualizar no Firebase primeiro
         await Promise.all(
             updatedGuias.map(async (guia, index) => {
                 const guiaRef = doc(db, "guias", guia.uid);
@@ -72,7 +71,6 @@ const GuiasPublicados = () => {
             })
         );
 
-        // Agora tratar a atualização do estado local
         if (type === "DEFAULT") {
             const guiasOrdenados = [...guiasGerais];
             const sourceIndex = source.index;
