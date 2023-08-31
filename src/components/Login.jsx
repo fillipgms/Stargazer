@@ -77,6 +77,17 @@ const Login = () => {
                     </Link>
                 </div>
 
+                {loginError ? (
+                    <span className="text-pink font-semibold">
+                        Erro:{" "}
+                        <span className="text-black font-medium">
+                            {loginError}
+                        </span>
+                    </span>
+                ) : (
+                    ""
+                )}
+
                 <span className="relative after:content-[''] after:block after:h-[2px] after:bg-pink after:absolute after:right-0 after:top-1/2 after:w-2/5 before:content-[''] before:block before:h-[2px] before:bg-pink before:absolute before:left-0 before:top-1/2 before:w-2/5 text-black">
                     ou
                 </span>

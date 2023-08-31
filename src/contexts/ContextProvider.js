@@ -24,6 +24,8 @@ import { Navigate } from "react-router-dom";
 import { doc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
+import { errors } from "../data/errosFirebase";
+
 const StateContext = createContext();
 const provider = new GoogleAuthProvider();
 
@@ -174,7 +176,8 @@ export const ContextProvider = ({ children }) => {
                     });
                 })
                 .catch((error) => {
-                    setLoginError(error);
+                    const erro = errors[error.code] || error.message;
+                    setLoginError(erro);
                 });
         } else {
             setLoginError("senhas diferentes");
@@ -193,7 +196,9 @@ export const ContextProvider = ({ children }) => {
                 );
             })
             .catch((error) => {
-                setLoginError(error);
+                console.log(errors[error.code]);
+                const erro = errors[error.code] || error.message;
+                setLoginError(erro);
             });
     };
 
