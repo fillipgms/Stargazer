@@ -6,9 +6,9 @@ import { cardsContainer, card } from "../data/dummy";
 
 const Cards = ({ items }) => {
     return (
-        <section className=" mb-32 md:pt-0 pt-10 bg-main-dark-bg flex items-center justify-center flex-col">
+        <section className=" mb-24 bg-main-dark-bg flex items-center justify-center flex-col">
             <motion.div
-                className="flex md:w-full w-9/12 md:justify-evenly md:gap-0 gap-20 justify-center mt-20 flex-wrap"
+                className="flex md:w-full w-9/12 md:justify-evenly md:gap-0 gap-20 justify-center mt-10 flex-wrap"
                 variants={cardsContainer}
                 initial="hidden"
                 whileInView="show"

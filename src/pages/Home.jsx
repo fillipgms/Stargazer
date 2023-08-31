@@ -30,7 +30,7 @@ const Home = () => {
 
     return (
         <>
-            <section className="h-screen bg-main-dark-bg w-full flex flex-col md:flex-row ">
+            <section className="h-screen bg-main-dark-bg w-full flex flex-col md:flex-row mb-5">
                 <div className="md:w-9/12 w-full flex gap-3 flex-col items-center justify-center h-full px-10 md:px-48">
                     <h1 className="md:w-full text-2xl md:text-4xl text-white w-full">
                         <span className="text-pink">
@@ -84,7 +84,10 @@ const Home = () => {
                     </motion.div>
                 </div>
             </section>
-            <div>
+
+            <Advertisement />
+
+            <div className="mt-5">
                 <div className="text-center">
                     <h3 className="text-pink md:text-4xl text-2xl">
                         Descura Cripto
@@ -96,8 +99,6 @@ const Home = () => {
                 <Cards items={icons} />
             </div>
 
-            <Advertisement />
-            <Timeline />
             <Footer />
         </>
     );
