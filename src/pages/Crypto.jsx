@@ -100,7 +100,7 @@ const Crypto = () => {
     return (
         <>
             <section className="mb-5">
-                <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-10">
+                <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center gap-6">
                     {coins
                         .slice((page - 1) * 10, (page - 1) * 10 + 10)
                         .map((coin) => {
