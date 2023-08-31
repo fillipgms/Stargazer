@@ -58,6 +58,7 @@ const Login = () => {
                             aria-describedby="outlined_senha_help"
                             class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-pink appearance-none  focus:outline-none focus:ring-0 focus:border-pink peer border-2"
                             placeholder=" "
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             type={inputType ? "text" : "password"}
                         />

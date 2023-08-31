@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import axios from "axios";
 
-import { Advertisement, Cards, Timeline, Footer } from "../components";
+import { Advertisement, Cards, Footer } from "../components";
 import { container, itemA, icons } from "../data/dummy";
 import { TopThreeCoins } from "../services/coinGeckoApi";
 
@@ -68,10 +68,11 @@ const Home = () => {
                         initial="hidden"
                         animate="show"
                     >
-                        {threeCoins.map((coin) => (
+                        {threeCoins.map((coin, index) => (
                             <motion.div
                                 className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 backdrop-blur-glassmorphism"
                                 variants={itemA}
+                                key={index}
                             >
                                 <img
                                     src={coin.image}

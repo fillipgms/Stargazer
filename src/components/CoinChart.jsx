@@ -82,8 +82,8 @@ const CoinChart = ({ coin }) => {
                         key={btn.tempo}
                         className={`border-2 py-1 px-3 rounded-md ${
                             parseInt(btn.tempo) === days
-                                ? "border-violet bg-violet text-black font-semibold"
-                                : "border-violet text-violet"
+                                ? "border-pink bg-pink text-black font-semibold"
+                                : "border-pink text-pink"
                         }`}
                         onClick={() => setDays(parseInt(btn.tempo))}
                     >

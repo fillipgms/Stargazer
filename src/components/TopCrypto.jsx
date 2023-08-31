@@ -70,6 +70,7 @@ const TopCrypto = () => {
                                     onClick={() =>
                                         navigate(`/coins/${coin.id}`)
                                     }
+                                    key={coin.id}
                                     className="hover:bg-black-bg cursor-pointer px-4 py-2 flex justify-between text-left"
                                 >
                                     <div className="flex items-center gap-1 flex-1">

@@ -147,11 +147,8 @@ export const ContextProvider = ({ children }) => {
                 });
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.customData.email;
-                const credential =
-                    GoogleAuthProvider.credentialFromError(error);
+                const erro = errors[error.code] || error.message;
+                setLoginError(erro);
             });
         return;
     };

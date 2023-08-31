@@ -75,13 +75,14 @@ const News = () => {
 
                         const isLargeNews = index === 0 || index % 4 === 0;
 
-                        if (isLargeNews) {
+                        if ((isLargeNews, index)) {
                             return (
                                 <a
                                     className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"
                                     href={news?.url}
                                     target="_blank"
                                     rel="noreferrer"
+                                    key={index}
                                 >
                                     <div className="md:w-96">
                                         <img
