@@ -7,7 +7,7 @@ const API_URL = `https://newsapi.org/v2/everything?apiKey=${API_KEY}`;
 function getStartDate() {
     const today = new Date();
     const startDate = new Date(today);
-    startDate.setDate(startDate.getDate() - 31);
+    startDate.setDate(startDate.getDate() - 7);
     return startDate.toISOString().split("T")[0];
 }
 

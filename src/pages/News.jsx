@@ -75,7 +75,7 @@ const News = () => {
 
                         const isLargeNews = index === 0 || index % 4 === 0;
 
-                        if ((isLargeNews, index)) {
+                        if (isLargeNews) {
                             return (
                                 <a
                                     className="md:col-span-3 flex bg-dark-bg rounded-md overflow-hidden flex-col md:flex-row hover:shadow-glow transition-all"

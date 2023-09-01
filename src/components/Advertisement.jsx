@@ -19,7 +19,7 @@ const Advertisement = () => {
     }, []);
 
     return (
-        <Link to="/guide">
+        <Link to="/guias">
             <section className=" text-white text-center relative bg-pink-sky md:py-32 py-10 bg-cover bg-right">
                 <div className="w-9/12 mx-auto">
                     <h3 className="text-2xl font-bold mb-3 bg-cover">
