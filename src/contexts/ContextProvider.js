@@ -331,8 +331,10 @@ export const ContextProvider = ({ children }) => {
         );
 
         const unsubscribeGerais = onSnapshot(guiasGeraisQuery, (snapshot) => {
+            setLoading(true);
             const guiasGeraisData = snapshot.docs.map((doc) => doc.data());
             setGuiasGerais(guiasGeraisData);
+            setLoading(false);
         });
 
         const unsubscribeEspecificos = onSnapshot(

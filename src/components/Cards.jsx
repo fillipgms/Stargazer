@@ -6,7 +6,7 @@ import { cardsContainer, card } from "../data/dummy";
 
 const Cards = ({ items }) => {
     return (
-        <section className=" mb-24 bg-main-dark-bg flex items-center justify-center flex-col">
+        <section className=" mb-20 bg-main-dark-bg flex items-center justify-center flex-col">
             <motion.div
                 className="flex md:w-full w-9/12 md:justify-evenly md:gap-0 gap-20 justify-center mt-10 flex-wrap"
                 variants={cardsContainer}

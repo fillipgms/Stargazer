@@ -66,10 +66,11 @@ const GuiasEspecificos = () => {
                                 src={icon}
                                 className="md:w-32 w-20 rounded-full absolute bottom-0 left-10 border-4 border-main-dark transform translate-y-1/2"
                                 alt="icon"
+                                draggable={false}
                             />
                         </div>
                     </header>
-                    <main className="md:py-5 py-10 md:px-48 px-10 text-white">
+                    <main className="md:py-5 py-10 md:px-48 px-10 text-white mb-10">
                         <h1 className="font-semibold text-xl mb-2">
                             {guiaInfo.nome}
                         </h1>
