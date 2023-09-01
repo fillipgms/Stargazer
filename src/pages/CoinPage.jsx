@@ -142,7 +142,9 @@ const CoinPage = () => {
                     <aside className=""></aside>
                 </main>
             </section>
-            <Footer />
+            <span className="absolute bottom-0 left-0 w-full">
+                <Footer />
+            </span>
         </>
     );
 };
