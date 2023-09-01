@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import { newsPlaceholder } from "../data/NewsPlaceholder";
 import { Footer, Loading } from "../components";
 import { Advertisement, TopNews } from "../components";
 import { getCryptoNews } from "../services/newsApi";
@@ -60,6 +61,10 @@ const News = () => {
 
     if (error && page === 1) {
         return <p>Error: {error}</p>;
+    }
+
+    if (cryptoNews.length === 0) {
+        setCryptoNews(newsPlaceholder);
     }
 
     return (

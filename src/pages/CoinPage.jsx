@@ -6,6 +6,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdPlayArrow } from "react-icons/md";
+import { basicInfo } from "../data/dummy";
 
 import { CoinChart, Footer, Loading } from "../components";
 
@@ -80,7 +81,10 @@ const CoinPage = () => {
                                 <h2>R$ {price}</h2>
                             </span>
                         </div>
-                        <div className="flex flex-col text-white">
+                        <div
+                            className="flex flex-col text-white tooltip tooltip-bottom"
+                            data-tip={basicInfo.altasEbaixas.content}
+                        >
                             <span className="flex items-center">
                                 {" "}
                                 <MdPlayArrow className="text-blue -rotate-90 text-lg" />

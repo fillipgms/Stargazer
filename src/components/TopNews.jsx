@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getCryptoNews } from "../services/newsApi";
+import { newsPlaceholder } from "../data/NewsPlaceholder";
 
 const demoImage =
     "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
@@ -22,6 +23,10 @@ const TopNews = () => {
             setError(error.message);
         }
     };
+
+    if (cryptoHeadlines.length === 0) {
+        setCryptoHeadlines(newsPlaceholder);
+    }
 
     return (
         <div className="flex md:px-48 px-10 flex-col pt-20 items-center justify-center">
