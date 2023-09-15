@@ -56,9 +56,64 @@ const CoinPage = () => {
         .replace(/(\d)(\d{5})$/, "$1.$2")
         .replace(/(\d)(\d{2})$/, "$1,$2");
 
+    const marketCap = coin?.market_data.market_cap[currency.toLowerCase()]
+        .toFixed(2)
+        .replace(/\D/g, "")
+        .replace(/(\d)(\d{14})$/, "$1.$2")
+        .replace(/(\d)(\d{11})$/, "$1.$2")
+        .replace(/(\d)(\d{8})$/, "$1.$2")
+        .replace(/(\d)(\d{5})$/, "$1.$2")
+        .replace(/(\d)(\d{2})$/, "$1,$2");
+
+    const volume = coin?.market_data.total_volume[currency.toLowerCase()]
+        .toFixed(2)
+        .replace(/\D/g, "")
+        .replace(/(\d)(\d{14})$/, "$1.$2")
+        .replace(/(\d)(\d{11})$/, "$1.$2")
+        .replace(/(\d)(\d{8})$/, "$1.$2")
+        .replace(/(\d)(\d{5})$/, "$1.$2")
+        .replace(/(\d)(\d{2})$/, "$1,$2");
+
+    const avaliacao = coin?.market_data.fully_diluted_valuation[
+        currency.toLowerCase()
+    ]
+        .toFixed(2)
+        .replace(/\D/g, "")
+        .replace(/(\d)(\d{14})$/, "$1.$2")
+        .replace(/(\d)(\d{11})$/, "$1.$2")
+        .replace(/(\d)(\d{8})$/, "$1.$2")
+        .replace(/(\d)(\d{5})$/, "$1.$2")
+        .replace(/(\d)(\d{2})$/, "$1,$2");
+
+    const circulacao = coin?.market_data.circulating_supply
+        .toFixed(2)
+        .replace(/\D/g, "")
+        .replace(/(\d)(\d{14})$/, "$1.$2")
+        .replace(/(\d)(\d{11})$/, "$1.$2")
+        .replace(/(\d)(\d{8})$/, "$1.$2")
+        .replace(/(\d)(\d{5})$/, "$1.$2")
+        .replace(/(\d)(\d{2})$/, "$1,$2");
+
+    const total = coin?.market_data.total_supply
+        .toFixed(2)
+        .replace(/\D/g, "")
+        .replace(/(\d)(\d{14})$/, "$1.$2")
+        .replace(/(\d)(\d{11})$/, "$1.$2")
+        .replace(/(\d)(\d{8})$/, "$1.$2")
+        .replace(/(\d)(\d{5})$/, "$1.$2")
+        .replace(/(\d)(\d{2})$/, "$1,$2");
+
+    const profit24h = coin?.market_data.price_change_percentage_24hd > 0;
+    const profit14d = coin?.market_data.price_change_percentage_7d > 0;
+    const profit30d = coin?.market_data.price_change_percentage_14d > 0;
+
     const guiaEncontrado = guiasEspecificos.find(
         (guia) => guia.nome.toLowerCase() === coin.id.toLowerCase()
     );
+
+    const containerClass = "py-2 px-5 bg-dark-bg rounded-md";
+
+    console.log(coin);
 
     return (
         <>
@@ -135,16 +190,141 @@ const CoinPage = () => {
                         </div>
                     </div>
                 </header>
-                <main className="w-full flex">
+                <main className="w-full">
                     <section className="w-full">
                         <CoinChart coin={coin} />
                     </section>
-                    <aside className=""></aside>
+                    <section className="py-3 text-white">
+                        <h2 className="text-xl font-semibold py-2">Mercado</h2>
+                        <div className="grid grid-cols-[repeat(auto-fill,_minmax(270px,_1fr))] gap-2">
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Popularidade
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span># {coin?.market_cap_rank}</span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Capitalização de Mercado
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span>R$ {marketCap}</span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Volume Total
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span>R$ {volume}</span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Mudança de Preço (24h)
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span
+                                    style={{
+                                        color:
+                                            profit24h > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                        fontWeight: 500,
+                                        borderColor:
+                                            profit24h > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                    }}
+                                >
+                                    {coin?.market_data.price_change_percentage_24h.toFixed(
+                                        2
+                                    )}{" "}
+                                    %
+                                </span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Mudança de Preço (7d)
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span
+                                    style={{
+                                        color:
+                                            profit14d > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                        fontWeight: 500,
+                                        borderColor:
+                                            profit14d > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                    }}
+                                >
+                                    {coin?.market_data.price_change_percentage_14d.toFixed(
+                                        2
+                                    )}{" "}
+                                    %
+                                </span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Mudança de Preço (14d)
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span
+                                    style={{
+                                        color:
+                                            profit30d > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                        fontWeight: 500,
+                                        borderColor:
+                                            profit30d > 0
+                                                ? "#7fa2e0"
+                                                : "#c7a3ff",
+                                    }}
+                                >
+                                    {coin?.market_data.price_change_percentage_30d.toFixed(
+                                        2
+                                    )}{" "}
+                                    %
+                                </span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Quantidade total
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span>{total}</span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Avaliação Totalmente Diluida
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span>R$ {avaliacao}</span>
+                            </div>
+                            <div className={containerClass}>
+                                <h3 className="flex items-center gap-1">
+                                    {" "}
+                                    Moedas em circulação
+                                    <AiOutlineInfoCircle />
+                                </h3>
+                                <span>R$ {circulacao}</span>
+                            </div>
+                        </div>
+                    </section>
                 </main>
             </section>
-            <span className="absolute bottom-0 left-0 w-full">
-                <Footer />
-            </span>
+            <Footer />
         </>
     );
 };
