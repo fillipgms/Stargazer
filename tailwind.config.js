@@ -31,6 +31,7 @@ module.exports = {
                 "banner-bg": "url(./data/banner-bg.png)",
                 wallpaper: "url(./data/wallpaper.jpg)",
                 "pink-sky": "url(./data/pink_sky.png)",
+                "dark-wallpaper": "url(./data/dark_walppaper.jpg)",
             },
             boxShadow: {
                 "pink-blue-glow": [

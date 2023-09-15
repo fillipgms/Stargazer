@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { TrendingCoins } from "../services/coinGeckoApi";
 import { useStateContext } from "../contexts/ContextProvider";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const TopCrypto = () => {
     const navigate = useNavigate();
 
-    const { currency, screenSize, setScreenSize } = useStateContext();
+    const { currency, setScreenSize, screenSize } = useStateContext();
     const [trendindCoins, setTrendingCoins] = useState([]);
 
     const fetchTrending = async () => {
@@ -32,110 +33,108 @@ const TopCrypto = () => {
         fetchTrending();
     }, [currency]);
 
+    const classeLinha =
+        screenSize >= 900
+            ? "w-[calc(100%/3)] text-center capitalize"
+            : "w-[calc(100%/2)] text-center capitalize";
+
+    const classeTitulo = `${classeLinha} tooltip tooltip-bottom flex items-center justify-center gap-1`;
+
     return (
-        <div className="flex md:px-48 px-10 flex-col pt-20 pb-10 items-center justify-center">
-            <div className="bg-dark-bg w-full rounded-md shadow-md">
-                <div>
-                    <div className="text-white text-center font-semibold text-lg py-2 px-4 border-b-2 border-pink">
-                        Bombando agora
+        <div className="flex items-center pt-32 pb-20 mb-10 justify-center bg-dark-wallpaper py-10 bg-cove w-full bg-cover bg-center">
+            <div className="bg-dark-bg  rounded-md text-white py-2 w-9/12  shadow-lg">
+                <h3 className="font-bold text-center">Bombando agora</h3>
+                <div className="flex flex-col pt-4">
+                    <div className="flex">
+                        <h2 className={classeLinha}> moeda</h2>
+                        <h2
+                            className={classeTitulo}
+                            data-tip={
+                                "A variação no percentual do volume de negociação deste ativo em relação a 24 horas atrás."
+                            }
+                        >
+                            24h
+                            <AiOutlineInfoCircle />
+                        </h2>
+                        {screenSize >= 900 ? (
+                            <h2
+                                className={classeTitulo}
+                                data-tip={
+                                    "A capitalização de mercado é calculada multiplicando a oferta em circulação do ativo pelo seu preço atual. Uma capitalização de mercado alta significa que o ativo é muito valorizado. O ativo de maior capitalização de mercado hoje é o bitcoin."
+                                }
+                            >
+                                {" "}
+                                capitalização de mercado
+                                <AiOutlineInfoCircle />
+                            </h2>
+                        ) : (
+                            ""
+                        )}
                     </div>
-                    <div className="text-white tabela-moedas table-auto">
-                        <div className="flex justify-between text-justify px-4 py-2 font-semibold">
-                            <div className="flex-1">Nome</div>
-                            <div className="flex-1">Preço</div>
-                            {screenSize > 900 ? (
-                                <>
-                                    <div className="flex-1">24h</div>
-                                    <div className="flex-1">
-                                        Capialização de mercado
-                                    </div>
-                                </>
-                            ) : (
-                                " "
-                            )}
-                        </div>
-                        {trendindCoins.map((coin) => {
-                            const price = coin?.current_price
-                                .toFixed(2)
-                                .replace(/\D/g, "")
-                                .replace(/(\d)(\d{8})$/, "$1.$2")
-                                .replace(/(\d)(\d{5})$/, "$1.$2")
-                                .replace(/(\d)(\d{2})$/, "$1,$2");
+                    {trendindCoins.map((moeda) => {
+                        const price = moeda?.current_price
+                            .toFixed(2)
+                            .replace(/\D/g, "")
+                            .replace(/(\d)(\d{8})$/, "$1.$2")
+                            .replace(/(\d)(\d{5})$/, "$1.$2")
+                            .replace(/(\d)(\d{2})$/, "$1,$2");
 
-                            const profit =
-                                coin?.price_change_percentage_24h > 0;
+                        const profit = moeda?.price_change_percentage_24h > 0;
 
-                            return (
-                                <div
-                                    onClick={() =>
-                                        navigate(`/coins/${coin.id}`)
-                                    }
-                                    key={coin.id}
-                                    className="hover:bg-black-bg cursor-pointer px-4 py-2 flex justify-between text-left"
-                                >
-                                    <div className="flex items-center gap-1 flex-1">
-                                        <img
-                                            src={coin.image}
-                                            className="w-10"
-                                        />
-                                        {coin.name}
+                        return (
+                            <div
+                                className="px-5 py-2 flex gap-3 items-center hover:bg-black-bg justify-between cursor-pointer"
+                                onClick={() => navigate(`/coins/${moeda.id}`)}
+                            >
+                                <div className="flex gap-3 w-[calc(100%/3)]">
+                                    <img
+                                        src={moeda.image}
+                                        alt={moeda.name}
+                                        className="w-10 h-10"
+                                    />
+                                    <div>
+                                        <h2 className="font-semibold flex gap-1">
+                                            {moeda.name}
+                                            <span className="font-normal">
+                                                {moeda.symbol}
+                                            </span>
+                                        </h2>
+                                        <span>R$ {price}</span>
                                     </div>
-                                    <div className="flex-1"> R$ {price}</div>
-                                    {screenSize > 900 ? (
-                                        <>
-                                            <div
-                                                style={{
-                                                    color:
-                                                        profit > 0
-                                                            ? "#7fa2e0"
-                                                            : "#c7a3ff",
-                                                    fontWeight: 500,
-                                                    borderColor:
-                                                        profit > 0
-                                                            ? "#7fa2e0"
-                                                            : "#c7a3ff",
-                                                }}
-                                                className="flex-1"
-                                            >
-                                                {coin.price_change_percentage_24h.toFixed(
-                                                    2
-                                                )}
-                                                %
-                                            </div>
-                                            <div className="flex-1">
-                                                R${" "}
-                                                {coin.market_cap
-                                                    .toFixed(2)
-                                                    .replace(/\D/g, "")
-                                                    .replace(
-                                                        /(\d)(\d{14})$/,
-                                                        "$1.$2"
-                                                    )
-                                                    .replace(
-                                                        /(\d)(\d{11})$/,
-                                                        "$1.$2"
-                                                    )
-                                                    .replace(
-                                                        /(\d)(\d{8})$/,
-                                                        "$1.$2"
-                                                    )
-                                                    .replace(
-                                                        /(\d)(\d{5})$/,
-                                                        "$1.$2"
-                                                    )
-                                                    .replace(
-                                                        /(\d)(\d{2})$/,
-                                                        "$1,$2"
-                                                    )}
-                                            </div>
-                                        </>
-                                    ) : (
-                                        " "
-                                    )}
                                 </div>
-                            );
-                        })}
-                    </div>
+                                <div
+                                    style={{
+                                        color:
+                                            profit > 0 ? "#7fa2e0" : "#c7a3ff",
+                                        fontWeight: 500,
+                                        borderColor:
+                                            profit > 0 ? "#7fa2e0" : "#c7a3ff",
+                                    }}
+                                    className={classeLinha}
+                                >
+                                    {moeda.price_change_percentage_24h.toFixed(
+                                        2
+                                    )}
+                                    %
+                                </div>
+                                {screenSize >= 900 ? (
+                                    <div className={classeLinha}>
+                                        R${" "}
+                                        {moeda.market_cap
+                                            .toFixed(2)
+                                            .replace(/\D/g, "")
+                                            .replace(/(\d)(\d{14})$/, "$1.$2")
+                                            .replace(/(\d)(\d{11})$/, "$1.$2")
+                                            .replace(/(\d)(\d{8})$/, "$1.$2")
+                                            .replace(/(\d)(\d{5})$/, "$1.$2")
+                                            .replace(/(\d)(\d{2})$/, "$1,$2")}
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
