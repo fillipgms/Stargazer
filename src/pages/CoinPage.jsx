@@ -325,7 +325,7 @@ const CoinPage = () => {
                     <section className="py-3 text-white">
                         <h2 className="text-xl font-semibold py-2">
                             {coin?.name} está em{" "}
-                            {profit7d > 0 ? "alta" : "baixa"} essa semana
+                            {profit7d > 0 ? "alta" : "baixa"} essa semana.
                         </h2>
                         <p>
                             O preço de {coin?.name}{" "}
@@ -335,9 +335,11 @@ const CoinPage = () => {
                             )}
                             % nos últimos 7 dias. O preço{" "}
                             {profit24h > 0 ? "subiu" : "caiu"}{" "}
-                            {coin?.market_data.price_change_percentage_24h}% nas
-                            últimas 24 horas. O preço atual é de R$ {price} por{" "}
-                            {coin?.symbol}.
+                            {coin?.market_data.price_change_percentage_24h.toFixed(
+                                2
+                            )}
+                            % nas últimas 24 horas. O preço atual é de R${" "}
+                            {price} por {coin?.symbol}.
                         </p>
                     </section>
                 </main>
