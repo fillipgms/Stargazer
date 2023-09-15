@@ -104,8 +104,8 @@ const CoinPage = () => {
         .replace(/(\d)(\d{2})$/, "$1,$2");
 
     const profit24h = coin?.market_data.price_change_percentage_24hd > 0;
-    const profit14d = coin?.market_data.price_change_percentage_7d > 0;
-    const profit30d = coin?.market_data.price_change_percentage_14d > 0;
+    const profit7d = coin?.market_data.price_change_percentage_7d > 0;
+    const profit14d = coin?.market_data.price_change_percentage_14d > 0;
 
     const guiaEncontrado = guiasEspecificos.find(
         (guia) => guia.nome.toLowerCase() === coin.id.toLowerCase()
@@ -255,17 +255,17 @@ const CoinPage = () => {
                                 <span
                                     style={{
                                         color:
-                                            profit14d > 0
+                                            profit7d > 0
                                                 ? "#7fa2e0"
                                                 : "#c7a3ff",
                                         fontWeight: 500,
                                         borderColor:
-                                            profit14d > 0
+                                            profit7d > 0
                                                 ? "#7fa2e0"
                                                 : "#c7a3ff",
                                     }}
                                 >
-                                    {coin?.market_data.price_change_percentage_14d.toFixed(
+                                    {coin?.market_data.price_change_percentage_7d.toFixed(
                                         2
                                     )}{" "}
                                     %
@@ -280,17 +280,17 @@ const CoinPage = () => {
                                 <span
                                     style={{
                                         color:
-                                            profit30d > 0
+                                            profit14d > 0
                                                 ? "#7fa2e0"
                                                 : "#c7a3ff",
                                         fontWeight: 500,
                                         borderColor:
-                                            profit30d > 0
+                                            profit14d > 0
                                                 ? "#7fa2e0"
                                                 : "#c7a3ff",
                                     }}
                                 >
-                                    {coin?.market_data.price_change_percentage_30d.toFixed(
+                                    {coin?.market_data.price_change_percentage_14d.toFixed(
                                         2
                                     )}{" "}
                                     %
@@ -321,6 +321,24 @@ const CoinPage = () => {
                                 <span>R$ {circulacao}</span>
                             </div>
                         </div>
+                    </section>
+                    <section className="py-3 text-white">
+                        <h2 className="text-xl font-semibold py-2">
+                            {coin?.name} está em{" "}
+                            {profit7d > 0 ? "alta" : "baixa"} essa semana
+                        </h2>
+                        <p>
+                            O preço de {coin?.name}{" "}
+                            {profit7d > 0 ? "subiu" : "desceu"}{" "}
+                            {coin?.market_data.price_change_percentage_7d.toFixed(
+                                2
+                            )}
+                            % nos últimos 7 dias. O preço{" "}
+                            {profit24h > 0 ? "subiu" : "caiu"}{" "}
+                            {coin?.market_data.price_change_percentage_24h}% nas
+                            últimas 24 horas. O preço atual é de R$ {price} por{" "}
+                            {coin?.symbol}.
+                        </p>
                     </section>
                 </main>
             </section>
