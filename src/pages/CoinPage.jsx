@@ -35,6 +35,18 @@ const CoinPage = () => {
         return <Loading />;
     }
 
+    function formatNumber(num) {
+        if (num >= 1e12) {
+            return (num / 1e12).toFixed(1) + "T";
+        } else if (num >= 1e9) {
+            return (num / 1e9).toFixed(1) + "B";
+        } else if (num >= 1e6) {
+            return (num / 1e6).toFixed(1) + "M";
+        } else {
+            return num.toString();
+        }
+    }
+
     const price = coin?.market_data.current_price[currency.toLowerCase()]
         .toFixed(2)
         .replace(/\D/g, "")
@@ -52,53 +64,6 @@ const CoinPage = () => {
     const low = coin?.market_data.low_24h[currency.toLowerCase()]
         .toFixed(2)
         .replace(/\D/g, "")
-        .replace(/(\d)(\d{8})$/, "$1.$2")
-        .replace(/(\d)(\d{5})$/, "$1.$2")
-        .replace(/(\d)(\d{2})$/, "$1,$2");
-
-    const marketCap = coin?.market_data.market_cap[currency.toLowerCase()]
-        .toFixed(2)
-        .replace(/\D/g, "")
-        .replace(/(\d)(\d{14})$/, "$1.$2")
-        .replace(/(\d)(\d{11})$/, "$1.$2")
-        .replace(/(\d)(\d{8})$/, "$1.$2")
-        .replace(/(\d)(\d{5})$/, "$1.$2")
-        .replace(/(\d)(\d{2})$/, "$1,$2");
-
-    const volume = coin?.market_data.total_volume[currency.toLowerCase()]
-        .toFixed(2)
-        .replace(/\D/g, "")
-        .replace(/(\d)(\d{14})$/, "$1.$2")
-        .replace(/(\d)(\d{11})$/, "$1.$2")
-        .replace(/(\d)(\d{8})$/, "$1.$2")
-        .replace(/(\d)(\d{5})$/, "$1.$2")
-        .replace(/(\d)(\d{2})$/, "$1,$2");
-
-    const avaliacao = coin?.market_data.fully_diluted_valuation[
-        currency.toLowerCase()
-    ]
-        .toFixed(2)
-        .replace(/\D/g, "")
-        .replace(/(\d)(\d{14})$/, "$1.$2")
-        .replace(/(\d)(\d{11})$/, "$1.$2")
-        .replace(/(\d)(\d{8})$/, "$1.$2")
-        .replace(/(\d)(\d{5})$/, "$1.$2")
-        .replace(/(\d)(\d{2})$/, "$1,$2");
-
-    const circulacao = coin?.market_data.circulating_supply
-        .toFixed(2)
-        .replace(/\D/g, "")
-        .replace(/(\d)(\d{14})$/, "$1.$2")
-        .replace(/(\d)(\d{11})$/, "$1.$2")
-        .replace(/(\d)(\d{8})$/, "$1.$2")
-        .replace(/(\d)(\d{5})$/, "$1.$2")
-        .replace(/(\d)(\d{2})$/, "$1,$2");
-
-    const total = coin?.market_data.total_supply
-        .toFixed(2)
-        .replace(/\D/g, "")
-        .replace(/(\d)(\d{14})$/, "$1.$2")
-        .replace(/(\d)(\d{11})$/, "$1.$2")
         .replace(/(\d)(\d{8})$/, "$1.$2")
         .replace(/(\d)(\d{5})$/, "$1.$2")
         .replace(/(\d)(\d{2})$/, "$1,$2");
@@ -211,7 +176,14 @@ const CoinPage = () => {
                                     Capitalização de Mercado
                                     <AiOutlineInfoCircle />
                                 </h3>
-                                <span>R$ {marketCap}</span>
+                                <span>
+                                    R${" "}
+                                    {formatNumber(
+                                        coin?.market_data.market_cap[
+                                            currency.toLowerCase()
+                                        ]
+                                    )}
+                                </span>
                             </div>
                             <div className={containerClass}>
                                 <h3 className="flex items-center gap-1">
@@ -219,7 +191,14 @@ const CoinPage = () => {
                                     Volume Total
                                     <AiOutlineInfoCircle />
                                 </h3>
-                                <span>R$ {volume}</span>
+                                <span>
+                                    R${" "}
+                                    {formatNumber(
+                                        coin?.market_data.total_volume[
+                                            currency.toLowerCase()
+                                        ]
+                                    )}
+                                </span>
                             </div>
                             <div className={containerClass}>
                                 <h3 className="flex items-center gap-1">
@@ -302,7 +281,11 @@ const CoinPage = () => {
                                     Quantidade total
                                     <AiOutlineInfoCircle />
                                 </h3>
-                                <span>{total}</span>
+                                <span>
+                                    {formatNumber(
+                                        coin?.market_data.total_supply
+                                    )}
+                                </span>
                             </div>
                             <div className={containerClass}>
                                 <h3 className="flex items-center gap-1">
@@ -310,7 +293,15 @@ const CoinPage = () => {
                                     Avaliação Totalmente Diluida
                                     <AiOutlineInfoCircle />
                                 </h3>
-                                <span>R$ {avaliacao}</span>
+                                <span>
+                                    R${" "}
+                                    {formatNumber(
+                                        coin?.market_data
+                                            .fully_diluted_valuation[
+                                            currency.toLowerCase()
+                                        ]
+                                    )}
+                                </span>
                             </div>
                             <div className={containerClass}>
                                 <h3 className="flex items-center gap-1">
@@ -318,7 +309,12 @@ const CoinPage = () => {
                                     Moedas em circulação
                                     <AiOutlineInfoCircle />
                                 </h3>
-                                <span>R$ {circulacao}</span>
+                                <span>
+                                    R${" "}
+                                    {formatNumber(
+                                        coin?.market_data.circulating_supply
+                                    )}
+                                </span>
                             </div>
                         </div>
                     </section>
