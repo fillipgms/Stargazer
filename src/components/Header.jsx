@@ -20,7 +20,7 @@ const Header = () => {
     } = useStateContext();
 
     const notScrolled =
-        "transition-colors flex py-2 px-3 justify-between fixed md:bg-transparent bg-main-dark-bg w-full right-0 z-[998] text-white text-sm";
+        "transition-colors flex py-2 px-3 justify-between fixed md:bg-transparent bg-main-dark-bg w-full z-[998] text-white text-sm";
 
     const scrolled =
         "transition-colors flex py-2 px-3 justify-between fixed bg-dark-bg w-full right-0 z-[998] text-white border-b-gray-100 border-b text-sm";

@@ -41,7 +41,7 @@ const TopCrypto = () => {
     const classeTitulo = `${classeLinha} tooltip tooltip-bottom flex items-center justify-center gap-1`;
 
     return (
-        <div className="flex items-center pt-32 pb-20 mb-10 justify-center bg-dark-wallpaper py-10 bg-cove w-full bg-cover bg-center">
+        <div className="flex items-center pt-32 pb-20 mb-10 justify-center bg-dark-wallpaper py-10 bg-cove w-full bg-cover bg-top">
             <div className="bg-dark-bg  rounded-md text-white py-2 w-9/12  shadow-lg">
                 <h3 className="font-bold text-center">Bombando agora</h3>
                 <div className="flex flex-col pt-4">

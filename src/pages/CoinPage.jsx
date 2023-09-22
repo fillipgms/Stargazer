@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { SingleCoin } from "../services/coinGeckoApi";
 import { useStateContext } from "../contexts/ContextProvider";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineInfoCircle, AiOutlineLink } from "react-icons/ai";
 import { MdPlayArrow } from "react-icons/md";
 import { basicInfo } from "../data/dummy";
 
-import { CoinChart, Footer, Loading } from "../components";
+import { Advertisement, CoinChart, Footer, Loading } from "../components";
 
 const CoinPage = () => {
     const { id } = useParams();
@@ -318,7 +318,7 @@ const CoinPage = () => {
                             </div>
                         </div>
                     </section>
-                    <section className="py-3 text-white">
+                    <section className="pb-10 pt-3 text-white">
                         <h2 className="text-xl font-semibold py-2">
                             {coin?.name} está em{" "}
                             {profit7d > 0 ? "alta" : "baixa"} essa semana.
@@ -340,6 +340,85 @@ const CoinPage = () => {
                     </section>
                 </main>
             </section>
+            <Advertisement />
+
+            <section className="md:px-48 px-10 py-10 text-white">
+                <h2 className="text-xl font-semibold py-2">
+                    Sobre {coin?.name}
+                </h2>
+                <div className="grid grid-cols-[repeat(auto-fill,_minmax(270px,_1fr))] gap-2">
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Camada
+                            <AiOutlineInfoCircle />
+                        </h3>
+
+                        <span>{coin?.categories[2]}</span>
+                    </div>
+
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Código fonte
+                            <AiOutlineInfoCircle />
+                        </h3>
+                        <a href={coin?.links.repos_url.github[0]}>Github</a>
+                    </div>
+
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Site oficial
+                            <AiOutlineInfoCircle />
+                        </h3>
+
+                        <a href={coin?.links.homepage[0]}>
+                            {coin?.links.homepage[0]
+                                .replace("https://", "")
+                                .replace("http://", "")
+                                .replace("/", "")}
+                        </a>
+                    </div>
+
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Comunidade
+                            <AiOutlineInfoCircle />
+                        </h3>
+
+                        <a href={coin?.links.official_forum_url[0]}>
+                            {coin?.links.official_forum_url[0]
+                                .replace("https://", "")
+                                .replace("http://", "")
+                                .replace("/", "")}
+                        </a>
+                    </div>
+
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Reddit
+                            <AiOutlineInfoCircle />
+                        </h3>
+
+                        <a href={coin?.links.subreddit_url}>
+                            {coin?.links.subreddit_url
+                                .replace("https://", "")
+                                .replace("http://", "")
+                                .replace("/", "")}
+                        </a>
+                    </div>
+
+                    <div className={containerClass}>
+                        <h3 className="flex items-center gap-1">
+                            Twitter
+                            <AiOutlineInfoCircle />
+                        </h3>
+
+                        <a href={coin?.links.twitter_screen_name}>
+                            twitter.com/{coin?.links.twitter_screen_name}
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <Footer />
         </>
     );
