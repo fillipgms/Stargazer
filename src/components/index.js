@@ -12,3 +12,6 @@ export { default as TopNews } from "./TopNews";
 export { default as CoinChart } from "./CoinChart";
 export { default as GuiasPublicados } from "./GuiasPublicados";
 export { default as TopCrypto } from "./TopCrypto";
+export { default as FormatNumber } from "./FormatNumber";
+export { default as SimpleCard } from "./SimpleCard";
+export { default as DynamicCoinInfo } from "./DynamicCoinInfo";

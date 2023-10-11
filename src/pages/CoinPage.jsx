@@ -4,11 +4,18 @@ import { useParams } from "react-router-dom";
 import { SingleCoin } from "../services/coinGeckoApi";
 import { useStateContext } from "../contexts/ContextProvider";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { AiOutlineInfoCircle, AiOutlineLink } from "react-icons/ai";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdPlayArrow } from "react-icons/md";
 import { basicInfo } from "../data/dummy";
 
-import { Advertisement, CoinChart, Footer, Loading } from "../components";
+import {
+    Advertisement,
+    CoinChart,
+    DynamicCoinInfo,
+    Footer,
+    Loading,
+    SimpleCard,
+} from "../components";
 
 const CoinPage = () => {
     const { id } = useParams();
@@ -33,18 +40,6 @@ const CoinPage = () => {
 
     if (!coin) {
         return <Loading />;
-    }
-
-    function formatNumber(num) {
-        if (num >= 1e12) {
-            return (num / 1e12).toFixed(1) + "T";
-        } else if (num >= 1e9) {
-            return (num / 1e9).toFixed(1) + "B";
-        } else if (num >= 1e6) {
-            return (num / 1e6).toFixed(1) + "M";
-        } else {
-            return num.toString();
-        }
     }
 
     const price = coin?.market_data.current_price[currency.toLowerCase()]
@@ -76,9 +71,13 @@ const CoinPage = () => {
         (guia) => guia.nome.toLowerCase() === coin.id.toLowerCase()
     );
 
-    const containerClass = "py-2 px-5 bg-dark-bg rounded-md";
-
-    console.log(coin);
+    const { about, linksInfo } = DynamicCoinInfo(
+        coin,
+        currency,
+        profit24h,
+        profit7d,
+        profit14d
+    );
 
     return (
         <>
@@ -162,160 +161,15 @@ const CoinPage = () => {
                     <section className="py-3 text-white">
                         <h2 className="text-xl font-semibold py-2">Mercado</h2>
                         <div className="grid grid-cols-[repeat(auto-fill,_minmax(270px,_1fr))] gap-2">
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Popularidade
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span># {coin?.market_cap_rank}</span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Capitalização de Mercado
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span>
-                                    R${" "}
-                                    {formatNumber(
-                                        coin?.market_data.market_cap[
-                                            currency.toLowerCase()
-                                        ]
-                                    )}
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Volume Total
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span>
-                                    R${" "}
-                                    {formatNumber(
-                                        coin?.market_data.total_volume[
-                                            currency.toLowerCase()
-                                        ]
-                                    )}
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Mudança de Preço (24h)
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span
-                                    style={{
-                                        color:
-                                            profit24h > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                        fontWeight: 500,
-                                        borderColor:
-                                            profit24h > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                    }}
-                                >
-                                    {coin?.market_data.price_change_percentage_24h.toFixed(
-                                        2
-                                    )}{" "}
-                                    %
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Mudança de Preço (7d)
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span
-                                    style={{
-                                        color:
-                                            profit7d > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                        fontWeight: 500,
-                                        borderColor:
-                                            profit7d > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                    }}
-                                >
-                                    {coin?.market_data.price_change_percentage_7d.toFixed(
-                                        2
-                                    )}{" "}
-                                    %
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Mudança de Preço (14d)
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span
-                                    style={{
-                                        color:
-                                            profit14d > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                        fontWeight: 500,
-                                        borderColor:
-                                            profit14d > 0
-                                                ? "#7fa2e0"
-                                                : "#c7a3ff",
-                                    }}
-                                >
-                                    {coin?.market_data.price_change_percentage_14d.toFixed(
-                                        2
-                                    )}{" "}
-                                    %
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Quantidade total
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span>
-                                    {formatNumber(
-                                        coin?.market_data.total_supply
-                                    )}
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Avaliação Totalmente Diluida
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span>
-                                    R${" "}
-                                    {formatNumber(
-                                        coin?.market_data
-                                            .fully_diluted_valuation[
-                                            currency.toLowerCase()
-                                        ]
-                                    )}
-                                </span>
-                            </div>
-                            <div className={containerClass}>
-                                <h3 className="flex items-center gap-1">
-                                    {" "}
-                                    Moedas em circulação
-                                    <AiOutlineInfoCircle />
-                                </h3>
-                                <span>
-                                    R${" "}
-                                    {formatNumber(
-                                        coin?.market_data.circulating_supply
-                                    )}
-                                </span>
-                            </div>
+                            {about.map((info, index) => (
+                                <SimpleCard
+                                    key={index}
+                                    titulo={info.title}
+                                    conteudo={info.content}
+                                    color={info.color}
+                                    tooltip={info.tooltip}
+                                />
+                            ))}
                         </div>
                     </section>
                     <section className="pb-10 pt-3 text-white">
@@ -347,75 +201,15 @@ const CoinPage = () => {
                     Sobre {coin?.name}
                 </h2>
                 <div className="grid grid-cols-[repeat(auto-fill,_minmax(270px,_1fr))] gap-2">
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Camada
-                            <AiOutlineInfoCircle />
-                        </h3>
-
-                        <span>{coin?.categories[2]}</span>
-                    </div>
-
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Código fonte
-                            <AiOutlineInfoCircle />
-                        </h3>
-                        <a href={coin?.links.repos_url.github[0]}>Github</a>
-                    </div>
-
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Site oficial
-                            <AiOutlineInfoCircle />
-                        </h3>
-
-                        <a href={coin?.links.homepage[0]}>
-                            {coin?.links.homepage[0]
-                                .replace("https://", "")
-                                .replace("http://", "")
-                                .replace("/", "")}
-                        </a>
-                    </div>
-
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Comunidade
-                            <AiOutlineInfoCircle />
-                        </h3>
-
-                        <a href={coin?.links.official_forum_url[0]}>
-                            {coin?.links.official_forum_url[0]
-                                .replace("https://", "")
-                                .replace("http://", "")
-                                .replace("/", "")}
-                        </a>
-                    </div>
-
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Reddit
-                            <AiOutlineInfoCircle />
-                        </h3>
-
-                        <a href={coin?.links.subreddit_url}>
-                            {coin?.links.subreddit_url
-                                .replace("https://", "")
-                                .replace("http://", "")
-                                .replace("/", "")}
-                        </a>
-                    </div>
-
-                    <div className={containerClass}>
-                        <h3 className="flex items-center gap-1">
-                            Twitter
-                            <AiOutlineInfoCircle />
-                        </h3>
-
-                        <a href={coin?.links.twitter_screen_name}>
-                            twitter.com/{coin?.links.twitter_screen_name}
-                        </a>
-                    </div>
+                    {linksInfo.map((info, index) => (
+                        <SimpleCard
+                            key={index}
+                            titulo={info.title}
+                            conteudo={info.content}
+                            color={info.color}
+                            tooltip={info.tooltip}
+                        />
+                    ))}
                 </div>
             </section>
 
