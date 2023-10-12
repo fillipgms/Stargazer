@@ -6,7 +6,7 @@ const SimpleCard = ({ titulo, tooltip, conteudo, color }) => {
 
     return (
         <div
-            className="py-2 px-5 bg-dark-bg rounded-md tooltip text-left"
+            className="py-2 px-5 bg-dark-bg rounded-md tooltip text-left tooltip-bottom"
             data-tip={tooltip}
         >
             <h3 className="flex items-center gap-1">
