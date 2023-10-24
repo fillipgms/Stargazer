@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import { Advertisement, Cards, Footer } from "../components";
 import { container, itemA, icons } from "../data/dummy";
 import { TopThreeCoins } from "../services/coinGeckoApi";
@@ -15,6 +15,7 @@ const Home = () => {
     useEffect(() => {
         document.title = "Home";
     });
+    const navigate = useNavigate();
 
     const [threeCoins, setThreeCoins] = useState([]);
 
@@ -70,9 +71,10 @@ const Home = () => {
                     >
                         {threeCoins.map((coin, index) => (
                             <motion.div
-                                className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 backdrop-blur-glassmorphism"
+                                className="shadow-pink-blue-glow bg-glassmorphism rounded-full md:h-32 md:w-32 h-20 w-20 md:p-4 p-3 backdrop-blur-glassmorphism cursor-pointer"
                                 variants={itemA}
                                 key={index}
+                                onClick={() => navigate(`/coins/${coin.id}`)}
                             >
                                 <img
                                     src={coin.image}
